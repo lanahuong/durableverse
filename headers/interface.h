@@ -7,13 +7,13 @@ requires the current turn currturn
 assigns 
 ensures create a new turn :
 		add 1 to currturn, if turn 6 display fix to 2 the nb of 'personnel' card, if turn 11 fix to 3 the nb of 'personnel' card */
-void newturn(int currturn);
+void NewTurn(int currturn);
 
 /*requires player equals to 0 or 1 (ENSIIE A or ENSIIE B)
 assigns
 ensures display "Nouvelle Phase" and the player associate to the new phase, player = (player + 1) mod 2
 */
-void newphase(int player);
+void NewPhase(int player);
 
 /*Let s define the cardboard as a structure with 3 categories : Leleves, Lpersonnel, Lactions which represent the card present 
 on 1 player s board. each composante is a list with the diffent cards on the board
@@ -33,7 +33,7 @@ assigns
 ensures display the board of each player
 */
 
-void board(cob p1card, cob p2cards);
+void Board(cob p1card, cob p2cards);
 
 /*requires player 0 or 1
  * assigns

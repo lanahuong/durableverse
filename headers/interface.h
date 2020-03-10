@@ -56,3 +56,5 @@ void Choice(int player, int PE);
 */
 
 void EndGame(int player);
+
+#endif

@@ -7,7 +7,7 @@ requires the current turn currturn
 assigns 
 ensures create a new turn :
 		add 1 to currturn, if turn 6 display fix to 2 the nb of 'personnel' card, if turn 11 fix to 3 the nb of 'personnel' card */
-void NewTurn(int currturn);
+void NewTurn(int* currturn);
 
 /*requires player equals to 0 or 1 (ENSIIE A or ENSIIE B)
 assigns
@@ -33,7 +33,7 @@ assigns
 ensures display the board of each player
 */
 
-void Board(cob p1card, cob p2cards);
+void Board(cob* p1card, cob* p2cards);
 
 /*requires player 0 or 1
  * assigns

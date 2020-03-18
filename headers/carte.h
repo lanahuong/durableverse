@@ -20,7 +20,7 @@ void add_student_card(plateau *p, carte c);
 @assigns nothing
 @ensures return hte number of PE available forthe player in the current turn 
 */
-int nb_energy(ensiie player, int current_turn);
+int available_PE(ensiie player, int current_turn);
 
 /*
 @requires player and the card c he want's to play on the cardboard p

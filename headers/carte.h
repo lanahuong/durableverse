@@ -6,7 +6,7 @@
 @assigns nothing
 @ensures return the number of card the player will receive 
 */
-int receive_student_card(int player, int turn_nb_prev);
+int receive_student_card(ensiie player, int turn_nb_prev);
 
 /*
 @requires cardboard p and card c
@@ -20,14 +20,14 @@ void add_student_card(plateau *p, carte c);
 @assigns nothing
 @ensures return hte number of PE available forthe player in the current turn 
 */
-int nb_energy(int player, int current_turn);
+int nb_energy(ensiie player, int current_turn);
 
 /*
 @requires player and the card c he want's to play on the cardboard p
 @assigns add a malloc on the cardboard and put c on it
 @ensures put the card c on the cardboard 
 */
-void play_card(int player, carte c, plateau *p);
+void play_card(ensiie player, carte c, plateau *p);
 
 /*
 @requires cardboard p 
@@ -41,7 +41,7 @@ char DD_earned(plateau p);
 @assigns nothing
 @ensures tells if the game is over and if someone wins 
 */
-char is_over(plateau p, int player1, int player2);
+char is_over(plateau p, ensiie player1, ensiie player2);
 
 #ENDIF
 

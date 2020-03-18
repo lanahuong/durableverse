@@ -37,7 +37,7 @@ void play_card(ensiie player, carte c);
 char DD_earned(ensiie player);
 
 /*
-@requires player 1, player 2 
+@requires player 1 and player 2 
 @assigns nothing
 @ensures tells if the game is over and if someone wins 
 */

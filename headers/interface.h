@@ -15,7 +15,7 @@ ensures display "Nouvelle Phase" and the player associate to the new phase, play
 */
 void interfaceNewPhase(ensiie player);
 
-/*Let s define the cardboard as a structure with 3 categories : Leleves, Lpersonnel, Lactions which represent the card present 
+/*Let s define the cardboard as a structure with 2 categories : Leleves, Lpersonnel which represent the card present 
 on 1 player s board. each composante is a list with the diffent cards on the board
 */
 
@@ -24,7 +24,6 @@ struct cardsonboard
 {
 	char* Leleves;
 	char* Lpersonnel;
-	char* Lactions;
 	
 };
 

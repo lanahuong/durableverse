@@ -2,11 +2,11 @@
 #DEFINE CARTE_H
 
 /*
-@requires player who will receive its student cards according to its previous turn
+@requires player who will receive its student cards
 @assigns nothing
 @ensures return the number of card the player will receive 
 */
-int receive_student_card(ensiie player, int turn_nb_prev);
+int receive_student_card(ensiie player);
 
 /*
 @requires player and card c
@@ -16,11 +16,11 @@ int receive_student_card(ensiie player, int turn_nb_prev);
 void add_student_card(ensiie *player, carte c);
 
 /*
-@requires current turn and the player
+@requires player
 @assigns nothing
 @ensures return the number of PE available for the player in the current turn 
 */
-int available_PE(ensiie player, int current_turn);
+int available_PE(ensiie player);
 
 /*
 @requires player and the card c one wants to play on its cardboard 

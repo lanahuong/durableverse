@@ -55,7 +55,7 @@ int main(int argc, char** argv) {
   gameSetUp(players, &turn, &winner);
 
   // While the game isn't over an other turn plays out
-  while (turn<=30 || winner) {
+  while (turn<=30 && winner==-1) {
     turn++;
     gameLoop(turn, players);
     winner = cardIsOver(players);

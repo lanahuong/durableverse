@@ -9,9 +9,9 @@ ensures create a new turn :
 		add 1 to currturn, if turn 6 display fix to 2 the nb of 'personnel' card, if turn 11 fix to 3 the nb of 'personnel' card */
 void  interfaceNewTurn(int* currturn);
 
-/*requires player equals to 0 or 1 (ENSIIE A or ENSIIE B)
+/*requires player (ENSIIE A or ENSIIE B)
 assigns
-ensures display "Nouvelle Phase" and the player associate to the new phase, player = (player + 1) mod 2
+ensures display "Nouvelle Phase" and the player associate to the new phase
 */
 void interfaceNewPhase(ensiie player);
 
@@ -34,13 +34,13 @@ ensures display the board of each player
 
 void interfaceBoard(cob* p1card, cob* p2cards);
 
-/*requires player 0 or 1
+/*requires player A or B
  * assigns
  * ensures give a FISE or FISA card to the player concerned
  */
 void interfaceFiseOrFisa(ensiie player);
 
-/*requires player 0 or 1
+/*requires player A or B
  * assigns 
  * ensures The function ask the player what to do : play a card or finish the turn. 
  *         The function only propose the card which cost less than player s PE. If no card
@@ -49,11 +49,11 @@ void interfaceFiseOrFisa(ensiie player);
 void interfaceChoice(ensiie player);
 
 
-/*requires player 0 or 1 
+/*requires player A or B 
  * assigns
- * ensures display the winner (player 0 o 1)
+ * ensures display the winner & the final score 
  * */
 
-void interfaceEndGame(ensiie player);
+void interfaceEndGame(ensiie player1, ensiie player2);
 
 #endif

@@ -1,5 +1,18 @@
-#IFNDEF CARTE_H
-#DEFINE CARTE_H
+#ifndef CARTE_H
+#define CARTE_H
+
+typedef struct Carte Carte;
+
+enum type {ELEVE, PERSONNEL, ACTION};
+
+struct Carte
+{
+  int cout;
+  enum type t;
+  int num;
+};
+
+typedef int ensiie;
 
 /*
 @requires player who will receive its student cards
@@ -13,7 +26,7 @@ int receive_student_card(ensiie player);
 @assigns add a malloc on player's cardboard on FILO side and put c on it 
 @ensures add the student card c on one of the FILO from the player's cardboard  
 */
-void add_student_card(ensiie *player, carte c);
+void add_student_card(ensiie *player, Carte c);
 
 /*
 @requires player
@@ -27,7 +40,7 @@ int available_PE(ensiie player);
 @assigns add a malloc on player's cardboard and put c on it
 @ensures put the card c on the cardboard 
 */
-void play_card(ensiie player, carte c);
+void play_card(ensiie player, Carte c);
 
 /*
 @requires player's cardboard 
@@ -43,5 +56,5 @@ char DD_earned(ensiie player);
 */
 char is_over(ensiie player1, ensiie player2);
 
-#ENDIF
+#endif
 

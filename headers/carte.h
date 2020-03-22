@@ -9,9 +9,9 @@
 int receive_student_card(ensiie player);
 
 /*
-@requires player and card c
-@assigns add a malloc on player's cardboard and put c on it 
-@ensures add a card on the cardboard of player 
+@requires player and student card c onr wants to dd on its cardboard
+@assigns add a malloc on player's cardboard on FILO side and put c on it 
+@ensures add the student card c on one of the FILO from the player's cardboard  
 */
 void add_student_card(ensiie *player, carte c);
 

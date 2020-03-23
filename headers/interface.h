@@ -39,7 +39,7 @@ int interfaceFiseOrFisa();
  *         return the number of the card else
  *         
 */
-void interfaceChoice();
+int interfaceChoice(plateau p);
 
 
 /*requires the winner( player 0 or 1) and players' DD
@@ -47,6 +47,6 @@ void interfaceChoice();
  * ensures display the winner & the final score 
  * */
 
-void interfaceEndGame(nt winner, int DD1, int DD2);
+void interfaceEndGame(int winner, int DD1, int DD2);
 
 #endif

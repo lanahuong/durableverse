@@ -42,11 +42,11 @@ int interfaceFiseOrFisa();
 void interfaceChoice();
 
 
-/*requires 
+/*requires the winner( player 0 or 1) and players' DD
  * assigns
  * ensures display the winner & the final score 
  * */
 
-void interfaceEndGame();
+void interfaceEndGame(nt winner, int DD1, int DD2);
 
 #endif

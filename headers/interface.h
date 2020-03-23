@@ -15,36 +15,29 @@ ensures display "Nouvelle Phase" and the player associate to the new phase
 */
 void interfaceNewPhase();
 
-/*Let s define the cardboard as a structure with 2 categories : Leleves, Lpersonnel which represent the card present 
-on 1 player s board. each composante is a list with the diffent cards on the board
-*/
 
-typedef struct cardsonboard cob;
-struct cardsonboard
-{
-	char* Leleves;
-	char* Lpersonnel;
-	
-};
 
-/*requires matrix of player1's cards idem for player2,
+/*requires plateau of both ensiie
 assigns
 ensures display the board of each player
 */
 
-void interfaceBoard(cob* p1card, cob* p2cards);
+int interfaceBoard(plateau player1, plateau player2);
 
 /*requires 
  * assigns
- * ensures give a FISE or FISA card to the player concerned
+ * ensures give a FISE or FISA card to the player concerned ( 0 for fise 1 for sisa)
  */
-void interfaceFiseOrFisa();
+int interfaceFiseOrFisa();
 
 /*requires 
  * assigns 
  * ensures The function ask the player what to do : play a card or finish the turn. 
  *         The function only propose the card which cost less than player s PE. If no card
  *         available then the only choice its end the turn
+ *         return -1 if the player finish the turn
+ *         return the number of the card else
+ *         
 */
 void interfaceChoice();
 

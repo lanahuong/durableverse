@@ -17,7 +17,33 @@ typedef struct ensiie ensiie;
  * @assigns players' board, deck, hand and discard
  * @ensures nothing
  */
-void phase(ensiie player){
+void phase(ensiie player, board adv, int turn){
+  // Count student cards to be received
+  int studentCardsNbr = board_studentCardCount(player.cb);
+
+  // Display the cardboards
+  interface_board(player.cb, adv);
+
+  // Play the student cards
+  for (int i = 0; i<studentCardsNbr; i++) {
+    int card = interface_fiseOrFisa();
+    board_playStudentCard(player.cb, card);
+  }
+
+  // Count PE
+  player.PE = (player.cb, turn);
+
+  // Display the cardboards
+  interface_board(player.cb, adv);
+
+  // Play cards
+  int choice = 0;
+  while (choice !=-1) {
+    choice = interface_choice(player.cb);
+    if (choice != 0) {
+      board_playCard(player.cb, choice, &(player.PE));
+    }
+  }
 }
 
 /* Handle one turn off the game
@@ -34,9 +60,9 @@ void gameLoop(int *turn, ensiie players[2]){
 
   // Play the 2 phases
   interface_newPhase(0);
-  phase(players[0]);
+  phase(players[0], players[1].cb,*turn);
   interface_newPhase(1);
-  phase(players[1]);
+  phase(players[1], players[0].cb, *turn);
 
   // Finish the turn by counting the players DD
   int DDEarned[2] = board_DDEarned(players[0].cb,players[1].cb);

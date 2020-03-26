@@ -19,15 +19,23 @@ typedef struct ensiie ensiie;
  */
 void phase(ensiie player, board adv, int turn){
   // Count student cards to be received
-  int studentCardsNbr = board_studentCardCount(player.cb);
+  int studentCardNbr = board_studentCardCount(player.cb);
 
   // Display the cardboards
   interface_board(player.cb, adv);
 
   // Play the student cards
-  for (int i = 0; i<studentCardsNbr; i++) {
+  for (int i = 0; i<studentCardNbr; i++) {
     int card = interface_fiseOrFisa();
     board_playStudentCard(player.cb, card);
+  }
+
+  // Count the cards to draw
+  int cardNbr = board_drawCount(player.cb);
+
+  // Draw the cards
+  for (int i = 0; i<cardNbr; i++) {
+    board_draw(player.cb);
   }
 
   // Count PE
@@ -105,6 +113,10 @@ int main() {
   
   // When the game is over display the outcome
   interface_endGame(winner,players[0].DD,players[1].DD);
+
+  //Free the boards
+  board_freeBoard(players[0].cb);
+  board_freeBoard(players[1].cb);
 
   return 0;
 }

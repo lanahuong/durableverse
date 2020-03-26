@@ -25,7 +25,24 @@ void phase(ensiie player){
  * @assigns players' DD
  * @ensures nothing
  */
-void gameLoop(int turn, ensiie players[2]){
+void gameLoop(int *turn, ensiie players[2]){
+  // Start a new turn
+  board_newTurn(turn);
+
+  // Display the new turn
+  interface_newTurn(*turn);
+
+  // Play the 2 phases
+  interface_newPhase(0);
+  phase(players[0]);
+  interface_newPhase(1);
+  phase(players[1]);
+
+  // Finish the turn by counting the players DD
+  int DDEarned[2] = board_DDEarned(players[0].cb,players[1].cb);
+  players[0].DD += max(DDEarned[0],0);
+  players[1].DD += max(DDEarned[1],0);
+
 }
 
 /* Initialize the whole game
@@ -55,7 +72,7 @@ int main(int argc, char** argv) {
   // While the game isn't over an other turn plays out
   while (turn<=30 && winner==-1) {
     turn++;
-    gameLoop(turn, players);
+    gameLoop(&turn, players);
     winner = cardIsOver(players);
   }
   

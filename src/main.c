@@ -15,9 +15,6 @@ struct ensiie {
   int DD;
   int PE;
   board cb;
-  cardList deck;
-  cardList hand;
-  cardList discard;
 };
 typedef struct ensiie ensiie;
 

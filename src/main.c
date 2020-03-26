@@ -1,14 +1,7 @@
 #include "headers/interface.h"
-#include "headers/carte.h"
-#include "headers/plateau.h"
+#include "headers/card.h"
+#include "headers/board.h"
 
-
-// Structure to store cards for the deck, the hand and the discard
-struct cardList {
-  int length;
-  int *cards;
-};
-typedef struct cardList cardList;
 
 // Structure to store all the informations of a player
 struct ensiie {
@@ -17,9 +10,6 @@ struct ensiie {
   board cb;
 };
 typedef struct ensiie ensiie;
-
-int const NB_CARDS = 42;
-int const DEFAULT_DECK[NB_CARDS] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,21,21,22,22,22,23,23,24,24,25,25,26,26,27,27,27,27,28,29,30,31};
 
 /* 
  * Handle the playing phase of one player
@@ -51,13 +41,7 @@ void gameSetUp(ensiie players[2], int* turn, int* winner){
   for (int i=0; i<2 ; i++){
     players[i].DD = 0;
     players[i].PE = 0;
-    players[i].hand.length = 0;
-    players[i].discard.length = 0;
-    players[i].deck.length = NB_CARDS;
-    players[i].deck.cards = malloc(NB_CARDS*sizeof(int));
-    for (int k=0; k<NB_CARDS; k++) {
-      players[i].deck.cards[k] = DEFAULT_DECK[k];
-    }
+    players[i].cb = board_newBoard();
   }
 }
 

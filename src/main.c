@@ -39,7 +39,7 @@ void phase(ensiie player, board adv, int turn){
   // Play cards
   int choice = 0;
   while (choice !=-1) {
-    choice = interface_choice(player.cb);
+    choice = interface_choice(player.cb, player.PE);
     if (choice != 0) {
       board_playCard(player.cb, choice, &(player.PE));
     }

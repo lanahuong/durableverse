@@ -6,88 +6,90 @@
 typedef struct board* board;
 
 /*
- @requires rien
- @assigns  rien
- @ensures  return a new plateau
+ @requires nothing
+ @assigns  nothing
+ @ensures  return a new correctly initialized board
  */
 
 board board_newBoard();
 
 
 /*
- @requires a plateau exist
- @assigns  rien
+ @requires a correctly fomatted board
+ @assigns  nothing
  @ensures  free the memory espace 
  */
 
 void board_freeBoard(board p);
 
 /*
- @requires a plateau (tour number)
- @assigns  
- @ensures  add the number of the "tour";if "tour" is pair , FISA doesnt work
-           if "tour" is 6 or 11 , add a new place
+ @requires 2 correctly formatted boards
+ @assigns  *turn
+ @ensures  add 1 to the number of the turn
+           if turn is 6 or 11 , add 1 to the number of personnel cards boards can hold
  */
 
 void board_newTurn(board b1, board b2, int *turn);
 
 /*
- @requires plateau(not a pointure)
- @assigns  rien
- @ensures  calcule how many card should ensiie pioche at the beginning of each phase
+ @requires a correctly formatted board
+ @assigns  nothing
+ @ensures  calcule how many card should ensiie draw at the beginning the phase
  */
 
 int board_drawCount(board p);
 
 /*
- @requires board 
- @assigns  le main et le deck du plateau
- @ensures  catch a card from "deck" to hands (main)
+ @requires a correctly formatted board
+ @assigns  the hand and deck of the board
+ @ensures  remove a card from the deck and put's it in the hand
  */
 
 void board_draw(board p);
 
 /*
-@requires player's cardboard who will receive its student cards
+@requires a correctly formatted board
 @assigns nothing
-@ensures return the number of card the player will receive according to its cardboard
+@ensures return the number of student cards the player will receive
 */
 int board_studentCardCount(board p);
 
 /*
-@requires player's cardboard and student card c one wants to play on its cardboard
-@assigns add a malloc on player's cardboard on FILO side and put c on it 
-@ensures add the student card c on one of the FILO from the player's cardboard  
+@requires a correctly formatted board and c is 0 for fise and 1 for fisa
+@assigns the play area of the board
+@ensures add the student card to the board's play area
 */
 void board_playStudentCard(board p, int c);
 
 /*
-@requires player's cardboard and the current turn
+@requires a correctly formatted card board
 @assigns nothing
-@ensures return the number of PE available for the player in the current turn 
+@ensures return the number of PE available to the player in the current turn 
 */
 int board_initialPECount(board p, int curturn);
 
 /*
-@requires player's cardboard and the card c one wants to play on its cardboard 
-@assigns add a malloc on player's cardboard and put c on it, *PE
-@ensures put the card c on the cardboard 
+@requires a correctly formatted board, c is a number from 1 to 30
+@assigns the hand and the play area of the board, *PE
+@ensures put the card c on the cardboard's play area 
 */
 void board_playCard(board p, int c, int *PE);
 
 /*
-@requires players' cardboards 
-@assigns nothing
-@ensures return the number of DD earned by each player "player x : y DD " y could be positive or negative
+@requires 2 correctly formatted boards
+@assigns DD
+@ensures DD comtains the number of DD earned by the 2 players (can be negative)
 */
 void board_DDEarned(board p1, board p2, int DD[2]);
 
 /*
-@requires DD from player 1 and player 2 and the current turn
+@requires 
 @assigns nothing
-@ensures tells if the game is over and if someone wins 
+@ensures return -1 if the game is not over, 0 (resp. 1) if player 0 (resp.1) wins
+         2 if it is a tie
+
 */
-char board_gameIsOver(int DDp1,int DDp2, int curturn);
+int board_gameIsOver(int DDp1,int DDp2, int curturn);
 
 
 #endif

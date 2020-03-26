@@ -6,19 +6,19 @@
 /*
 requires the current turn currturn
 assigns 
-ensures create a new turn :
-		 if turn 6 display fix to 2 the nb of 'personnel' card, if turn 11 fix to 3 the nb of 'personnel' card */
+ensures display new turn and it's number and additionnal informations
+*/
 void  interface_newTurn(int currturn);
 
 /*requires 
 assigns
-ensures display "Nouvelle Phase" and the player associate to the new phase
+ensures display "Nouvelle Phase" and the player associated to the new phase
 */
 void interface_newPhase(int player);
 
 
 
-/*requires board of both ensiie
+/*requires 2 correctly formatted board (player1=current player, player2=adversary)
 assigns
 ensures display the board of each player
 */
@@ -27,7 +27,8 @@ int interface_board(board player1, board player2);
 
 /*requires 
  * assigns
- * ensures give a FISE or FISA card to the player concerned ( 0 for fise 1 for sisa)
+ * ensures ask the player which type of card it wants
+ * 		   return the chosen type of card (0 for fise 1 for fisa)
  */
 int interface_fiseOrFisa();
 
@@ -35,12 +36,12 @@ int interface_fiseOrFisa();
  * assigns 
  * ensures The function ask the player what to do : play a card or finish the turn. 
  *         The function only propose the card which cost less than player s PE. If no card
- *         available then the only choice its end the turn
+ *         available then the only choice is to end the turn
  *         return -1 if the player finish the turn
- *         return the number of the card else
+ *         otherwise return the number of the card
  *         
 */
-int interface_choice(board p);
+int interface_choice(board p, int PE);
 
 
 /*requires the winner( player 0 or 1) and players' DD

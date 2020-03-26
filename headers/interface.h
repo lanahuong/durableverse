@@ -1,34 +1,35 @@
 #ifndef INTERFACE_H
 #define INTERFACE_H
 
+#include "board.h"
 
 /*
 requires the current turn currturn
 assigns 
 ensures create a new turn :
 		 if turn 6 display fix to 2 the nb of 'personnel' card, if turn 11 fix to 3 the nb of 'personnel' card */
-void  interfaceNewTurn(int currturn);
+void  interface_newTurn(int currturn);
 
 /*requires 
 assigns
 ensures display "Nouvelle Phase" and the player associate to the new phase
 */
-void interfaceNewPhase();
+void interface_newPhase();
 
 
 
-/*requires plateau of both ensiie
+/*requires board of both ensiie
 assigns
 ensures display the board of each player
 */
 
-int interfaceBoard(plateau player1, plateau player2);
+int interface_board(board player1, board player2);
 
 /*requires 
  * assigns
  * ensures give a FISE or FISA card to the player concerned ( 0 for fise 1 for sisa)
  */
-int interfaceFiseOrFisa();
+int interface_fiseOrFisa();
 
 /*requires 
  * assigns 
@@ -39,7 +40,7 @@ int interfaceFiseOrFisa();
  *         return the number of the card else
  *         
 */
-int interfaceChoice(plateau p);
+int interface_choice(board p);
 
 
 /*requires the winner( player 0 or 1) and players' DD
@@ -47,6 +48,6 @@ int interfaceChoice(plateau p);
  * ensures display the winner & the final score 
  * */
 
-void interfaceEndGame(int winner, int DD1, int DD2);
+void interface_endGame(int winner, int DD1, int DD2);
 
 #endif

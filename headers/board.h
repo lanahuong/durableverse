@@ -1,7 +1,9 @@
-#ifndef PLATEAU_H
-#define PLATEAU_H
+#ifndef BOARD_H
+#define BOARD_H
 
-typedef struct Plateau  Plateau;
+#include "card.h"
+
+typedef struct board* board;
 
 /*
  @requires rien
@@ -9,7 +11,7 @@ typedef struct Plateau  Plateau;
  @ensures  return a new plateau
  */
 
-Plateau plateauNew();
+board board_newBoard();
 
 
 /*
@@ -18,7 +20,7 @@ Plateau plateauNew();
  @ensures  free the memory espace 
  */
 
-void free_plateau(Plateau *p);
+void board_freeBoard(board p);
 
 /*
  @requires a plateau (tour number)
@@ -27,7 +29,7 @@ void free_plateau(Plateau *p);
            if "tour" is 6 or 11 , add a new place
  */
 
-void tourNew(Plateau *p);
+void board_newTurn(board p);
 
 /*
  @requires plateau(not a pointure)
@@ -35,57 +37,57 @@ void tourNew(Plateau *p);
  @ensures  calcule how many card should ensiie pioche at the beginning of each phase
  */
 
-int nbr_cd_phaseNew(Plateau p);
+int board_drawCount(board p);
 
 /*
- @requires Plateau 
+ @requires board 
  @assigns  le main et le deck du plateau
  @ensures  catch a card from "deck" to hands (main)
  */
 
-void pioche(Plateau *p);
+void board_draw(board p);
 
 /*
 @requires player's cardboard who will receive its student cards
 @assigns nothing
 @ensures return the number of card the player will receive according to its cardboard
 */
-int receive_student_card(Plateau p);
+int board_studentCardCount(board p);
 
 /*
 @requires player's cardboard and student card c one wants to play on its cardboard
 @assigns add a malloc on player's cardboard on FILO side and put c on it 
 @ensures add the student card c on one of the FILO from the player's cardboard  
 */
-void play_student_card(Plateau p, Carte c);
+void board_playStudentCard(board p, card c);
 
 /*
 @requires player's cardboard and the current turn
 @assigns nothing
 @ensures return the number of PE available for the player in the current turn 
 */
-int available_PE(Plateau p, int curturn);
+int board_initialPECount(board p, int curturn);
 
 /*
 @requires player's cardboard and the card c one wants to play on its cardboard 
-@assigns add a malloc on player's cardboard and put c on it
+@assigns add a malloc on player's cardboard and put c on it, *PE
 @ensures put the card c on the cardboard 
 */
-void play_card(Plateau p, Carte c);
+void board_playCard(board p, card c, int *PE);
 
 /*
 @requires players' cardboards 
 @assigns nothing
 @ensures return the number of DD earned by each player "player x : y DD " y could be positive or negative
 */
-char DD_earned(Plateau p1, Plateau p2);
+char board_DDEarned(board p1, board p2);
 
 /*
 @requires DD from player 1 and player 2 and the current turn
 @assigns nothing
 @ensures tells if the game is over and if someone wins 
 */
-char is_over(int DDp1,int DDp2, int curturn);
+char board_gameIsOver(int DDp1,int DDp2, int curturn);
 
 
 #endif

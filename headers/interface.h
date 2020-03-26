@@ -14,7 +14,7 @@ void  interface_newTurn(int currturn);
 assigns
 ensures display "Nouvelle Phase" and the player associate to the new phase
 */
-void interface_newPhase();
+void interface_newPhase(int player);
 
 
 

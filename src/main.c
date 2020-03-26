@@ -1,6 +1,6 @@
-#include "headers/interface.h"
-#include "headers/card.h"
-#include "headers/board.h"
+#include "../headers/interface.h"
+#include "../headers/card.h"
+#include "../headers/board.h"
 
 
 // Structure to store all the informations of a player
@@ -31,7 +31,7 @@ void phase(ensiie player, board adv, int turn){
   }
 
   // Count PE
-  player.PE = (player.cb, turn);
+  player.PE = board_initialPECount(player.cb, turn);
 
   // Display the cardboards
   interface_board(player.cb, adv);
@@ -53,7 +53,7 @@ void phase(ensiie player, board adv, int turn){
  */
 void gameLoop(int *turn, ensiie players[2]){
   // Start a new turn
-  board_newTurn(turn);
+  board_newTurn(players[0].cb, players[1].cb, turn);
 
   // Display the new turn
   interface_newTurn(*turn);
@@ -65,9 +65,10 @@ void gameLoop(int *turn, ensiie players[2]){
   phase(players[1], players[0].cb, *turn);
 
   // Finish the turn by counting the players DD
-  int DDEarned[2] = board_DDEarned(players[0].cb,players[1].cb);
-  players[0].DD += max(DDEarned[0],0);
-  players[1].DD += max(DDEarned[1],0);
+  int DDEarned[2] = {0,0};
+  board_DDEarned(players[0].cb,players[1].cb, DDEarned);
+  players[0].DD += (DDEarned[0] > 0) ? DDEarned[0] : 0;
+  players[1].DD += (DDEarned[1] > 0) ? DDEarned[1] : 1;
 
 }
 
@@ -88,7 +89,7 @@ void gameSetUp(ensiie players[2], int* turn, int* winner){
   }
 }
 
-int main(int argc, char** argv) {
+int main() {
   // Initialization of game variables
   ensiie players[2];
   int turn;
@@ -96,14 +97,14 @@ int main(int argc, char** argv) {
   gameSetUp(players, &turn, &winner);
 
   // While the game isn't over an other turn plays out
-  while (turn<=30 && winner==-1) {
+  while (winner==-1) {
     turn++;
     gameLoop(&turn, players);
-    winner = cardIsOver(players);
+    winner = board_gameIsOver(players[0].DD,players[1].DD, turn);
   }
   
   // When the game is over display the outcome
-  interfaceEndGame(winner);
+  interface_endGame(winner,players[0].DD,players[1].DD);
 
   return 0;
 }

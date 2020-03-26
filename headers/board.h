@@ -29,7 +29,7 @@ void board_freeBoard(board p);
            if "tour" is 6 or 11 , add a new place
  */
 
-void board_newTurn(board p);
+void board_newTurn(board b1, board b2, int *turn);
 
 /*
  @requires plateau(not a pointure)
@@ -59,7 +59,7 @@ int board_studentCardCount(board p);
 @assigns add a malloc on player's cardboard on FILO side and put c on it 
 @ensures add the student card c on one of the FILO from the player's cardboard  
 */
-void board_playStudentCard(board p, card c);
+void board_playStudentCard(board p, int c);
 
 /*
 @requires player's cardboard and the current turn
@@ -73,14 +73,14 @@ int board_initialPECount(board p, int curturn);
 @assigns add a malloc on player's cardboard and put c on it, *PE
 @ensures put the card c on the cardboard 
 */
-void board_playCard(board p, card c, int *PE);
+void board_playCard(board p, int c, int *PE);
 
 /*
 @requires players' cardboards 
 @assigns nothing
 @ensures return the number of DD earned by each player "player x : y DD " y could be positive or negative
 */
-char board_DDEarned(board p1, board p2);
+void board_DDEarned(board p1, board p2, int DD[2]);
 
 /*
 @requires DD from player 1 and player 2 and the current turn

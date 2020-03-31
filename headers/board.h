@@ -15,6 +15,9 @@ struct board* {
     stack FISE;
     stack FISA; 
     card* Personnel[3];
+    cardList deck;
+    cardList hand;
+    cardList discard;
 };
 
 typedef struct ensiie {
@@ -23,9 +26,6 @@ typedef struct ensiie {
     int nCard;
     int nStudent;
     board cb;
-    cardList deck;
-    cardList hand;
-    cardList discard;
 } ensiie;
 
 

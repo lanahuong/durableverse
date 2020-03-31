@@ -23,7 +23,7 @@ assigns
 ensures display the board of each player
 */
 
-int interface_board(board player1, board player2);
+void interface_board(board player1, board player2);
 
 /*requires 
  * assigns
@@ -41,7 +41,7 @@ int interface_fiseOrFisa();
  *         otherwise return the number of the card
  *         
 */
-int interface_choice(board p, int PE);
+void interface_choice(board p, int PE);
 
 
 /*requires the winner( player 0 or 1) and players' DD

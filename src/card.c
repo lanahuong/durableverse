@@ -1,21 +1,9 @@
-#include "durableverse/headers/carte.h"
-/* #include "durableverse/headers/structure.h" */
-#include "durableverse/headers/plateau.h"
-#include "durableverse/headers/interface.h"
+#include "../headers/card.h"
+#include "../headers/structure.h"
+#include "../headers/board.h"
+#include "../headers/interface.h"
 #include <stdio.h>
 #include <stdlib.h>
-
-struct card {
-  int cout;
-  type t;
-  int num;
-};
-
-struct studentCard {
-    int Dev_pts;
-    int Dur_pts;
-    Eleve filiere;
-};
 
 /*
 @requires a correctly formated card c
@@ -29,7 +17,7 @@ int PE_cost(card c) {
 @requires a correctly formated card c
 @assigns nothing
 @ensures return the type of the card */ 
-Type card_type(card c) {
+type card_type(card c) {
     return c.t;
 }
 
@@ -47,38 +35,111 @@ int nb_cards_in_deck(cardList deck) {
 @ensures apply the effect of the card. */
 void apply_effect(card c, ensiie *player, ensiie *opponent) {
     switch (c.num) {
-        case 1 : add_dev_points_FISE(&player.cb.FISE, 1); break; 
-        case 2 : add_dur_points_FISE(&player.cb.FISE, 1); break;
-        case 3 : add_dev_points_FISA(&player.cb.FISA), 1; break;
-        case 4 : add_dur_points_FISA(&player.cb.FISA, 1); break;
-        case 5 : rmv_dev_points_FISE(&opponent.cb.FISE, 1); break;
-        case 6 : rmv_dur_points_FISE(&opponent.cb.FISE, 1); break;
-        case 7 : rmv_dev_points_FISA(&opponent.cb.FISA, 1); break;
-        case 8 : rmv_dur_points_FISA(&opponent.cb.FISA, 1); break;
+        case 1 : {
+            add_dev_points_FISE(player.cb->FISE, 1); 
+            break; 
+        }
+        case 2 : {
+            add_dur_points_FISE(player.cb->FISE, 1);
+            break;
+        }
+        case 3 : {
+            add_dev_points_FISA(player.cb->FISA), 1; 
+            break;
+            }
+        case 4 : {
+            add_dur_points_FISA(player.cb->FISA, 1); 
+            break;
+            }
+        case 5 : {
+            rmv_dev_points_FISE(opponent.cb->FISE, 1); 
+            break;
+            }
+        case 6 : {
+            rmv_dur_points_FISE(opponent.cb->FISE, 1); 
+            break;
+            }
+        case 7 : {
+            rmv_dev_points_FISA(opponent.cb->FISA, 1); 
+            break;
+        }
+        case 8 : {
+            rmv_dur_points_FISA(opponent.cb->FISA, 1); 
+            break;
+            }
         case 9 : {
-            add_dev_points_FISE(&player.cb.FISE, 1); 
-            add_dev_points_FISA(&player.cb.FISA), 1; 
+            add_dev_points_FISE(player.cb->FISE, 1); 
+            add_dev_points_FISA(player.cb->FISA), 1; 
             break; 
         }
         case 10 : {
-            add_dur_points_FISE(&player.cb.FISE, 1);
-            add_dur_points_FISA(&player.cb.FISA, 1);
+            add_dur_points_FISE(player.cb->FISE, 1);
+            add_dur_points_FISA(player.cb->FISA, 1);
             break;
         }
         case 11 : {
-            rmv_dev_points_FISE(&opponent.cb.FISE, 1);
-            rmv_dev_points_FISA(&opponent.cb.FISA, 1); 
+            rmv_dev_points_FISE(opponent.cb->FISE, 1);
+            rmv_dev_points_FISA(opponent.cb->FISA, 1); 
             break;
         }
         case 12 : {
-            rmv_dur_points_FISE(&opponent.cb.FISE, 1);
-            rmv_dur_points_FISA(&opponent.cb.FISA, 1); 
+            rmv_dur_points_FISE(opponent.cb->FISE, 1);
+            rmv_dur_points_FISA(opponent.cb->FISA, 1); 
             break;
         }
         case 13 : {
-            
+            add_card_in_hand(player, 2);
+            break;
         }
-
+        case 14 : {
+            add_dd_points(player, 2);
+            add_card_in_hand(player, 1);
+            add_student_card_on_board(player, 1);
+            break;
+        }
+        case 15 : {
+            rmv_dd_points(opponent, 2);
+            add_card_in_hand(player, 1);
+            add_student_card_on_board(player, 1);
+            break;
+        }
+        case 16 : {
+            add_dev_points_FISE(player.cb->FISE, 1);
+            add_dur_points_FISE(player.cb->FISE, 1);
+            rmv_dur_points_FISE(opponent.cb->FISE, 1);
+            rmv_dd_points(opponent, 1);
+            break;
+        }
+        case 17 : {
+            add_dev_points_FISA(player.cb->FISA, 1);
+            add_dur_points_FISA(player.cb->FISA, 1);
+            rmv_dur_points_FISA(opponent.cb->FOSA, 1);
+            rmv_dd_points(opponent, 1);
+            break;
+        }
+        case 18 : {
+            add_dev_points_FISE(player.cb->FISE, 2);
+            add_dur_points_FISE(player.cb->FISE, 2);
+            add_student_card_on_board(player, 1);
+            break;
+        }
+        case 19 : {
+            add_dev_points_FISA(player.cb->FISA, 2);
+            add_dur_points_FISA(player.cb->FISA, 2);
+            add_student_card_on_board(player, 1);
+            break;
+        }
+        case 20 : {
+            add_dev_points_FISE(player.cb->FISE, 2);
+            add_dur_points_FISE(player.cb->FISE, 2);
+            add_dev_points_FISA(player.cb->FISA, 2);
+            add_dur_points_FISA(player.cb->FISA, 2);
+            add_dd_points(player, 1);
+            rmv_dd_points(opponent, 1);
+            add_card_in_hand(player, 1);
+            add_student_card_on_board(player, 2);
+            break;
+        }
     }
 }
 
@@ -195,19 +256,19 @@ void rmv_dd_points(ensiie *player, int n) {
 }
 
 
-// on n'utilise pas de pointeur psk on ne veut changer que pour 1 tour les valeurs.  
 /*
 @requires player and an integer n
-@assigns changes Nb_carte
+@assigns nCard
 @ensures add a number n of cards player will have in hand for the next turn. */
-void add_card_in_hand(ensiie player, int n) {
-    player.Nb_carte += n;
+void add_card_in_hand(ensiie *player, int n) {
+    player->nCard += n;
+
 }
 
 /*
 @requires player and an integer n
-@assigns changes Nb_eleve
+@assigns nStudent
 @ensures add a number n of cards player will have in hand for the next turn. */
-void add_student_card_on_board(ensiie player, int n) {
-    player.Nb_eleve += n;
+void add_student_card_on_board(ensiie *player, int n) {
+    player->nStudent += n;
 }

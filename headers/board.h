@@ -1,33 +1,7 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-#include "card.h"
-
-typedef struct board* board;
-typedef struct stack stack;
-
-struct stack {
-    student_card* contain;
-    int top;
-};
-
-struct board* {
-    stack FISE;
-    stack FISA; 
-    card* Personnel[3];
-    cardList deck;
-    cardList hand;
-    cardList discard;
-};
-
-typedef struct ensiie {
-    int DD;
-    int PE;
-    int nCard;
-    int nStudent;
-    board cb;
-} ensiie;
-
+#include "structure.h"
 
 /*
  @requires nothing

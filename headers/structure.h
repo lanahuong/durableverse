@@ -1,3 +1,7 @@
+typedef enum {PERSONNEL, ACTION} type;
+typedef enum {FISE, FISA} student;
+typedef enum {ThomasLim = 1, MarieSzafranski, AlainFaye, ChristopheMouilleron, StefaniaDumbrava, JulienForest, NicolasBrunel, LaurenceBourard, DimitriWatel, ViteraY, KevinGoilard, VincentJeannas, MassinissaMerabet, Anne_LaureLigozat, CatherineDubois, EricLejeune, ChristineMathias, KatrinSalhab, AbassSagna, LaurentPrevel} staff;
+typedef enum {CoursDeveloppementDurable = 21, Recrutement, RentreeFISE, RentreeFISA, EnergieVerte, Diplomation, Decharge, Recyclage, ZeroPapier, RepasVegetarien, FermetureAnuelle} action;
 
 typedef struct card {
   int cout;
@@ -8,13 +12,8 @@ typedef struct card {
 typedef struct studentCard {
     int Dev_pts;
     int Dur_pts;
-    Eleve filiere;
+    student formation;
 } studentCard;
-
-typedef enum type {PERSONNEL, ACTION} type;
-typedef enum student {FISE, FISA} student;
-typedef enum staff {ThomasLim = 1, MarieSzafranski, AlainFaye, ChristopheMouilleron, StefaniaDumbrava, JulienForest, NicolasBrunel, LaurenceBourard, DimitriWatel, ViteraY, KevinGoilard, VincentJeannas, MassinissaMerabet, Anne_LaureLigozat, CatherineDubois, EricLejeune, ChristineMathias, KatrinSalhab, AbassSagna, LaurentPrevel} staff;
-typedef enum action {CoursDeveloppementDurable = 21, Recrutement, RentreeFISE, RentreeFISA, EnergieVerte, Diplomation, Decharge, Recyclage, ZeroPapier, RepasVegetarien, FermetureAnuelle} action;
 
 typedef struct cardList {
   int length;
@@ -22,14 +21,14 @@ typedef struct cardList {
 } cardList; 
 
 typedef struct stack {
-    student_card* contain;
+    studentCard* contain;
     int top;
 } stack;
 
 typedef struct board* {
     stack FISE;
     stack FISA; 
-    card* Personnel[3];
+    card Personnel[3];
     cardList deck;
     cardList hand;
     cardList discard;

@@ -1,5 +1,3 @@
-#include "../headers/card.h"
-#include "../headers/structure.h"
 #include "../headers/board.h"
 #include "../headers/interface.h"
 #include <stdio.h>
@@ -36,55 +34,55 @@ int nb_cards_in_deck(cardList deck) {
 void apply_effect(card c, ensiie *player, ensiie *opponent) {
     switch (c.num) {
         case 1 : {
-            add_dev_points_FISE(player.cb->FISE, 1); 
+            add_dev_points_FISE(player->cb->FISE, 1); 
             break; 
         }
         case 2 : {
-            add_dur_points_FISE(player.cb->FISE, 1);
+            add_dur_points_FISE(player->cb->FISE, 1);
             break;
         }
         case 3 : {
-            add_dev_points_FISA(player.cb->FISA), 1; 
+            add_dev_points_FISA(player->cb->FISA, 1); 
             break;
             }
         case 4 : {
-            add_dur_points_FISA(player.cb->FISA, 1); 
+            add_dur_points_FISA(player->cb->FISA, 1); 
             break;
             }
         case 5 : {
-            rmv_dev_points_FISE(opponent.cb->FISE, 1); 
+            rmv_dev_points_FISE(opponent->cb->FISE, 1); 
             break;
             }
         case 6 : {
-            rmv_dur_points_FISE(opponent.cb->FISE, 1); 
+            rmv_dur_points_FISE(opponent->cb->FISE, 1); 
             break;
             }
         case 7 : {
-            rmv_dev_points_FISA(opponent.cb->FISA, 1); 
+            rmv_dev_points_FISA(opponent->cb->FISA, 1); 
             break;
         }
         case 8 : {
-            rmv_dur_points_FISA(opponent.cb->FISA, 1); 
+            rmv_dur_points_FISA(opponent->cb->FISA, 1); 
             break;
             }
         case 9 : {
-            add_dev_points_FISE(player.cb->FISE, 1); 
-            add_dev_points_FISA(player.cb->FISA), 1; 
+            add_dev_points_FISE(player->cb->FISE, 1); 
+            add_dev_points_FISA(player->cb->FISA), 1; 
             break; 
         }
         case 10 : {
-            add_dur_points_FISE(player.cb->FISE, 1);
-            add_dur_points_FISA(player.cb->FISA, 1);
+            add_dur_points_FISE(player->cb->FISE, 1);
+            add_dur_points_FISA(player->cb->FISA, 1);
             break;
         }
         case 11 : {
-            rmv_dev_points_FISE(opponent.cb->FISE, 1);
-            rmv_dev_points_FISA(opponent.cb->FISA, 1); 
+            rmv_dev_points_FISE(opponent->cb->FISE, 1);
+            rmv_dev_points_FISA(opponent->cb->FISA, 1); 
             break;
         }
         case 12 : {
-            rmv_dur_points_FISE(opponent.cb->FISE, 1);
-            rmv_dur_points_FISA(opponent.cb->FISA, 1); 
+            rmv_dur_points_FISE(opponent->cb->FISE, 1);
+            rmv_dur_points_FISA(opponent->cb->FISA, 1); 
             break;
         }
         case 13 : {
@@ -104,36 +102,36 @@ void apply_effect(card c, ensiie *player, ensiie *opponent) {
             break;
         }
         case 16 : {
-            add_dev_points_FISE(player.cb->FISE, 1);
-            add_dur_points_FISE(player.cb->FISE, 1);
-            rmv_dur_points_FISE(opponent.cb->FISE, 1);
+            add_dev_points_FISE(player->cb->FISE, 1);
+            add_dur_points_FISE(player->cb->FISE, 1);
+            rmv_dur_points_FISE(opponent->cb->FISE, 1);
             rmv_dd_points(opponent, 1);
             break;
         }
         case 17 : {
-            add_dev_points_FISA(player.cb->FISA, 1);
-            add_dur_points_FISA(player.cb->FISA, 1);
-            rmv_dur_points_FISA(opponent.cb->FOSA, 1);
+            add_dev_points_FISA(player->cb->FISA, 1);
+            add_dur_points_FISA(player->cb->FISA, 1);
+            rmv_dur_points_FISA(opponent->cb->FOSA, 1);
             rmv_dd_points(opponent, 1);
             break;
         }
         case 18 : {
-            add_dev_points_FISE(player.cb->FISE, 2);
-            add_dur_points_FISE(player.cb->FISE, 2);
+            add_dev_points_FISE(player->cb->FISE, 2);
+            add_dur_points_FISE(player->cb->FISE, 2);
             add_student_card_on_board(player, 1);
             break;
         }
         case 19 : {
-            add_dev_points_FISA(player.cb->FISA, 2);
-            add_dur_points_FISA(player.cb->FISA, 2);
+            add_dev_points_FISA(player->cb->FISA, 2);
+            add_dur_points_FISA(player->cb->FISA, 2);
             add_student_card_on_board(player, 1);
             break;
         }
         case 20 : {
-            add_dev_points_FISE(player.cb->FISE, 2);
-            add_dur_points_FISE(player.cb->FISE, 2);
-            add_dev_points_FISA(player.cb->FISA, 2);
-            add_dur_points_FISA(player.cb->FISA, 2);
+            add_dev_points_FISE(player->cb->FISE, 2);
+            add_dur_points_FISE(player->cb->FISE, 2);
+            add_dev_points_FISA(player->cb->FISA, 2);
+            add_dur_points_FISA(player->cb->FISA, 2);
             add_dd_points(player, 1);
             rmv_dd_points(opponent, 1);
             add_card_in_hand(player, 1);
@@ -150,7 +148,7 @@ void apply_effect(card c, ensiie *player, ensiie *opponent) {
 void add_dev_points_FISE(stack* FISE_s, int n) {
     if (FISE_s->top != -1) {
         for (int i=0; i<FISE_s->top; i++) {
-            FISE_s->contain[i].Dev_pts += n;
+            (FISE_s->contain[i])->Dev_pts += n;
         }
     }
 }
@@ -162,7 +160,7 @@ void add_dev_points_FISE(stack* FISE_s, int n) {
 void add_dur_points_FISE(stack* FISE_s, int n) {
     if (FISE_s->top != -1) {
         for (int i=0; i<FISE_s->top; i++) {
-            FISE_s->contain[i].Dur_pts += n;
+            (FISE_s->contain[i])->Dur_pts += n;
         }
     }
 }
@@ -174,7 +172,7 @@ void add_dur_points_FISE(stack* FISE_s, int n) {
 void add_dev_points_FISA(stack* FISA_s, int n) {
     if (FISA_s->top != -1) {
         for (int i=0; i<FISA_s->top; i++) {
-            FISA_s->contain[i].Dev_pts += n;
+            (FISA_s->contain[i])->Dev_pts += n;
         }
     }
 }
@@ -186,7 +184,7 @@ void add_dev_points_FISA(stack* FISA_s, int n) {
 void add_dur_points_FISA(stack* FISA_s, int n) {
     if (FISA_s->top != -1) {
         for (int i=0; i<FISA_s->top; i++) {
-            FISA_s->contain[i].Dur_pts += n;
+            (FISA_s->contain[i])->Dur_pts += n;
         }
     }
 }
@@ -198,7 +196,7 @@ void add_dur_points_FISA(stack* FISA_s, int n) {
 void rmv_dev_points_FISE(stack* FISE_s, int n) {
     if (FISE_s->top != -1) {
         for (int i=0; i<FISE_s->top; i++) {
-            FISE_s->contain[i].Dev_pts = FISE_s->contain[i].Dev_pts - n;
+            (FISE_s->contain[i])->Dev_pts = (FISE_s->contain[i])->Dev_pts - n;
         }
     }
 }
@@ -210,7 +208,7 @@ void rmv_dev_points_FISE(stack* FISE_s, int n) {
 void rmv_dur_points_FISE(stack* FISE_s, int n) {
     if (FISE_s->top != -1) {
         for (int i=0; i<FISE_s->top; i++) {
-            FISE_s->contain[i].Dur_pts = FISE_s->contain[i].Dur_pts - n;
+            (FISE_s->contain[i])->Dur_pts = (FISE_s->contain[i])->Dur_pts - n;
         }
     }
 }
@@ -222,7 +220,7 @@ void rmv_dur_points_FISE(stack* FISE_s, int n) {
 void rmv_dev_points_FISA(stack* FISA_s, int n) {
     if (FISA_s->top != -1) {
         for (int i=0; i<FISA_s->top; i++) {
-            FISA_s->contain[i].Dev_pts = FISA_s->contain[i].Dev_pts - n;
+            (FISA_s->contain[i])->Dev_pts = (FISA_s->contain[i])->Dev_pts - n;
         }
     }
 }
@@ -234,7 +232,7 @@ void rmv_dev_points_FISA(stack* FISA_s, int n) {
 void rmv_dur_points_FISA(stack* FISA_s, int n) {
     if (FISA_s->top != -1) {
         for (int i=0; i<FISA_s->top; i++) {
-            FISA_s->contain[i].Dur_pts = FISA_s->contain[i].Dur_pts - n;
+            (FISA_s->contain[i])->Dur_pts = (FISA_s->contain[i])->Dur_pts - n;
         }
     }
 }

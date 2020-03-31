@@ -79,7 +79,7 @@ void rmv_dur_points_FISA(stack* FISA_s, int n);
 @requires a correctly formated player and an integer n equals 1 or 2
 @assigns DD
 @ensures add n DD points to player. */
-void add_dd_points(ensiie player, int n);
+void add_dd_points(ensiie *player, int n);
 
 /*
 @requires a correctly formated player and an integer n equals 1 or 2

@@ -1,7 +1,7 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-#include "structure.h"
+#include "card.h"
 
 /*
  @requires nothing

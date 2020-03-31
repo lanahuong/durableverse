@@ -4,6 +4,30 @@
 #include "card.h"
 
 typedef struct board* board;
+typedef struct stack stack;
+
+struct stack {
+    student_card* contain;
+    int top;
+};
+
+struct board* {
+    stack FISE;
+    stack FISA; 
+    card* Personnel[3];
+};
+
+typedef struct ensiie {
+    int DD;
+    int PE;
+    int nCard;
+    int nStudent;
+    board cb;
+    cardList deck;
+    cardList hand;
+    cardList discard;
+} ensiie;
+
 
 /*
  @requires nothing

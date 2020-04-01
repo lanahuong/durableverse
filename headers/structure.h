@@ -21,7 +21,7 @@ typedef struct cardList {
 } cardList; 
 
 typedef struct stack {
-    studentCard* contain;
+    studentCard* content;
     int top;
 } stack;
 
@@ -41,3 +41,9 @@ typedef struct ensiie {
     int nStudent;
     board cb;
 } ensiie;
+
+stack* empty_stack(void);
+int is_empty_stack(stack*);
+void push(studentCard, stack*);
+studentCard pop(stack*);
+void double_top(stack*);

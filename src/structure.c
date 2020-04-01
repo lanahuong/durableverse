@@ -36,8 +36,6 @@ void push(studentCard x, stack* p){
 @assigns nothing 
 @ensures return the studentCard on top of the stack */ 
 studentCard pop(stack* p){
-	if (is_empty_stack(p)==1)
-		return 0;
 	studentCard n;
 	n=p->content[p->top];
 	p->top=p->top - 1;

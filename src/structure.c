@@ -25,10 +25,7 @@ int* structure_getCardListContent(cardList l) {
 queue* structure_emptyQueue(unsigned capacity) {
     queue* queue = (queue*)malloc(sizeof(queue));
     queue->capacity = capacity;
-    queue->first = 0;
-    queue->size = 0;
-    queue->last = capacity - 1; 
-    // quand on ajoutera le premier élément, first et last seront égaux 
+    queue->size = 0; 
     queue->content = (card*)malloc(capacity * sizeof(card));
     return queue;
 }
@@ -50,41 +47,50 @@ int structure_isFullQueue(queue q) {
 }
 
 /*
-@requires a correctly formated non full queue and a card c
-@assigns content, size and last
+@requires a correctly formated non full queue and int n
+@assigns content & size
 @ensures add n to the queue */
-void structure_enqueue(queue* q, card c) {
-    q->last = (q->last + 1) % (q->capacity); // il faut un modulo
-    q->content[q->last] = c;
-    q->size += 1;
+void structure_enqueue(queue* q, int n) {
+    if (q->size == 0){
+	    q->content[2] = n;
+	    size +=1;
+    }
+    else if (q->size == 1){
+	    q->content[1] = n;
+	    size +=1;
+    }
+    else if (q->size == 2){
+	   structure_dequeue(q);
+	    q->content[0] = n;
+	    
+    }
+  
+    
 }
 
 /*
 @requires a correctly formated non empty queue
-@assigns content, size and first
-@ensures remove the first item of the queue */
-card structure_dequeue(queue* q) {
-    card firstCard = q->content[q->first];
-    q->first = (q->first + 1) % (q->capacity); // il faut un modulo 
-    q->size = q->size - 1;
-    return firstCard;
+@assigns content & size
+@ensures remove the first item of the queue & move the others*/
+void structure_dequeue(queue* q) {
+    	if (!structure_isEmptyQueue){
+    		if(q->size == 1){
+			q->content[2] = NULL;
+		}
+		else if (q->size == 2){
+			q->content[2] = q->content[1];
+			q->content[1] = NULL;
+		}
+		else if (q->size ==3){
+			q->content[2] = q->content[1];
+			q->content[1] = q->content[0];
+			q->content[0] = NULL;
+		}
+
+		q->size = q->size - 1;
+	}
 }
 
-/* 
-@requires a correctly formated queue
-@assigns nothing
-@ensures return the first item's index */
-int structure_getQueueFirst(queue q) {
-    return q.first;
-}
-
-/* 
-@requires a correctly formated queue
-@assigns nothing
-@ensures return the last item's index */
-int structure_getQueueLast(queue q) {
-    return q.last;
-}
 
 /* 
 @requires a correctly formated queue

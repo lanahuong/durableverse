@@ -1,8 +1,14 @@
 #ifndef BOARD_H
 #define BOARD_H
+<<<<<<< HEAD
+
+#include "card.h"
+#include "structure.h"
+=======
 #include "structure.h"
 #include "card.h" 
 
+>>>>>>> 6fed14da00ba259c2ee0a80b1bbc477c07e68ee7
 typedef struct board* board;
 
 // à ajouter dans le board.c

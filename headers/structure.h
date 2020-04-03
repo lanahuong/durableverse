@@ -2,6 +2,8 @@
 #define STRUCTURE_H
 #include "card.h"
 
+#include "card.h"
+
 // In order to make the code easily understandable :
 typedef enum {ELEVE, PERSONNEL, ACTION} type;
 typedef enum {ThomasLim = 1, MarieSzafranski, AlainFaye, ChristopheMouilleron, StefaniaDumbrava, JulienForest, NicolasBrunel, LaurenceBourard, DimitriWatel, ViteraY, KevinGoilard, VincentJeannas, MassinissaMerabet, Anne_LaureLigozat, CatherineDubois, EricLejeune, ChristineMathias, KatrinSalhab, AbassSagna, LaurentPrevel} staff;
@@ -27,8 +29,6 @@ int* structure_getCardListContent(cardList l);
 
 // To set a structure for the board where Staff cards would be played
 typedef struct queue {
-    int first;
-    int last;
     int size;
     unsigned capacity;
     int* content;
@@ -62,19 +62,7 @@ void structure_enqueue(queue* q, int n);
 @requires a correctly formated non empty queue
 @assigns content, size and first
 @ensures remove the first item of the queue */
-card structure_dequeue(queue* q);
-
-/* 
-@requires a correctly formated queue
-@assigns nothing
-@ensures return the first item's index */
-int structure_getQueueFirst(queue l);
-
-/* 
-@requires a correctly formated queue
-@assigns nothing
-@ensures return the last item's index */
-int structure_getQueueLast(queue l);
+void structure_dequeue(queue* q);
 
 /* 
 @requires a correctly formated queue
@@ -87,5 +75,9 @@ int structure_getQueueSize(queue l);
 @assigns nothing
 @ensures return the content */
 int* structure_getQueueContent(queue l);
+<<<<<<< HEAD
+#endif
+=======
 
 #endif
+>>>>>>> 6fed14da00ba259c2ee0a80b1bbc477c07e68ee7

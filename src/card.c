@@ -1,272 +1,143 @@
-#include "../headers/board.h"
-#include "../headers/interface.h"
+#include "../headers/card.h"
 #include <stdio.h>
 #include <stdlib.h>
+
+typedef struct card {
+  int cost;
+  type t;
+  int num;
+  int AE1;
+  int AE2;
+  int AA1;
+  int AA2;
+  int RE1;
+  int RE2;
+  int RA1;
+  int RA2;
+  int ADD;
+  int RDD;
+  int DR;
+  int E;
+} card;
+
+//We need a list of the different cards and to know their amount so we're gonna create two tables 
+//In one of them, we'ra gonna stock the differents cards 
+card deckCards[31];
+//and their amount in the second table
+int deckCardsCount[31];
+//For instance, card n°1 aka ThomasLim is gonna be stocked in deckCards[0] and its amount which is 1 will be the value of deckCardsCount[0]
+
+/*
+@requires number the card will have, its type, its cost and 12 integers each equals to 0, 1 or 2
+@assigns memory space for a card
+@ensures create a card with all the parameters */
+card* card_createCard(
+  int num, type t, int cost, int AE1; int AE2, int AA1, int AA2, 
+  int RE1, int RE2, int RA1, int RA2, int ADD, int RDD, int DR, int E) {
+      card* card = (card*)malloc(sizeof(card));
+      card->num = num;
+      card->t = t;
+      card->cost = cost;
+      card->AE1 = AE1;
+      card->AE2 = AE2;
+      card->AA1 = AA1;
+      card->AA2 = AA2;
+      card->RE1 = RE1;
+      card->RE2 = RE2;
+      card->RA1 = RA1;
+      card->RA2 = RA2;
+      card->ADD = ADD;
+      card->RDD = RDD;
+      card->DR = DR;
+      card->E = E;
+  }
 
 /*
 @requires a correctly formated card c
 @assigns nothing
-@ensures return the PE that the player has to pay in order to play this card c */
-int PE_cost(card c) {
-    return c.cout;
-}
+@ensures return the card's cost */
+int card_cost(card c);
 
 /*
 @requires a correctly formated card c
 @assigns nothing
 @ensures return the type of the card */ 
-type card_type(card c) {
-    return c.t;
-}
+type card_type(card c);
 
 /*
-@requires a correctly formated deck 
+@requires a correctly formatted card c
 @assigns nothing
-@ensures return the number of cards included in the deck. */ 
-int nb_cards_in_deck(cardList deck) {
-    return deck.length;
-}
+@ensures return the card's number */
+int card_number(card c);
 
 /*
-@requires a correctly formated card c, a correctly formated player who has played it and his opponent
-@assigns different according to the played card's effect
-@ensures apply the effect of the card. */
-void apply_effect(card c, ensiie *player, ensiie *opponent) {
-    switch (c.num) {
-        case 1 : {
-            add_dev_points_FISE(player->cb->FISE, 1); 
-            break; 
-        }
-        case 2 : {
-            add_dur_points_FISE(player->cb->FISE, 1);
-            break;
-        }
-        case 3 : {
-            add_dev_points_FISA(player->cb->FISA, 1); 
-            break;
-            }
-        case 4 : {
-            add_dur_points_FISA(player->cb->FISA, 1); 
-            break;
-            }
-        case 5 : {
-            rmv_dev_points_FISE(opponent->cb->FISE, 1); 
-            break;
-            }
-        case 6 : {
-            rmv_dur_points_FISE(opponent->cb->FISE, 1); 
-            break;
-            }
-        case 7 : {
-            rmv_dev_points_FISA(opponent->cb->FISA, 1); 
-            break;
-        }
-        case 8 : {
-            rmv_dur_points_FISA(opponent->cb->FISA, 1); 
-            break;
-            }
-        case 9 : {
-            add_dev_points_FISE(player->cb->FISE, 1); 
-            add_dev_points_FISA(player->cb->FISA), 1; 
-            break; 
-        }
-        case 10 : {
-            add_dur_points_FISE(player->cb->FISE, 1);
-            add_dur_points_FISA(player->cb->FISA, 1);
-            break;
-        }
-        case 11 : {
-            rmv_dev_points_FISE(opponent->cb->FISE, 1);
-            rmv_dev_points_FISA(opponent->cb->FISA, 1); 
-            break;
-        }
-        case 12 : {
-            rmv_dur_points_FISE(opponent->cb->FISE, 1);
-            rmv_dur_points_FISA(opponent->cb->FISA, 1); 
-            break;
-        }
-        case 13 : {
-            add_card_in_hand(player, 2);
-            break;
-        }
-        case 14 : {
-            add_dd_points(player, 2);
-            add_card_in_hand(player, 1);
-            add_student_card_on_board(player, 1);
-            break;
-        }
-        case 15 : {
-            rmv_dd_points(opponent, 2);
-            add_card_in_hand(player, 1);
-            add_student_card_on_board(player, 1);
-            break;
-        }
-        case 16 : {
-            add_dev_points_FISE(player->cb->FISE, 1);
-            add_dur_points_FISE(player->cb->FISE, 1);
-            rmv_dur_points_FISE(opponent->cb->FISE, 1);
-            rmv_dd_points(opponent, 1);
-            break;
-        }
-        case 17 : {
-            add_dev_points_FISA(player->cb->FISA, 1);
-            add_dur_points_FISA(player->cb->FISA, 1);
-            rmv_dur_points_FISA(opponent->cb->FOSA, 1);
-            rmv_dd_points(opponent, 1);
-            break;
-        }
-        case 18 : {
-            add_dev_points_FISE(player->cb->FISE, 2);
-            add_dur_points_FISE(player->cb->FISE, 2);
-            add_student_card_on_board(player, 1);
-            break;
-        }
-        case 19 : {
-            add_dev_points_FISA(player->cb->FISA, 2);
-            add_dur_points_FISA(player->cb->FISA, 2);
-            add_student_card_on_board(player, 1);
-            break;
-        }
-        case 20 : {
-            add_dev_points_FISE(player->cb->FISE, 2);
-            add_dur_points_FISE(player->cb->FISE, 2);
-            add_dev_points_FISA(player->cb->FISA, 2);
-            add_dur_points_FISA(player->cb->FISA, 2);
-            add_dd_points(player, 1);
-            rmv_dd_points(opponent, 1);
-            add_card_in_hand(player, 1);
-            add_student_card_on_board(player, 2);
-            break;
-        }
-    }
-}
+@requires a correctly formatted card c
+@assigns nothing
+@ensures return the card's AE1 value */
+int card_getAE1(card c);
 
 /*
-@requires a correctly formated stack FISE_s used for FISE cards and an integer n equals 1 or 2
-@assigns Dev_pts of each FISE cards from stack 
-@ensures add n more Development points for each FISE cards. */
-void add_dev_points_FISE(stack* FISE_s, int n) {
-    if (FISE_s->top != -1) {
-        for (int i=0; i<FISE_s->top; i++) {
-            (FISE_s->contain[i])->Dev_pts += n;
-        }
-    }
-}
+@requires a correctly formatted card c
+@assigns nothing
+@ensures return the card's AE2 value*/
+int card_getAE2(card c);
 
 /*
-@requires a correctly formated stack FISE_s used for FISE cards and an integer n equals 1 or 2
-@assigns Dur_pts of each FISE cards from stack 
-@ensures add n more Durability points for each FISE cards. */
-void add_dur_points_FISE(stack* FISE_s, int n) {
-    if (FISE_s->top != -1) {
-        for (int i=0; i<FISE_s->top; i++) {
-            (FISE_s->contain[i])->Dur_pts += n;
-        }
-    }
-}
+@requires a correctly formatted card c
+@assigns nothing
+@ensures return the card's AA1 value */
+int card_getAA1(card c);
 
 /*
-@requires a correctly formated stack FISA_s used for FISA cards and an integer n equals 1 or 2
-@assigns Dev_pts of each FISA cards from stack 
-@ensures add n more Development points for each FISA cards. */
-void add_dev_points_FISA(stack* FISA_s, int n) {
-    if (FISA_s->top != -1) {
-        for (int i=0; i<FISA_s->top; i++) {
-            (FISA_s->contain[i])->Dev_pts += n;
-        }
-    }
-}
+@requires a correctly formatted card c
+@assigns nothing
+@ensures return the card's AA2 value*/
+int card_getAA2(card c);
 
 /*
-@requires a correctly formated stack FISA_s used for FISA cards and an integer n equals 1 or 2
-@assigns Dur_pts of each FISA cards from stack 
-@ensures add n more Durability points for each FISA cards. */
-void add_dur_points_FISA(stack* FISA_s, int n) {
-    if (FISA_s->top != -1) {
-        for (int i=0; i<FISA_s->top; i++) {
-            (FISA_s->contain[i])->Dur_pts += n;
-        }
-    }
-}
+@requires a correctly formatted card c
+@assigns nothing
+@ensures return the card's RE1 value */
+int card_getRE1(card c);
 
 /*
-@requires a correctly formated stack FISE_s used for FISE cards and an integer n equals 1 or 2
-@assigns Dev_pts of each FISE cards from stack 
-@ensures remove n Development points for each FISE cards. */
-void rmv_dev_points_FISE(stack* FISE_s, int n) {
-    if (FISE_s->top != -1) {
-        for (int i=0; i<FISE_s->top; i++) {
-            (FISE_s->contain[i])->Dev_pts = (FISE_s->contain[i])->Dev_pts - n;
-        }
-    }
-}
+@requires a correctly formatted card c
+@assigns nothing
+@ensures return the card's RE2 value*/
+int card_getRE2(card c);
 
 /*
-@requires a correctly formated stack FISE_s used for FISE cards and an integer n equals 1 or 2
-@assigns Dur_pts of each FISE cards from stack 
-@ensures remove n Durability points for each FISE cards. */
-void rmv_dur_points_FISE(stack* FISE_s, int n) {
-    if (FISE_s->top != -1) {
-        for (int i=0; i<FISE_s->top; i++) {
-            (FISE_s->contain[i])->Dur_pts = (FISE_s->contain[i])->Dur_pts - n;
-        }
-    }
-}
+@requires a correctly formatted card c
+@assigns nothing
+@ensures return the card's RA1 value */
+int card_getRA1(card c);
 
 /*
-@requires a correctly formated stack FISA_s used for FISA cards and an integer n equals 1 or 2
-@assigns Dev_pts of each FISA cards from stack 
-@ensures remove n Development points for each FISA cards. */
-void rmv_dev_points_FISA(stack* FISA_s, int n) {
-    if (FISA_s->top != -1) {
-        for (int i=0; i<FISA_s->top; i++) {
-            (FISA_s->contain[i])->Dev_pts = (FISA_s->contain[i])->Dev_pts - n;
-        }
-    }
-}
+@requires a correctly formatted card c
+@assigns nothing
+@ensures return the card's RA2 value*/
+int card_getRA2(card c);
 
 /*
-@requires a correctly formated stack FISA_s used for FISA cards and an integer n equals 1 or 2
-@assigns Dur_pts of each FISA cards from stack 
-@ensures remove n Durability points for each FISA cards. */
-void rmv_dur_points_FISA(stack* FISA_s, int n) {
-    if (FISA_s->top != -1) {
-        for (int i=0; i<FISA_s->top; i++) {
-            (FISA_s->contain[i])->Dur_pts = (FISA_s->contain[i])->Dur_pts - n;
-        }
-    }
-}
+@requires a correctly formatted card c
+@assigns nothing
+@ensures return the card's ADD value */
+int card_getADD(card c);
 
 /*
-@requires a correctly formated player and an integer n equals 1 or 2
-@assigns DD
-@ensures add n DD points to player. */
-void add_dd_points(ensiie *player, int n) {
-    player->DD += n;
-}
+@requires a correctly formatted card c
+@assigns nothing
+@ensures return the card's RDD value*/
+int card_getRDD(card c);
 
 /*
-@requires a correctly formated player and an integer n equals 1 or 2
-@assigns DD
-@ensures remove n DD points to player. */
-void rmv_dd_points(ensiie *player, int n) {
-    player->DD = player->DD - n;
-}
-
+@requires a correctly formatted card c
+@assigns nothing
+@ensures return the card's DR value */
+int card_getDR(card c);
 
 /*
-@requires player and an integer n
-@assigns nCard
-@ensures add a number n of cards player will have in hand for the next turn. */
-void add_card_in_hand(ensiie *player, int n) {
-    player->nCard += n;
-
-}
-
-/*
-@requires player and an integer n
-@assigns nStudent
-@ensures add a number n of cards player will have in hand for the next turn. */
-void add_student_card_on_board(ensiie *player, int n) {
-    player->nStudent += n;
-}
+@requires a correctly formatted card c
+@assigns nothing
+@ensures return the card's E value*/
+int card_getE(card c);

@@ -14,7 +14,7 @@ int structure_getCardListLength(cardList l) {
 @requires a correctly formated cardList
 @assigns nothing
 @ensures return the content */
-card* structure_getCardListContent(cardList l) {
+int* structure_getCardListContent(cardList l) {
     return l.content;
 }
 

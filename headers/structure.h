@@ -1,5 +1,6 @@
 #ifndef STRUCTURE_H
 #define STRUCTURE_H
+#include "card.h"
 
 // In order to make the code easily understandable :
 typedef enum {ELEVE, PERSONNEL, ACTION} type;
@@ -9,7 +10,7 @@ typedef enum {CoursDeveloppementDurable = 21, Recrutement, RentreeFISE, RentreeF
 // To set a structure for the deck
 typedef struct cardList {
   int length;
-  card* content;
+  int* content;
 } cardList; 
 
 /* 
@@ -22,7 +23,7 @@ int structure_getCardListLength(cardList l);
 @requires a correctly formated cardList
 @assigns nothing
 @ensures return the content */
-card* structure_getCardListContent(cardList l);
+int* structure_getCardListContent(cardList l);
 
 // To set a structure for the board where Staff cards would be played
 typedef struct queue {
@@ -86,3 +87,5 @@ int structure_getQueueSize(queue l);
 @assigns nothing
 @ensures return the content */
 int* structure_getQueueContent(queue l);
+
+#endif

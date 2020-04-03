@@ -18,7 +18,7 @@ typedef struct card {
   int ADD;
   int RDD;
   int DR;
-  int E.
+  int E;
 } card;
 
 /*

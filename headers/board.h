@@ -1,7 +1,7 @@
 #ifndef BOARD_H
 #define BOARD_H
-
-#include "card.h"
+#include "structure.h"
+#include "card.h" 
 
 typedef struct board* board;
 
@@ -10,7 +10,7 @@ struct board* {
     int FISE;
     int FISA; 
     int bonusDur;
-    fifo personnel;
+    queue personnel;
     cardList deck;
     cardList hand;
     cardList discard;
@@ -35,7 +35,7 @@ void board_freeBoard(board p);
 
 /*
  @requires 2 correctly formatted boards
- @assigns  *turn
+ @assigns  *turn 
  @ensures  add 1 to the number of the turn
            if turn is 6 or 11 , add 1 to the number of personnel cards boards can hold
  */

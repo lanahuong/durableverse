@@ -14,5 +14,11 @@ $(EXEC) : $(OBJ)*.o
 $(OBJ)%.o : $(SRC)%.c $(INC)%.h
 	$(CC) -c -o $@ $<
 
-clean :
+doc :
+	doxygen Doxyfile
+
+clean : cleandoc
 	rm -f $(OBJ)*.o $(BIN)*
+
+cleandoc :
+	rm -r html latex

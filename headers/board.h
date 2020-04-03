@@ -3,6 +3,19 @@
 
 #include "card.h"
 
+typedef struct board* board;
+
+// à ajouter dans le board.c
+struct board* {
+    int FISE;
+    int FISA; 
+    int bonusDur;
+    fifo personnel;
+    cardList deck;
+    cardList hand;
+    cardList discard;
+};
+
 /*
  @requires nothing
  @assigns  nothing

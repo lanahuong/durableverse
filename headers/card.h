@@ -3,11 +3,29 @@
 
 #include "structure.h"
 
+typedef struct card {
+  int cout;
+  type t;
+  int num;
+  int AE1;
+  int AE2;
+  int AA1;
+  int AA2;
+  int RE1;
+  int RE2;
+  int RA1;
+  int RA2;
+  int ADD;
+  int RDD;
+  int DR;
+  int E.
+} card;
+
 /*
 @requires a correctly formated card c
 @assigns nothing
-@ensures return the PE that the player has to pay in order to play this card c */
-int PE_cost(card c);
+@ensures return the card's cost */
+int card_cost(card c);
 
 /*
 @requires a correctly formated card c
@@ -18,86 +36,86 @@ type card_type(card c);
 /*
 @requires a correctly formated deck 
 @assigns nothing
-@ensures return the number of cards included in the deck. */ 
-int nb_cards_in_deck(cardList deck);
+@ensures return the number of cards included in the deck */ 
+int card_deckCardAmount(cardList deck);
 
 /*
-@requires a correctly formated card c, the player who has played it and his opponent
+@requires a correctly formated card c, two correctly formated boards
 @assigns different according to the played card's effect
-@ensures apply the effect of the card. */
-void apply_effect(card c, ensiie *player, ensiie *opponent);
+@ensures apply the effect of the card */
+void card_applyCardEffect(card c, board* player, board* opponent);
 
 /*
-@requires a correctly formated stack FISE_s used for FISE cards and an integer n equals 1 or 2
-@assigns Dev_pts of each FISE cards from stack 
-@ensures add n more Development points for each FISE cards. */
-void add_dev_points_FISE(stack* FISE_s, int n);
+@requires an integer FISE_dev and an integer AE1
+@assigns FISE_dev
+@ensures add AE1 more Development points for each FISE cards to FISE_dev */
+void card_addDevFISE(int* FISE_dev, int AE1);
 
 /*
-@requires a correctly formated stack FISE_s used for FISE cards and an integer n equals 1 or 2
-@assigns Dur_pts of each FISE cards from stack 
-@ensures add n more Durability points for each FISE cards. */
-void add_dur_points_FISE(stack* FISE_s, int n);
+@requires an integer FISE_dur and an integer AE2
+@assigns FISE_dur
+@ensures add AE2 more Durability points for each FISE cards to FISE_dur */
+void card_addDurFISE(int* FISE_dur, int AE2);
 
 /*
-@requires a correctly formated stack FISA_s used for FISA cards and an integer n equals 1 or 2
-@assigns Dev_pts of each FISA cards from stack 
-@ensures add n more Development points for each FISA cards. */
-void add_dev_points_FISA(stack* FISA_s, int n);
+@requires an integer FISA_dev and an integer AA1
+@assigns FISA_dev
+@ensures add AA1 more Development points for each FISA cards to FISA_dev */
+void card_addDevFISA(int* FISA_dev, int AA1);
 
 /*
-@requires a correctly formated stack FISA_s used for FISA cards and an integer n equals 1 or 2
-@assigns Dur_pts of each FISA cards from stack 
-@ensures add n more Durability points for each FISA cards. */
-void add_dur_points_FISA(stack* FISA_s, int n);
+@requires an integer FISA_dur and an integer AA2
+@assigns FISA_dur
+@ensures add AA2 more Durability points for each FISA cards to FISA_dur */
+void card_addDurFISA(int* FISA_dur, int AA2);
 
 /*
-@requires a correctly formated stack FISE_s used for FISE cards and an integer n equals 1 or 2
-@assigns Dev_pts of each FISE cards from stack 
-@ensures remove n Development points for each FISE cards. */
-void rmv_dev_points_FISE(stack* FISE_s, int n);
+@requires an integer FISE_dev and an integer RE1
+@assigns FISE_dev
+@ensures remove RE1 more Development points for each FISE cards to FISE_dev */
+void card_rmvDevFISE(int* FISE_dev, int RE1);
 
 /*
-@requires a correctly formated stack FISE_s used for FISE cards and an integer n equals 1 or 2
-@assigns Dur_pts of each FISE cards from stack 
-@ensures remove n Durability points for each FISE cards. */
-void rmv_dur_points_FISE(stack* FISE_s, int n);
+@requires an integer FISE_dur and an integer RE2
+@assigns FISE_dur
+@ensures remove RE2 more Durability points for each FISE cards to FISE_dur */
+void card_rmvDurFISE(int* FISE_dur, int RE2);
 
 /*
-@requires a correctly formated stack FISA_s used for FISA cards and an integer n equals 1 or 2
-@assigns Dev_pts of each FISA cards from stack 
-@ensures removen Development points for each FISA cards. */
-void rmv_dev_points_FISA(stack* FISA_s, int n);
+@requires an integer FISA_dev and an integer RA1
+@assigns FISA_dev
+@ensures remove RA1 more Development points for each FISA cards to FISA_dev */
+void card_rmvDevFISA(int* FISA_dev, int RA1);
 
 /*
-@requires a correctly formated stack FISA_s used for FISA cards and an integer n equals 1 or 2
-@assigns Dur_pts of each FISA cards from stack 
-@ensures remove n Durability points for each FISA cards. */
-void rmv_dur_points_FISA(stack* FISA_s, int n);
+@requires an integer FISA_dur and an integer RA2
+@assigns FISA_dur
+@ensures remove RA2 more Durability points for each FISA cards to FISA_dur */
+void card_rmvDevFISA(int* FISA_dur, int RA2);
 
 /*
-@requires a correctly formated player and an integer n equals 1 or 2
+@requires an integer DD and an integer ADD
 @assigns DD
-@ensures add n DD points to player. */
-void add_dd_points(ensiie *player, int n);
+@ensures add ADD to DD */
+void card_addDDPoints(int* DD, int ADD);
 
 /*
-@requires a correctly formated player and an integer n equals 1 or 2
+@requires an integer DD and an integer RDD
 @assigns DD
-@ensures remove n DD points to player. */
-void rmv_dd_points(ensiie *player, int n);
+@ensures remove RDD to DD */
+void card_rmvDDPoints(int* DD, int n);
 
 /*
-@requires player and an integer n
-@assigns nCard
-@ensures add a number n of cards player will have in hand for the next turn. */
-void add_card_in_hand(ensiie *player, int n);
+@requires a correctly formated board and an integer DR
+@assigns player's hand
+@ensures add DR more cards in player's hand  */
+void card_addCardInHand(board* player, int DR);
 
 /*
-@requires player and an integer n
-@assigns nStudent
-@ensures add a number n of cards player will have in hand for the next turn. */
-void add_student_card_on_board(ensiie *player, int n);
+@requires a correctly formated board and an integer E
+@assigns FisaCount and/or FiseCount
+@ensures play E more student cards */
+void card_playMoreStudentCard(board* player, int E);
 
 #endif
 

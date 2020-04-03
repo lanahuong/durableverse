@@ -3,50 +3,101 @@
 #include "../headers/structure.h"
 
 /* 
-@requires nothing
-@assigns storage for a stack 
-@ensures create an empty stack */
-stack* empty_stack(){
-	stack* p;
-	p=malloc(sizeof(stack));
-	p->content=malloc(N*sizeof(studentCard));
-	p->top=-1;
-	return p;
+@requires a correctly formated cardList
+@assigns nothing
+@ensures return the length */
+int structure_getCardListLength(cardList l) {
+    return l.length;
 }
 
 /* 
-@requires stack p
+@requires a correctly formated cardList
 @assigns nothing
-@ensures return 1 if stack p is empty else, return 0 */ 
-int is_empty_stack(stack* p){
-	return (p->top < 0);
-}
- 
-/*
-@requires stack p and a correctly formated studentCard x
-@assigns nothing
-@ensures add a studentCard x on the top of the stack */
-void push(studentCard x, stack* p){
-	p->top=p->top + 1;
-	p->content[p->top]=x;
+@ensures return the content */
+card* structure_getCardListContent(cardList l) {
+    return l.content;
 }
 
 /*
-@requires stack p not empty 
-@assigns nothing 
-@ensures return the studentCard on top of the stack */ 
-studentCard pop(stack* p){
-	studentCard n;
-	n=p->content[p->top];
-	p->top=p->top - 1;
-	return n;
+@requires an unsigned int
+@assigns memory space for a capacity-sized queue of int 
+@ensures create a queue */
+queue* structure_emptyQueue(unsigned capacity) {
+    queue* queue = (queue*)malloc(sizeof(queue));
+    queue->capacity = capacity;
+    queue->first = 0;
+    queue->size = 0;
+    queue->last = capacity - 1; 
+    // quand on ajoutera le premier élément, first et last seront égaux 
+    queue->content = (card*)malloc(capacity * sizeof(card));
+    return queue;
 }
 
 /*
-@requires stack p not empty
+@requires a correctly formated queue
 @assigns nothing
-@ensures double the top studentCard of the stack */ 
-void double_top(stack* p){
-	studentCard n=p->content[p->top];
-	push(n,p);
+@ensures return 1 if the queue is empty else 0 */
+int structure_isEmptyQueue(queue q) {
+    return (q.size == 0);
+}
+
+/*
+@requires a correctly formated queue
+@assigns nothing
+@ensures return 1 if the queue is full else 0 */
+int structure_isFullQueue(queue q) {
+    return (q.size == q.capacity);;
+}
+
+/*
+@requires a correctly formated non full queue and a card c
+@assigns content, size and last
+@ensures add n to the queue */
+void structure_enqueue(queue* q, card c) {
+    q->last = (q->last + 1) % (q->capacity); // il faut un modulo
+    q->content[q->last] = c;
+    q->size += 1;
+}
+
+/*
+@requires a correctly formated non empty queue
+@assigns content, size and first
+@ensures remove the first item of the queue */
+card structure_dequeue(queue* q) {
+    card firstCard = q->content[q->first];
+    q->first = (q->first + 1) % (q->capacity); // il faut un modulo 
+    q->size = q->size - 1;
+    return firstCard;
+}
+
+/* 
+@requires a correctly formated queue
+@assigns nothing
+@ensures return the first item's index */
+int structure_getQueueFirst(queue q) {
+    return q.first;
+}
+
+/* 
+@requires a correctly formated queue
+@assigns nothing
+@ensures return the last item's index */
+int structure_getQueueLast(queue q) {
+    return q.last;
+}
+
+/* 
+@requires a correctly formated queue
+@assigns nothing
+@ensures return the size */
+int structure_getQueueSize(queue q) {
+    return q.size;
+}
+
+/* 
+@requires a correctly formated queue
+@assigns nothing
+@ensures return the content */
+int* structure_getQueueContent(queue q) {
+    return q.content;
 }

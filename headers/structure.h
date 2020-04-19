@@ -1,13 +1,9 @@
 #ifndef STRUCTURE_H
 #define STRUCTURE_H
-#include "card.h"
 
 #include "card.h"
 
-// In order to make the code easily understandable :
-typedef enum {ELEVE, PERSONNEL, ACTION} type;
-typedef enum {ThomasLim = 1, MarieSzafranski, AlainFaye, ChristopheMouilleron, StefaniaDumbrava, JulienForest, NicolasBrunel, LaurenceBourard, DimitriWatel, ViteraY, KevinGoilard, VincentJeannas, MassinissaMerabet, Anne_LaureLigozat, CatherineDubois, EricLejeune, ChristineMathias, KatrinSalhab, AbassSagna, LaurentPrevel} staff;
-typedef enum {CoursDeveloppementDurable = 21, Recrutement, RentreeFISE, RentreeFISA, EnergieVerte, Diplomation, Decharge, Recyclage, ZeroPapier, RepasVegetarien, FermetureAnuelle} action;
+
 
 // To set a structure for the deck
 typedef struct cardList {
@@ -75,9 +71,6 @@ int structure_getQueueSize(queue l);
 @assigns nothing
 @ensures return the content */
 int* structure_getQueueContent(queue l);
-<<<<<<< HEAD
-#endif
-=======
 
 #endif
->>>>>>> 6fed14da00ba259c2ee0a80b1bbc477c07e68ee7
+

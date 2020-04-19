@@ -1,121 +1,128 @@
 #ifndef CARD_H
 #define CARD_H
 
-#include "structure.h"
+// In order to make the code easily understandable :
+typedef enum {ELEVE, PERSONNEL, ACTION} type;
+typedef enum {ThomasLim = 1, MarieSzafranski, AlainFaye, ChristopheMouilleron, StefaniaDumbrava, JulienForest, NicolasBrunel, LaurenceBourard, DimitriWatel, ViteraY, KevinGoilard, VincentJeannas, MassinissaMerabet, Anne_LaureLigozat, CatherineDubois, EricLejeune, ChristineMathias, KatrinSalhab, AbassSagna, LaurentPrevel} staff;
+typedef enum {CoursDeveloppementDurable = 21, Recrutement, RentreeFISE, RentreeFISA, EnergieVerte, Diplomation, Decharge, Recyclage, ZeroPapier, RepasVegetarien, FermetureAnuelle} action;
 
-typedef struct card {
-  int cout;
-  type t;
-  int num;
-  int AE1;
-  int AE2;
-  int AA1;
-  int AA2;
-  int RE1;
-  int RE2;
-  int RA1;
-  int RA2;
-  int ADD;
-  int RDD;
-  int DR;
-  int E;
-} card;
+
+typedef struct card* card;
+
+//We need a list of the different cards and to know their amount so we're gonna create two tables 
+//In one of them, we'ra gonna stock the differents cards 
+//card deckCards[31];
+//and their amount in the second table
+//int deckCardsCount[31];
+//For instance, card n°1 aka ThomasLim is gonna be stocked in deckCards[0] and its amount which is 1 will be the value of deckCardsCount[0]
+
+/*
+@requires number the card will have, its type, its cost, its amount and 12 integers each equals to 0, 1 or 2
+@assigns memory space for a card
+@ensures create a card with all the parameters */
+card card_createCard(int num, type t, int cost, int AE1, int AE2, int AA1, int AA2, int RE1, int RE2, int RA1, int RA2, int ADD, int RDD, int DR, int E);
+
+/*
+@requires two empty 31-sized tables, the card and its quantity 
+@assigns the two tables
+@ensures add the card in one table and card's amount in the second */
+void card_addDeckCardsAndCount(card deckCards[31], int deckCardsCount[31], card c, int amount);
+
+/*
+@requires two empty 31-sized tables
+@assigns the two tables
+@ensures add the cards in one table and cards' amount in the second */
+void card_setTables(card deckCards[31], int deckCardsCount[31]);
 
 /*
 @requires a correctly formated card c
 @assigns nothing
 @ensures return the card's cost */
-int card_cost(card c);
+int card_getCost(card c);
 
 /*
 @requires a correctly formated card c
 @assigns nothing
 @ensures return the type of the card */ 
-type card_type(card c);
+type card_getType(card c);
 
 /*
-@requires a correctly formated deck 
+@requires a correctly formatted card c
 @assigns nothing
-@ensures return the number of cards included in the deck */ 
-int card_deckCardAmount(cardList deck);
+@ensures return the card's number */
+int card_getNumber(card c);
 
 /*
-@requires a correctly formated card c, two correctly formated boards
-@assigns different according to the played card's effect
-@ensures apply the effect of the card */
-void card_applyCardEffect(card c, board* player, board* opponent);
+@requires a correctly formatted card c
+@assigns nothing
+@ensures return the card's AE1 value */
+int card_getAE1(card c);
 
 /*
-@requires an integer FISE_dev and an integer AE1
-@assigns FISE_dev
-@ensures add AE1 more Development points for each FISE cards to FISE_dev */
-void card_addDevFISE(int* FISE_dev, int AE1);
+@requires a correctly formatted card c
+@assigns nothing
+@ensures return the card's AE2 value*/
+int card_getAE2(card c);
 
 /*
-@requires an integer FISE_dur and an integer AE2
-@assigns FISE_dur
-@ensures add AE2 more Durability points for each FISE cards to FISE_dur */
-void card_addDurFISE(int* FISE_dur, int AE2);
+@requires a correctly formatted card c
+@assigns nothing
+@ensures return the card's AA1 value */
+int card_getAA1(card c);
 
 /*
-@requires an integer FISA_dev and an integer AA1
-@assigns FISA_dev
-@ensures add AA1 more Development points for each FISA cards to FISA_dev */
-void card_addDevFISA(int* FISA_dev, int AA1);
+@requires a correctly formatted card c
+@assigns nothing
+@ensures return the card's AA2 value*/
+int card_getAA2(card c);
 
 /*
-@requires an integer FISA_dur and an integer AA2
-@assigns FISA_dur
-@ensures add AA2 more Durability points for each FISA cards to FISA_dur */
-void card_addDurFISA(int* FISA_dur, int AA2);
+@requires a correctly formatted card c
+@assigns nothing
+@ensures return the card's RE1 value */
+int card_getRE1(card c);
 
 /*
-@requires an integer FISE_dev and an integer RE1
-@assigns FISE_dev
-@ensures remove RE1 more Development points for each FISE cards to FISE_dev */
-void card_rmvDevFISE(int* FISE_dev, int RE1);
+@requires a correctly formatted card c
+@assigns nothing
+@ensures return the card's RE2 value*/
+int card_getRE2(card c);
 
 /*
-@requires an integer FISE_dur and an integer RE2
-@assigns FISE_dur
-@ensures remove RE2 more Durability points for each FISE cards to FISE_dur */
-void card_rmvDurFISE(int* FISE_dur, int RE2);
+@requires a correctly formatted card c
+@assigns nothing
+@ensures return the card's RA1 value */
+int card_getRA1(card c);
 
 /*
-@requires an integer FISA_dev and an integer RA1
-@assigns FISA_dev
-@ensures remove RA1 more Development points for each FISA cards to FISA_dev */
-void card_rmvDevFISA(int* FISA_dev, int RA1);
+@requires a correctly formatted card c
+@assigns nothing
+@ensures return the card's RA2 value*/
+int card_getRA2(card c);
 
 /*
-@requires an integer FISA_dur and an integer RA2
-@assigns FISA_dur
-@ensures remove RA2 more Durability points for each FISA cards to FISA_dur */
-void card_rmvDevFISA(int* FISA_dur, int RA2);
+@requires a correctly formatted card c
+@assigns nothing
+@ensures return the card's ADD value */
+int card_getADD(card c);
 
 /*
-@requires an integer DD and an integer ADD
-@assigns DD
-@ensures add ADD to DD */
-void card_addDDPoints(int* DD, int ADD);
+@requires a correctly formatted card c
+@assigns nothing
+@ensures return the card's RDD value*/
+int card_getRDD(card c);
 
 /*
-@requires an integer DD and an integer RDD
-@assigns DD
-@ensures remove RDD to DD */
-void card_rmvDDPoints(int* DD, int n);
+@requires a correctly formatted card c
+@assigns nothing
+@ensures return the card's DR value */
+int card_getDR(card c);
 
 /*
-@requires a correctly formated board and an integer DR
-@assigns player's hand
-@ensures add DR more cards in player's hand  */
-void card_addCardInHand(board* player, int DR);
-
-/*
-@requires a correctly formated board and an integer E
-@assigns FisaCount and/or FiseCount
-@ensures play E more student cards */
-void card_playMoreStudentCard(board* player, int E);
+@requires a correctly formatted card c
+@assigns nothing
+@ensures return the card's E value*/
+int card_getE(card c);
 
 #endif
 

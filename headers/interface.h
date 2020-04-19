@@ -1,7 +1,7 @@
 #ifndef INTERFACE_H
 #define INTERFACE_H
-
 #include "board.h"
+#include "structure.h"
 
 /*
 requires the current turn currturn

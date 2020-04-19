@@ -4,7 +4,6 @@
 #include "card.h"
 
 
-
 // To set a structure for the deck
 typedef struct cardList {
   int length;

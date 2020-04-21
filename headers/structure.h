@@ -1,7 +1,6 @@
 #ifndef STRUCTURE_H
 #define STRUCTURE_H
 
-#include "card.h"
 
 
 // To set a structure for the deck

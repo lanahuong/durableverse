@@ -2,24 +2,10 @@
 #define BOARD_H
 
 #include "structure.h"
-
-
+#include "card.h"
 
 typedef struct board* board;
 
-// à ajouter dans le board.c
-struct board* {
-    int DD;
-    int PE;
-    int FiseCount;
-    int FisaCount; 
-    int duraBonus;
-    int devBonus;
-    queue personnel;
-    cardList deck;
-    cardList hand;
-    cardList discard;
-};
 
 /*
  @requires nothing
@@ -190,6 +176,8 @@ void card_addCardInHand(board* player, int DR);
 @assigns FisaCount and/or FiseCount
 @ensures play E more student cards */
 void card_playMoreStudentCard(board* player, int E);
+
+
 
 
 #endif

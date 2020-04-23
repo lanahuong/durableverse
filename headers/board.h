@@ -177,7 +177,67 @@ void card_addCardInHand(board* player, int DR);
 @ensures play E more student cards */
 void card_playMoreStudentCard(board* player, int E);
 
+/*
+@requires a correctly formated board)
+@assigns
+@ensures return the DD
+*/
+ int card_getDD(board* player);
 
+/*
+@requires a correctly formated board)
+@assigns
+@ensures return the PE
+*/
+int card_getPE(board* player);
 
+/*
+@requires a correctly formated board)
+@assigns
+@ensures return the FiseCount
+*/
+int card_getFiseCount(board* player);
+
+/*
+@requires a correctly formated board)
+@assigns
+@ensures return the FisaCount
+*/
+int card_getFisaCount(board* player);
+
+/*
+@requires a correctly formated board)
+@assigns
+@ensures return the devbonus
+*/
+int card_getDevBonus(board* player);
+
+/*
+@requires a correctly formated board)
+@assigns
+@ensures return the queue personnel
+*/
+queue card_getPersonnel(board* player);
+
+/*
+@requires a correctly formated board)
+@assigns
+@ensures return the deck
+*/
+cardList card_getDeck(board* player);
+
+/*
+@requires a correctly formated board)
+@assigns
+@ensures return the hand
+*/
+cardList card_getHand(board* player);
+
+/*
+@requires a correctly formated board)
+@assigns
+@ensures return the discard
+*/
+cardList card_getDiscard(board* player);
 
 #endif

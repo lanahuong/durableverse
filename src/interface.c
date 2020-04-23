@@ -36,7 +36,7 @@ void interface_board(board p1, board p2){
 
 	printf("TERRAIN ADVERSE\n");
 	printf("Nombre de carte FISE | Nombre de carte FISA | Personnels\n");
-	printf("*%d                      *%d                      *%d",p2.FiseCount,p2->FisaCount, structure_getQueueContent(p2->personnel)[0]);
+	printf("*%d                      *%d                      *%d",card_getFiseCount(&p1), card_getFisaCount(&p1), structure_getQueueContent(card_getPersonnel(&p1))[0]);
 
 
 

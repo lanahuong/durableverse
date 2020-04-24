@@ -19,17 +19,22 @@ struct card {
   int DR;
   int E;
 };
-//We need a list of the different cards and to know their amount so we're gonna create two tables 
-//In one of them, we'ra gonna stock the differents cards 
+
+//We need a list of the different cards and to know their amount so we're gonna create two tables. In one of them, we'ra gonna stock the differents cards 
 //card deckCards[31];
 //and their amount in the second table
 //int deckCardsCount[31];
 //For instance, card n°1 aka ThomasLim is gonna be stocked in deckCards[0] and its amount which is 1 will be the value of deckCardsCount[0]
 
-/*
-@requires number the card will have, its type, its cost and 12 integers each equals to 0, 1 or 2
-@assigns memory space for a card
-@ensures create a card with all the parameters */
+/**
+* \brief create a \a card with all the parameters
+* \param number the card will have, \attention should be unique for each card
+* \param t type of the card 
+* \param cost cost of the card
+* \param amount amount of the card
+* \param integers x 12, each equals to 0, 1 or 2
+* \return the \a card created 
+*/
 card card_createCard(int num, type t, int cost, int AE1, int AE2, int AA1, int AA2, int RE1, int RE2, int RA1, int RA2, int ADD, int RDD, int DR, int E) {
   card c = (card)malloc(sizeof (*c));
   c->num = num;
@@ -50,20 +55,26 @@ card card_createCard(int num, type t, int cost, int AE1, int AE2, int AA1, int A
   return c;
 }
 
-/*
-@requires two empty 31-sized tables, the card and its quantity 
-@assigns the two tables
-@ensures add the card in one table and card's amount in the second */
+/**
+* \brief add the \a card in one table and card's amount in the second
+* \param deckCard empty corretly formated 31-sized table to stock the cards
+* \param deckCardCount empty corretly formated 31-sized table to stock the amount of the card 
+* \param c the \a card we want to add
+* \param amount the amount of the card \a c
+* \return nothing 
+*/
 void card_addDeckCardsAndCount(card deckCards[31], int deckCardsCount[31], card c, int amount) {
   int i = c->num;
   deckCards[i - 1] = c;
   deckCardsCount[i - 1] = amount;
 }
 
-/*
-@requires two empty 31-sized tables
-@assigns the two tables
-@ensures add the cards in one table and cards' amount in the second */
+/**
+* \brief create the initial deck with the amount of each card
+* \param deckCard empty corretly formated 31-sized table to stock the cards
+* \param deckCardCount empty corretly formated 31-sized table to stock the amount of the card 
+* \return nothing
+ */
 void card_setTables(card deckCards[31], int deckCardsCount[31]) {
   card_addDeckCardsAndCount(deckCards, deckCardsCount, card_createCard(ThomasLim, PERSONNEL, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), 1);
   card_addDeckCardsAndCount(deckCards, deckCardsCount, card_createCard(MarieSzafranski, PERSONNEL, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), 1);
@@ -98,136 +109,151 @@ void card_setTables(card deckCards[31], int deckCardsCount[31]) {
   card_addDeckCardsAndCount(deckCards, deckCardsCount, card_createCard(FermetureAnnuelle, ACTION, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), 1);
 }
 
-/*
-@requires a correctly formated card c
-@assigns nothing
-@ensures return the card's cost */
+/**
+* \brief get the \a cost of the card
+* \param c the correctly formated card we want to get the cost
+* \return \a cost, the cost of the card \a c
+*/
 int card_getCost(card c) {
   int n = c->cost;
   return n;
 }
 
-/*
-@requires a correctly formated card c
-@assigns nothing
-@ensures return the type of the card */ 
+/**
+* \brief get the \a type of the card
+* \param c the correctly formated card we want to get the tyoe
+* \return \a type, the type of the card \a c
+*/
 type card_getType(card c) {
   type type =  c->t;
   return type;
 }
 
-/*
-@requires a correctly formatted card c
-@assigns nothing
-@ensures return the card's number */
+/**
+* \brief get the \a number of the card
+* \param c the correctly formated card we want to get the number
+* \return \a number, the number of the card \a c
+*/
 int card_getNumber(card c) {
   int n = c->num;
   return n;
 }
 
-/*
-@requires a correctly formatted card c
-@assigns nothing
-@ensures return the card's AE1 value */
+/**
+* \brief get the \a AE1 value of the card
+* \param c the correctly formated card we want to get the AE1 value
+* \return \a AE1 value of the card \a c
+*/
 int card_getAE1(card c) {
   int n =c->AE1;
   return n;
 }
 
-/*
-@requires a correctly formatted card c
-@assigns nothing
-@ensures return the card's AE2 value*/
+/**
+* \brief get the \a AE2 value of the card
+* \param c the correctly formated card we want to get the AE2 value
+* \return \a AE2 value of the card \a c
+*/
 int card_getAE2(card c) {
   int n = c->AE2;
   return n;
 }
 
-/*
-@requires a correctly formatted card c
-@assigns nothing
-@ensures return the card's AA1 value */
+/**
+* \brief get the \a AA1 value of the card
+* \param c the correctly formated card we want to get the AA1 value
+* \return \a AA1 value of the card \a c
+*/
 int card_getAA1(card c) {
   int n = c->AA1;
   return n;
 }
 
-/*
-@requires a correctly formatted card c
-@assigns nothing
-@ensures return the card's AA2 value*/
+/**
+* \brief get the \a AA2 value of the card
+* \param c the correctly formated card we want to get the AA2 value
+* \return \a AA2 value of the card \a c
+*/
 int card_getAA2(card c) {
   int n = c->AA2;
   return n;
 }
 
-/*
-@requires a correctly formatted card c
-@assigns nothing
-@ensures return the card's RE1 value */
+/**
+* \brief get the \a RE1 value of the card
+* \param c the correctly formated card we want to get the RE1 value
+* \return \a RE1 value of the card \a c
+*/
 int card_getRE1(card c) {
   int n = c->RE1;
   return n;
 }
 
-/*
-@requires a correctly formatted card c
-@assigns nothing
-@ensures return the card's RE2 value*/
+/**
+* \brief get the \a RE2 value of the card
+* \param c the correctly formated card we want to get the RE2 value
+* \return \a RE2 value of the card \a c
+*/
 int card_getRE2(card c) {
   int n = c->RE2;
   return n;
 }
 
-/*
-@requires a correctly formatted card c
-@assigns nothing
-@ensures return the card's RA1 value */
+/**
+* \brief get the \a RA1 value of the card
+* \param c the correctly formated card we want to get the RA1 value
+* \return \a RA1 value of the card \a c
+*/
 int card_getRA1(card c) {
   int n = c->RA1;
   return n;
 }
 
-/*
-@requires a correctly formatted card c
-@assigns nothing
-@ensures return the card's RA2 value*/
+/**
+* \brief get the \a RA2 value of the card
+* \param c the correctly formated card we want to get the RA2 value
+* \return \a RA2 value of the card \a c
+*/
 int card_getRA2(card c) {
   int n = c->RA2;
   return n;
 }
 
-/*
-@requires a correctly formatted card c
-@assigns nothing
-@ensures return the card's ADD value */
+/**
+* \brief get the \a ADD value of the card
+* \param c the correctly formated card we want to get the ADD value
+* \return \a ADD value of the card \a c
+*/
 int card_getADD(card c) {
   int n = c->ADD;
   return n;
 }
 
-/*
-@requires a correctly formatted card c
-@assigns nothing
-@ensures return the card's RDD value*/
+/**
+* \brief get the \a RDD value of the card
+* \param c the correctly formated card we want to get the RDD value
+* \return \a RDD value of the card \a c
+*/
 int card_getRDD(card c) {
   int n = c->RDD;
   return n;
 }
 
-/*
-@requires a correctly formatted card c
-@assigns nothing
-@ensures return the card's DR value */
+/**
+* \brief get the \a DR value of the card
+* \param c the correctly formated card we want to get the DR value
+* \return \a DR value of the card \a c
+*/
 int card_getDR(card c) {
   int n = c->DR;
   return n;
 }
 
-/*
-@requires a correctly formatted card c
-@assigns nothing
-@ensures return the card's E value*/
+/**
+* \brief get the \a E value of the card
+* \param c the correctly formated card we want to get the E value
+* \return \a E value of the card \a c
+*/
 int card_getE(card c) {
   int n = c->E;
   return n;

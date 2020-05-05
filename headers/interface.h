@@ -41,7 +41,7 @@ int interface_fiseOrFisa();
  *         otherwise return the number of the card
  *         
 */
-void interface_choice(board p, int PE);
+int interface_choice(board p, int PE);
 
 
 /*requires the winner( player 0 or 1) and players' DD

@@ -75,7 +75,7 @@ int board_initialPECount(board p, int curturn);
 @assigns the hand and the play area of the board, *PE
 @ensures put the card c on the cardboard's play area 
 */
-void board_playCard(board p, int c, int *PE);
+void board_playCard(board p, int c);
 
 /*
 @requires 2 correctly formatted boards
@@ -92,6 +92,34 @@ void board_DDEarned(board p1, board p2, int DD[2]);
 
 */
 int board_gameIsOver(int DDp1,int DDp2, int curturn);
+
+/*
+@requires newPE>=0, b a correctly formatted board
+@assigns b->PE
+@ensures b->PE holds the value newPE
+*/
+void board_setPE(board b, int newPE);
+
+/*
+@requires b a correctly formatted board
+@assigns nothing
+@ensures return b->PE
+*/
+int board_getPE(board b);
+
+/*
+@requires newDD>=0, b a correctly formatted board
+@assigns b->DD
+@ensures b->DD holds the value newPE+b->DD
+*/
+void board_earnDD(board b, int newDD);
+
+/*
+@requires b a correctly formatted board
+@assigns nothing
+@ensures return b->DD
+*/
+int board_getDD(board b);
 
 /*
 @requires a correctly formated deck 

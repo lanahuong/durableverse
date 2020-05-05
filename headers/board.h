@@ -150,13 +150,6 @@ int card_getFisaCount(board player);
 /*
 @requires a correctly formated board)
 @assigns
-@ensures return the devbonus
-*/
-int card_getDevBonus(board* player);
-
-/*
-@requires a correctly formated board)
-@assigns
 @ensures return the queue personnel
 */
 queue card_getPersonnel(board player);

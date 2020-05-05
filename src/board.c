@@ -42,7 +42,7 @@ board board_newBoard() {
             k=0;
         }
     }
-    
+
     b->hand = structure_emptyCardList();
     b->discard = structure_emptyCardList();
 }
@@ -54,7 +54,12 @@ board board_newBoard() {
  @ensures  free the memory espace 
  */
 
-// TODO void board_freeBoard(board p);
+void board_freeBoard(board p) {
+    structure_freeCardList(p->deck);
+    structure_freeCardList(p->hand);
+    structure_freeCardList(p->discard);
+    structure_freeQueue(p->personnel);
+}
 
 /*
  @requires 2 correctly formatted boards

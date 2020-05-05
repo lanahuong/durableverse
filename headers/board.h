@@ -138,7 +138,7 @@ void card_applyCardEffect(card c, board* player, board* opponent);
 @assigns
 @ensures return the FiseCount
 */
-int card_getFiseCount(board* player);
+int card_getFiseCount(board player);
 
 /*
 @requires a correctly formated board)

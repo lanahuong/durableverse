@@ -274,7 +274,9 @@ int board_getDD(board b) {
 @assigns
 @ensures return the FiseCount
 */
- // TODO int card_getFiseCount(board* player);
+int card_getFiseCount(board player) {
+    return player->FiseCount;
+}
 
 /*
 @requires a correctly formated board)

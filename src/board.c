@@ -310,7 +310,9 @@ cardList card_getDeck(board player) {
 @assigns
 @ensures return the hand
 */
- // TODO cardList card_getHand(board* player);
+cardList card_getHand(board player) {
+    return player->hand;
+}
 
 /*
 @requires a correctly formated board)

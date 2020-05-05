@@ -173,7 +173,7 @@ cardList card_getDeck(board player);
 @assigns
 @ensures return the hand
 */
-cardList card_getHand(board* player);
+cardList card_getHand(board player);
 
 /*
 @requires a correctly formated board)

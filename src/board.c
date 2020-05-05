@@ -81,7 +81,16 @@ void board_newTurn(board b1, board b2, int *turn) {
  @ensures  calcule how many card should ensiie draw at the beginning the phase
  */
 
- // TODO int board_drawCount(board p);
+int board_drawCount(board p) {
+    int c = 1;
+    queue personnel = card_getPersonnel(p);
+    if (!isEmptyQueue(personnel)) {
+        int* content = structure_getQueueContent(personnel);
+        for (int i=0; i<structure_getQueueSize(personnel); i++){
+            c+=card_getDR(content[i]);
+        }
+    }
+}
 
 /*
  @requires a correctly formatted board

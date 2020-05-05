@@ -148,7 +148,21 @@ board_DDEarned(board p1, board p2, int DD[2]) {
          2 if it is a tie
 
 */
- // TODO int board_gameIsOver(int DDp1,int DDp2, int curturn);
+int board_gameIsOver(int DDp1,int DDp2, int curturn) {
+    if (DDp1>=20 && DDp1>DDp2) {
+        return 0;
+    }
+    if (DDp2>=20 && DDp2>DDp1) {
+        return 1;
+    }
+    if (DDp1>=20 && DDp1==DDp2) {
+        return 2;
+    }
+    if (curturn==30) {
+        return 2;
+    }
+    return -1;
+}
 
 /*
 @requires newPE>=0, b a correctly formatted board

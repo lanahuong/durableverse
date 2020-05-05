@@ -82,7 +82,7 @@ void board_playCard(board p, int c);
 @assigns DD
 @ensures DD comtains the number of DD earned by the 2 players (can be negative)
 */
-void board_DDEarned(board p1, board p2, int DD[2]);
+void board_DDEarned(board p1, board p2, int DD[2], int turn);
 
 /*
 @requires 

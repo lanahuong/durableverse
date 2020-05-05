@@ -180,6 +180,6 @@ cardList card_getHand(board player);
 @assigns
 @ensures return the discard
 */
-cardList card_getDiscard(board* player);
+cardList card_getDiscard(board player);
 
 #endif

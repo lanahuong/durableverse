@@ -319,4 +319,6 @@ cardList card_getHand(board player) {
 @assigns
 @ensures return the discard
 */
- // TODO cardList card_getDiscard(board* player);
+cardList card_getDiscard(board player) {
+    return player->discard;
+}

@@ -178,7 +178,9 @@ void board_setPE(board b, int newPE) {
 @assigns nothing
 @ensures return b->PE
 */
- // TODO int board_getPE(board b);
+int board_getPE(board b) {
+    return b->PE;
+}
 
 /*
 @requires newDD>=0, b a correctly formatted board

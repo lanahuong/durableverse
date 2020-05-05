@@ -292,7 +292,9 @@ int card_getFisaCount(board player) {
 @assigns
 @ensures return the queue personnel
 */
- // TODO queue card_getPersonnel(board* player);
+queue card_getPersonnel(board player) {
+    return player->personnel;
+}
 
 /*
 @requires a correctly formated board)

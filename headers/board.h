@@ -159,7 +159,7 @@ int card_getDevBonus(board* player);
 @assigns
 @ensures return the queue personnel
 */
-queue card_getPersonnel(board* player);
+queue card_getPersonnel(board player);
 
 /*
 @requires a correctly formated board)

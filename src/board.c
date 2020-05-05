@@ -252,7 +252,9 @@ void board_earnDD(board b, int newDD) {
 @assigns nothing
 @ensures return b->DD
 */
- // TODO int board_getDD(board b);
+int board_getDD(board b) {
+    return b->DD;
+}
 
 /*
 @requires a correctly formated deck 

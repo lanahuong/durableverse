@@ -301,7 +301,9 @@ queue card_getPersonnel(board player) {
 @assigns
 @ensures return the deck
 */
- // TODO cardList card_getDeck(board* player);
+cardList card_getDeck(board player) {
+    return player->deck;
+}
 
 /*
 @requires a correctly formated board)

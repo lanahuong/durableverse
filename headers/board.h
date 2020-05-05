@@ -166,7 +166,7 @@ queue card_getPersonnel(board player);
 @assigns
 @ensures return the deck
 */
-cardList card_getDeck(board* player);
+cardList card_getDeck(board player);
 
 /*
 @requires a correctly formated board)

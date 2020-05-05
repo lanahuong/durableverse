@@ -136,7 +136,10 @@ void board_draw(board p) {
 @assigns DD
 @ensures DD comtains the number of DD earned by the 2 players (can be negative)
 */
- // TODO void board_DDEarned(board p1, board p2, int DD[2]);
+board_DDEarned(board p1, board p2, int DD[2]) {
+    p1->DD = p1->DD + DD[0];
+    p2->DD = p2->DD + DD[1];
+}
 
 /*
 @requires 

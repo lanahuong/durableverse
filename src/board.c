@@ -290,13 +290,6 @@ int card_getFisaCount(board player) {
 /*
 @requires a correctly formated board)
 @assigns
-@ensures return the devbonus
-*/
- // TODO int card_getDevBonus(board* player);
-
-/*
-@requires a correctly formated board)
-@assigns
 @ensures return the queue personnel
 */
  // TODO queue card_getPersonnel(board* player);

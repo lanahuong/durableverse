@@ -19,7 +19,33 @@ struct board {
  @ensures  return a new correctly initialized board
  */
 
-// TODO board board_newBoard();
+board board_newBoard() {
+    board b = (board) malloc(sizeof(board));
+    b->DD = 0;
+    b->PE = 0;
+    b->FiseCount = 0;
+    b->FisaCount = 0;
+    b->duraBonus = 0;
+    b->devBonus = 0;
+    queue *personnelq = structure_emptyQueue(3);
+    b->personnel = *personnelq;
+    b->deck = structure_emptyCardList();
+    // Create a complete deck
+    int i=0;
+    int k=0;
+    while (i<31) {
+        k+=1;
+        if (k<=DECKCARDSCOUNT[i]) {
+            structure_addCardCardList(b->deck, i);
+        } else {
+            i++;
+            k=0;
+        }
+    }
+    
+    b->hand = structure_emptyCardList();
+    b->discard = structure_emptyCardList();
+}
 
 
 /*

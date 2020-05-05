@@ -89,6 +89,7 @@ void gameSetUp(board players[2], int* turn, int* winner){
 
 int main() {
   // Initialization of game variables
+  card_setTables(DECKCARDS, DECKCARDSCOUNT);
   board players[2];
   int turn;
   int winner;

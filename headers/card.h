@@ -28,6 +28,9 @@ FermetureAnnuelle} action;
 
 typedef struct card* card;
 
+card DECKCARDS[31];
+int DECKCARDSCOUNT[31];
+
 //We need a list of the different cards and to know their amount so we're gonna create two tables. In one of them, we'ra gonna stock the differents cards 
 //card deckCards[31];
 //and their amount in the second table

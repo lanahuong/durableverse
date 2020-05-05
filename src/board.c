@@ -169,7 +169,9 @@ int board_gameIsOver(int DDp1,int DDp2, int curturn) {
 @assigns b->PE
 @ensures b->PE holds the value newPE
 */
- // TODO void board_setPE(board b, int newPE);
+void board_setPE(board b, int newPE) {
+    b->PE = newPE;
+}
 
 /*
 @requires b a correctly formatted board

@@ -283,7 +283,9 @@ int card_getFiseCount(board player) {
 @assigns
 @ensures return the FisaCount
 */
- // TODO int card_getFisaCount(board* player);
+int card_getFisaCount(board player) {
+    return player->FisaCount;
+}
 
 /*
 @requires a correctly formated board)

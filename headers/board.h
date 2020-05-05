@@ -145,7 +145,7 @@ int card_getFiseCount(board player);
 @assigns
 @ensures return the FisaCount
 */
-int card_getFisaCount(board* player);
+int card_getFisaCount(board player);
 
 /*
 @requires a correctly formated board)

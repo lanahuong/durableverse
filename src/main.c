@@ -66,7 +66,7 @@ void gameLoop(int *turn, board players[2]){
 
   // Finish the turn by counting the players DD
   int DDEarned[2] = {0,0};
-  board_DDEarned(players[0],players[1], DDEarned);
+  board_DDEarned(players[0],players[1], DDEarned, turn);
   board_earnDD(players[0],((DDEarned[0] > 0) ? DDEarned[0] : 0));
   board_earnDD(players[1],((DDEarned[1] > 0) ? DDEarned[1] : 1));
 

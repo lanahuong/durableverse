@@ -136,9 +136,65 @@ void board_draw(board p) {
 @assigns DD
 @ensures DD comtains the number of DD earned by the 2 players (can be negative)
 */
-board_DDEarned(board p1, board p2, int DD[2]) {
-    p1->DD = p1->DD + DD[0];
-    p2->DD = p2->DD + DD[1];
+void board_DDEarned(board p1, board p2, int DD[2], int turn) {
+    int devMultFISE1 = 1 + p1->devBonus;
+    int devMultFISE2 = 1 + p1->devBonus;
+    int durMultFISE1 = 1 + p1->duraBonus;
+    int durMultFISE2 = 1 + p1->duraBonus;
+    int devMultFISA1 = 1 + p2->devBonus;
+    int devMultFISA2 = 1 + p2->devBonus;
+    int durMultFISA1 = 1 + p2->duraBonus;
+    int durMultFISA2 = 1 + p2->duraBonus;
+    int DDbonus1 = 0;
+    int DDbonus2 = 0;
+    queue personnel = card_getPersonnel(p1);
+    if (!isEmptyQueue(personnel)) {
+        int* content = structure_getQueueContent(personnel);
+        for (int i=0; i<structure_getQueueSize(personnel); i++){
+            devMultFISE1+=card_getAE1(content[i]);
+            durMultFISE1+=card_getAE2(content[i]);
+            devMultFISA1+=card_getAA1(content[i]);
+            durMultFISA1+=card_getAA2(content[i]);
+            devMultFISE2-=card_getRE1(content[i]);
+            durMultFISE2-=card_getRE2(content[i]);
+            devMultFISA2-=card_getRA1(content[i]);
+            durMultFISA2-=card_getRA2(content[i]);
+            DDbonus1+=card_getDR(content[i]);
+            DDbonus2-=card_getRDD(content[i]);
+        }
+    }
+    personnel = card_getPersonnel(p2);
+    if (!isEmptyQueue(personnel)) {
+        int* content = structure_getQueueContent(personnel);
+        for (int i=0; i<structure_getQueueSize(personnel); i++){
+            devMultFISE2+=(card_getAE1(content[i]));
+            durMultFISE2+=(card_getAE2(content[i]));
+            devMultFISA2+=(card_getAA1(content[i]));
+            durMultFISA2+=(card_getAA2(content[i]));
+            devMultFISE1-=(card_getRE1(content[i]));
+            durMultFISE1-=(card_getRE2(content[i]));
+            devMultFISA1-=(card_getRA1(content[i]));
+            durMultFISA1-=(card_getRA2(content[i]));
+            DDbonus2+=card_getDR(content[i]);
+            DDbonus1-=card_getRDD(content[i]);
+        }
+    }
+    int FISE1 = card_getFiseCount(p1);
+    int FISE2 = card_getFiseCount(p2);
+    int dev1 = devMultFISE1*FISE1;
+    int dur1 = durMultFISE1*FISE1;
+    int dev2 = devMultFISE2*FISE2;
+    int dur2 = durMultFISE2*FISE2;
+    if (turn%2) {
+        int FISA1 = card_getFisaCount(p1);
+        int FISA2 = card_getFisaCount(p2);
+        dev1 += devMultFISA1*FISA1;
+        dur1 += durMultFISA1*FISA1;
+        dev2 += devMultFISA2*FISA2;
+        dur2 += durMultFISA2*FISA2;
+    }
+    DD[0] = dev1-dur2+DDbonus1;
+    DD[1] = dev2-dur1+DDbonus2;
 }
 
 /*
@@ -187,7 +243,9 @@ int board_getPE(board b) {
 @assigns b->DD
 @ensures b->DD holds the value newPE+b->DD
 */
- // TODO void board_earnDD(board b, int newDD);
+void board_earnDD(board b, int newDD) {
+    b->DD = b->DD + newDD;
+}
 
 /*
 @requires b a correctly formatted board

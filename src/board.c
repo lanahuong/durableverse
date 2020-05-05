@@ -68,7 +68,12 @@ void board_freeBoard(board p) {
            if turn is 6 or 11 , add 1 to the number of personnel cards boards can hold
  */
 
- // TODO void board_newTurn(board b1, board b2, int *turn);
+void board_newTurn(board b1, board b2, int *turn) {
+    *turn = *turn+1;
+    if (*turn==6 || *turn==11) {
+        b1->personnel.capacity+=1;
+    }
+}
 
 /*
  @requires a correctly formatted board

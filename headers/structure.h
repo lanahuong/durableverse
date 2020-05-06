@@ -36,9 +36,9 @@ cardList structure_emptyCardList();
 void structure_addCardCarList(cardList cl, int c);
 
 /* 
-@requires correctly formatted cardList cl and a card number c
+@requires correctly formatted cardList cl and an int c smaller than cardList.length
 @assigns cardList 
-@ensures remove the card which number is c from the cardList cl and return its index
+@ensures remove the card which index is c from the cardList cl and return the card's number
 */
 int structure_removeCardCardList(cardList cl, int c);
 

@@ -108,7 +108,17 @@ void board_draw(board p) {
 @assigns nothing
 @ensures return the number of student cards the player will receive
 */
- // TODO int board_studentCardCount(board p);
+int board_studentCardCount(board p) {
+    int c = 1;
+   queue personnel = card_getPersonnel(p);
+    if (!isEmptyQueue(personnel)) {
+        int* content = structure_getQueueContent(personnel);
+        for (int i=0; i<structure_getQueueSize(personnel); i++){
+            c+=card_getE(content[i]);
+        }
+    }
+    return c;
+}
 
 /*
 @requires a correctly formatted board and c is 0 for fise and 1 for fisa

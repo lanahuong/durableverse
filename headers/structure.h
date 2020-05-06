@@ -38,9 +38,9 @@ void structure_addCardCarList(cardList cl, int c);
 /* 
 @requires correctly formatted cardList cl and a card number c
 @assigns cardList 
-@ensures remove the card which number is c to the cardList cl
+@ensures remove the card which number is c from the cardList cl and return its index
 */
-void structure_removeCardCardList(cardList cl, int c);
+int structure_removeCardCardList(cardList cl, int c);
 
 /*
 @requires a correctly formatted cardList cl
@@ -95,8 +95,8 @@ void structure_enqueue(queue* q, int n);
 /*
 @requires a correctly formated non empty queue
 @assigns content, size and first
-@ensures remove the first item of the queue */
-void structure_dequeue(queue* q);
+@ensures remove the first item of the queue and return it */
+int structure_dequeue(queue* q);
 
 /* 
 @requires a correctly formated queue

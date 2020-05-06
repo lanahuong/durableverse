@@ -99,7 +99,7 @@ int board_drawCount(board p) {
  */
 
 void board_draw(board p) {
-    int c = structure_removeCardCardList(card_getHand(p));
+    int c = structure_removeCardCardList(card_getHand(p), structure_getCardListLength(p->hand)-1);
     structure_addCardCardList(card_getHand(p), c);
 }
 

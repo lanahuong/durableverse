@@ -148,7 +148,11 @@ void board_playStudentCard(board p, board o, int c) {
 @assigns nothing
 @ensures return the number of PE available to the player in the current turn 
 */
- // TODO int board_initialPECount(board p, int curturn);
+int board_initialPECount(board p, int curturn) {
+    int PE = card_getFiseCount(p);
+    PE += (curturn%2) ? 2*card_getFisaCount(p) : 0;
+    return PE;
+}
 
 /*
 @requires a correctly formatted board, c is a number from 1 to 30

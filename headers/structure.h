@@ -21,6 +21,42 @@ int structure_getCardListLength(cardList l);
 @ensures return the content */
 int* structure_getCardListContent(cardList l);
 
+/*
+@requires nothing
+@assigns nothing
+@ensures return an 42-sized empty cardList 
+*/
+cardList structure_emptyCardList();
+
+/* 
+@requires correctly formatted cardList cl and card number c
+@assigns cardList 
+@ensures add the card which number is c to the cardList cl
+*/
+void structure_addCardCarList(cardList cl, int c);
+
+/* 
+@requires correctly formatted cardList cl and a card number c
+@assigns cardList 
+@ensures remove the card which number is c to the cardList cl
+*/
+void structure_removeCardCardList(cardList cl, int c);
+
+/*
+@requires a correctly formatted cardList cl
+@assigns queue
+@ensures free the cardList cl
+*/
+void structure_freeCardList(cardList cl);
+
+/*
+@requires correctly formatted cardList cl and card number c
+@assigns nothing
+@ensures return the index of the card which number is c in cl or 
+                    -1 if that card does not exist in cl
+*/
+int structure_searchCardList(cardList cl, int c);
+
 // To set a structure for the board where Staff cards would be played
 typedef struct queue {
     int size;
@@ -69,6 +105,14 @@ int structure_getQueueSize(queue l);
 @assigns nothing
 @ensures return the content */
 int* structure_getQueueContent(queue l);
+
+/*
+@requires a correctly formatted queue q
+@assigns queue
+@ensures free the queue q
+*/
+void structure_freeQueue(queue q);
+
 
 #endif
 

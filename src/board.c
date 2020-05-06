@@ -108,28 +108,64 @@ void board_draw(board p) {
 @assigns nothing
 @ensures return the number of student cards the player will receive
 */
- // TODO int board_studentCardCount(board p);
+int board_studentCardCount(board p) {
+    int c = 1;
+   queue personnel = card_getPersonnel(p);
+    if (!isEmptyQueue(personnel)) {
+        int* content = structure_getQueueContent(personnel);
+        for (int i=0; i<structure_getQueueSize(personnel); i++){
+            c+=card_getE(content[i]);
+        }
+    }
+    return c;
+}
 
 /*
 @requires a correctly formatted board and c is 0 for fise and 1 for fisa
 @assigns the play area of the board
 @ensures add the student card to the board's play area
 */
- // TODO void board_playStudentCard(board p, int c);
+void board_playStudentCard(board p, int c) {
+    if (c==0) {
+        p->FiseCount++;
+    } else {
+        p->FiseCount++;
+    }
+}
 
 /*
 @requires a correctly formatted card board
 @assigns nothing
 @ensures return the number of PE available to the player in the current turn 
 */
- // TODO int board_initialPECount(board p, int curturn);
+int board_initialPECount(board p, int curturn) {
+    int PE = card_getFiseCount(p);
+    PE += (curturn%2) ? 2*card_getFisaCount(p) : 0;
+    return PE;
+}
 
 /*
 @requires a correctly formatted board, c is a number from 1 to 30
 @assigns the hand and the play area of the board, *PE
 @ensures put the card c on the cardboard's play area 
 */
- // TODO void board_playCard(board p, int c);
+void board_playCard(board p, board o, int c) {
+    int i = structure_searchCardList(p->hand, c);
+    if (i>=0) {
+        structure_removeCardCardList(p->hand, i);
+        if (card_getType(DECKCARDS[c]) == ACTION) {
+            card_applyCardEffect(c, p, o);
+            structure_addCardCardList(p->discard,c);
+        } else {
+            if (structure_isFullQueue(p->personnel)) {
+                int l = structure_dequeue(&(p->personnel));
+                structure_addCardCardList(p->discard,l);
+            }
+            structure_enqueue(&(p->personnel),c);
+            board_setPE(p, board_getPE(p)-card_getCost(c));
+        }
+    }
+}
 
 /*
 @requires 2 correctly formatted boards

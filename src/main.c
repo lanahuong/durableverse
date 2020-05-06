@@ -41,7 +41,7 @@ void phase(board player, board adv, int turn){
   while (choice !=-1) {
     choice = interface_choice(player, board_getPE(player));
     if (choice != 0) {
-      board_playCard(player, choice);
+      board_playCard(player, adv, choice);
     }
   }
 }

@@ -19,7 +19,7 @@ void phase(board player, board adv, int turn){
   // Play the student cards
   for (int i = 0; i<studentCardNbr; i++) {
     int card = interface_fiseOrFisa();
-    board_playStudentCard(player, card);
+    board_playStudentCard(player, adv, card);
   }
 
   // Count the cards to draw

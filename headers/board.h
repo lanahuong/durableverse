@@ -61,7 +61,7 @@ int board_studentCardCount(board p);
 @assigns the play area of the board
 @ensures add the student card to the board's play area
 */
-void board_playStudentCard(board p, int c);
+void board_playStudentCard(board p, board o, int c);
 
 /*
 @requires a correctly formatted card board

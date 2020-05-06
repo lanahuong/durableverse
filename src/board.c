@@ -125,21 +125,11 @@ int board_studentCardCount(board p) {
 @assigns the play area of the board
 @ensures add the student card to the board's play area
 */
-void board_playStudentCard(board p, board o, int c) {
-    int i = structure_searchCardList(p->hand, c);
-    if (i>=0) {
-        structure_removeCardCardList(p->hand, i);
-        if (card_getType(DECKCARDS[c]) == ACTION) {
-            card_applyCardEffect(c, p, o);
-            structure_addCardCardList(p->discard,c);
-        } else {
-            if (structure_isFullQueue(p->personnel)) {
-                int l = structure_dequeue(&(p->personnel));
-                structure_addCardCardList(p->discard,l);
-            }
-            structure_enqueue(&(p->personnel),c);
-            board_setPE(p, board_getPE(p)-card_getCost(c));
-        }
+void board_playStudentCard(board p, int c) {
+    if (c==0) {
+        p->FiseCount++;
+    } else {
+        p->FiseCount++;
     }
 }
 
@@ -159,7 +149,23 @@ int board_initialPECount(board p, int curturn) {
 @assigns the hand and the play area of the board, *PE
 @ensures put the card c on the cardboard's play area 
 */
- // TODO void board_playCard(board p, int c);
+void board_playCard(board p, board o, int c) {
+    int i = structure_searchCardList(p->hand, c);
+    if (i>=0) {
+        structure_removeCardCardList(p->hand, i);
+        if (card_getType(DECKCARDS[c]) == ACTION) {
+            card_applyCardEffect(c, p, o);
+            structure_addCardCardList(p->discard,c);
+        } else {
+            if (structure_isFullQueue(p->personnel)) {
+                int l = structure_dequeue(&(p->personnel));
+                structure_addCardCardList(p->discard,l);
+            }
+            structure_enqueue(&(p->personnel),c);
+            board_setPE(p, board_getPE(p)-card_getCost(c));
+        }
+    }
+}
 
 /*
 @requires 2 correctly formatted boards

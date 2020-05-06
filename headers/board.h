@@ -61,7 +61,7 @@ int board_studentCardCount(board p);
 @assigns the play area of the board
 @ensures add the student card to the board's play area
 */
-void board_playStudentCard(board p, board o, int c);
+void board_playStudentCard(board p, int c);
 
 /*
 @requires a correctly formatted card board
@@ -75,7 +75,7 @@ int board_initialPECount(board p, int curturn);
 @assigns the hand and the play area of the board, *PE
 @ensures put the card c on the cardboard's play area 
 */
-void board_playCard(board p, int c);
+void board_playCard(board p, board o, int c);
 
 /*
 @requires 2 correctly formatted boards

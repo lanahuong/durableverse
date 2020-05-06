@@ -57,6 +57,10 @@ void structure_freeCardList(cardList cl);
 */
 int structure_searchCardList(cardList cl, int c);
 
+
+
+
+
 // To set a structure for the board where Staff cards would be played
 typedef struct queue {
     int size;

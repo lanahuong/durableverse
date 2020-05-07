@@ -20,7 +20,7 @@ struct board {
  */
 
 board board_newBoard() {
-    board b = (board) malloc(sizeof(board));
+    board b = (board) malloc(sizeof(struct board));
     b->DD = 0;
     b->PE = 0;
     b->FiseCount = 0;
@@ -45,6 +45,8 @@ board board_newBoard() {
 
     b->hand = structure_emptyCardList();
     b->discard = structure_emptyCardList();
+
+    return b;
 }
 
 
@@ -84,12 +86,13 @@ void board_newTurn(board b1, board b2, int *turn) {
 int board_drawCount(board p) {
     int c = 1;
     queue personnel = card_getPersonnel(p);
-    if (!isEmptyQueue(personnel)) {
+    if (!structure_isEmptyQueue(personnel)) {
         int* content = structure_getQueueContent(personnel);
         for (int i=0; i<structure_getQueueSize(personnel); i++){
             c+=card_getDR(content[i]);
         }
     }
+    return c;
 }
 
 /*
@@ -113,7 +116,7 @@ void board_draw(board p) {
 int board_studentCardCount(board p) {
     int c = 1;
    queue personnel = card_getPersonnel(p);
-    if (!isEmptyQueue(personnel)) {
+    if (!structure_isEmptyQueue(personnel)) {
         int* content = structure_getQueueContent(personnel);
         for (int i=0; i<structure_getQueueSize(personnel); i++){
             c+=card_getE(content[i]);
@@ -155,7 +158,7 @@ void board_playCard(board p, board o, int c) {
     int i = structure_searchCardList(p->hand, c);
     if (i>=0) {
         structure_removeCardCardList(p->hand, i);
-        if (card_getType(DECKCARDS[c]) == ACTION) {
+        if (card_getType(c) == ACTION) {
             card_applyCardEffect(c, p, o);
             structure_addCardCardList(p->discard,c);
         } else {
@@ -186,7 +189,7 @@ void board_DDEarned(board p1, board p2, int DD[2], int turn) {
     int DDbonus1 = 0;
     int DDbonus2 = 0;
     queue personnel = card_getPersonnel(p1);
-    if (!isEmptyQueue(personnel)) {
+    if (!structure_isEmptyQueue(personnel)) {
         int* content = structure_getQueueContent(personnel);
         for (int i=0; i<structure_getQueueSize(personnel); i++){
             devMultFISE1+=card_getAE1(content[i]);
@@ -202,7 +205,7 @@ void board_DDEarned(board p1, board p2, int DD[2], int turn) {
         }
     }
     personnel = card_getPersonnel(p2);
-    if (!isEmptyQueue(personnel)) {
+    if (!structure_isEmptyQueue(personnel)) {
         int* content = structure_getQueueContent(personnel);
         for (int i=0; i<structure_getQueueSize(personnel); i++){
             devMultFISE2+=(card_getAE1(content[i]));
@@ -327,8 +330,7 @@ void card_applyCardEffect(int c, board player, board opponent) {
         break;
     case 27:
         // retire la plus ancienne carte personnelle du plateau de l'adversaire
-        int d = structure_dequeue(&(opponent->personnel));
-        structure_addCardCardList(opponent->discard, d);
+        structure_addCardCardList(opponent->discard, structure_dequeue(&(opponent->personnel)));
         break;
     case 28:
         // melange cette carte et les cartes de la défausse avec votre deck

@@ -8,8 +8,11 @@ EXEC = $(BIN)durableverse
 
 all : $(EXEC)
 
-$(EXEC) : $(OBJ)*.o
+$(EXEC) : $(OBJ)structure.o $(OBJ)card.o $(OBJ)board.o $(OBJ)interface.o $(OBJ)main.o
 	$(CC) -o $@ $^
+
+$(OBJ)main.o : $(SRC)main.c
+	$(CC) -c -o $@ $<
 
 $(OBJ)%.o : $(SRC)%.c $(INC)%.h
 	$(CC) -c -o $@ $<

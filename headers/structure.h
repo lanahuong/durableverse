@@ -32,7 +32,7 @@ cardList structure_emptyCardList();
 @assigns nothing
 @ensures return 0 if the cardList is empty else 1
 */
-int structure_isEmptyCardList(cardlist cl);
+int structure_isEmptyCardList(cardList cl);
 /* 
 @requires correctly formatted cardList cl and card number c
 @assigns cardList 
@@ -69,7 +69,7 @@ int structure_searchCardList(cardList cl, int c);
 // To set a structure for the board where Staff cards would be played
 typedef struct queue {
     int size;
-    unsigned capacity;
+    int capacity;
     int* content;
 } queue;
 
@@ -77,7 +77,7 @@ typedef struct queue {
 @requires an unsigned int
 @assigns memory space for a capacity-sized queue of int 
 @ensures create a queue */
-queue* structure_emptyQueue(unsigned capacity);
+queue* structure_emptyQueue(int capacity);
 
 /*
 @requires a correctly formated queue

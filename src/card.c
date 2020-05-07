@@ -114,8 +114,8 @@ void card_setTables(card deckCards[31], int deckCardsCount[31]) {
 * \param c the correctly formated card we want to get the cost
 * \return \a cost, the cost of the card \a c
 */
-int card_getCost(card c) {
-  int n = c->cost;
+int card_getCost(int c) {
+  int n = DECKCARDS[c]->cost;
   return n;
 }
 
@@ -124,8 +124,8 @@ int card_getCost(card c) {
 * \param c the correctly formated card we want to get the tyoe
 * \return \a type, the type of the card \a c
 */
-type card_getType(card c) {
-  type type =  c->t;
+type card_getType(int c) {
+  type type =  DECKCARDS[c]->t;
   return type;
 }
 
@@ -134,8 +134,8 @@ type card_getType(card c) {
 * \param c the correctly formated card we want to get the number
 * \return \a number, the number of the card \a c
 */
-int card_getNumber(card c) {
-  int n = c->num;
+int card_getNumber(int c) {
+  int n = DECKCARDS[c]->num;
   return n;
 }
 
@@ -144,8 +144,8 @@ int card_getNumber(card c) {
 * \param c the correctly formated card we want to get the AE1 value
 * \return \a AE1 value of the card \a c
 */
-int card_getAE1(card c) {
-  int n =c->AE1;
+int card_getAE1(int c) {
+  int n = DECKCARDS[c]->AE1;
   return n;
 }
 
@@ -154,8 +154,8 @@ int card_getAE1(card c) {
 * \param c the correctly formated card we want to get the AE2 value
 * \return \a AE2 value of the card \a c
 */
-int card_getAE2(card c) {
-  int n = c->AE2;
+int card_getAE2(int c) {
+  int n = DECKCARDS[c]->AE2;
   return n;
 }
 
@@ -164,8 +164,8 @@ int card_getAE2(card c) {
 * \param c the correctly formated card we want to get the AA1 value
 * \return \a AA1 value of the card \a c
 */
-int card_getAA1(card c) {
-  int n = c->AA1;
+int card_getAA1(int c) {
+  int n = DECKCARDS[c]->AA1;
   return n;
 }
 
@@ -174,8 +174,8 @@ int card_getAA1(card c) {
 * \param c the correctly formated card we want to get the AA2 value
 * \return \a AA2 value of the card \a c
 */
-int card_getAA2(card c) {
-  int n = c->AA2;
+int card_getAA2(int c) {
+  int n = DECKCARDS[c]->AA2;
   return n;
 }
 
@@ -184,8 +184,8 @@ int card_getAA2(card c) {
 * \param c the correctly formated card we want to get the RE1 value
 * \return \a RE1 value of the card \a c
 */
-int card_getRE1(card c) {
-  int n = c->RE1;
+int card_getRE1(int c) {
+  int n = DECKCARDS[c]->RE1;
   return n;
 }
 
@@ -194,8 +194,8 @@ int card_getRE1(card c) {
 * \param c the correctly formated card we want to get the RE2 value
 * \return \a RE2 value of the card \a c
 */
-int card_getRE2(card c) {
-  int n = c->RE2;
+int card_getRE2(int c) {
+  int n = DECKCARDS[c]->RE2;
   return n;
 }
 
@@ -204,8 +204,8 @@ int card_getRE2(card c) {
 * \param c the correctly formated card we want to get the RA1 value
 * \return \a RA1 value of the card \a c
 */
-int card_getRA1(card c) {
-  int n = c->RA1;
+int card_getRA1(int c) {
+  int n = DECKCARDS[c]->RA1;
   return n;
 }
 
@@ -214,8 +214,8 @@ int card_getRA1(card c) {
 * \param c the correctly formated card we want to get the RA2 value
 * \return \a RA2 value of the card \a c
 */
-int card_getRA2(card c) {
-  int n = c->RA2;
+int card_getRA2(int c) {
+  int n = DECKCARDS[c]->RA2;
   return n;
 }
 
@@ -224,8 +224,8 @@ int card_getRA2(card c) {
 * \param c the correctly formated card we want to get the ADD value
 * \return \a ADD value of the card \a c
 */
-int card_getADD(card c) {
-  int n = c->ADD;
+int card_getADD(int c) {
+  int n = DECKCARDS[c]->ADD;
   return n;
 }
 
@@ -234,8 +234,8 @@ int card_getADD(card c) {
 * \param c the correctly formated card we want to get the RDD value
 * \return \a RDD value of the card \a c
 */
-int card_getRDD(card c) {
-  int n = c->RDD;
+int card_getRDD(int c) {
+  int n = DECKCARDS[c]->RDD;
   return n;
 }
 
@@ -244,8 +244,8 @@ int card_getRDD(card c) {
 * \param c the correctly formated card we want to get the DR value
 * \return \a DR value of the card \a c
 */
-int card_getDR(card c) {
-  int n = c->DR;
+int card_getDR(int c) {
+  int n = DECKCARDS[c]->DR;
   return n;
 }
 
@@ -254,8 +254,8 @@ int card_getDR(card c) {
 * \param c the correctly formated card we want to get the E value
 * \return \a E value of the card \a c
 */
-int card_getE(card c) {
-  int n = c->E;
+int card_getE(int c) {
+  int n = DECKCARDS[c]->E;
   return n;
 }
 

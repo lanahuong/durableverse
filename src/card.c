@@ -258,11 +258,11 @@ int main() {
     printf("carte: %i, type: %i, cout: %i, quantité: %i, AE1: %i, AE2: %i, AA1: %i, AA2: %i, RE1: %i, RE2: %i, RA1: %i, RA2: %i, ADD: %i, RDD: %i, DR: %i, E: %i \n", deckCards[i]->num, deckCards[i]->t, deckCards[i]->cost, deckCardsCount[i], deckCards[i]->AE1, deckCards[i]->AE2, deckCards[i]->AA1, deckCards[i]->AA2, deckCards[i]->RE1, deckCards[i]->RE2, deckCards[i]->RA1, deckCards[i]->RA2, deckCards[i]->ADD, deckCards[i]->RDD, deckCards[i]->DR, deckCards[i]->E);
     printf("============================================================================================================================================================\n");
   }
-  card c1 = deckCards[30];
-  card c2 = deckCards[9];
-  printf("carte: %i, type: %i, cout: %i, AE1: %i, AE2: %i, AA1: %i, AA2: %i, RE1: %i, RE2: %i, RA1: %i, RA2: %i, ADD: %i, RDD: %i, DR: %i, E: %i \n", card_getNumber(c1), card_getType(c1), card_getCost(c1), card_getAE1(c1), card_getAE2(c1), card_getAA1(c1), card_getAA2(c1), card_getRE1(c1), card_getRE2(c1), card_getRA1(c1), card_getRA2(c1), card_getADD(c1), card_getRDD(c1), card_getDR(c1), card_getE(c1));
+  int c1 = 30;
+  int c2 = 9;
+  printf("carte: %i, type: %i, cout: %i, AE1: %i, AE2: %i, AA1: %i, AA2: %i, RE1: %i, RE2: %i, RA1: %i, RA2: %i, ADD: %i, RDD: %i, DR: %i, E: %i \n", c1, card_getType(c1), card_getCost(c1), card_getAE1(c1), card_getAE2(c1), card_getAA1(c1), card_getAA2(c1), card_getRE1(c1), card_getRE2(c1), card_getRA1(c1), card_getRA2(c1), card_getADD(c1), card_getRDD(c1), card_getDR(c1), card_getE(c1));
   
-  printf("carte: %i, type: %i, cout: %i, AE1: %i, AE2: %i, AA1: %i, AA2: %i, RE1: %i, RE2: %i, RA1: %i, RA2: %i, ADD: %i, RDD: %i, DR: %i, E: %i \n", card_getNumber(c2), card_getType(c2), card_getCost(c2), card_getAE1(c2), card_getAE2(c2), card_getAA1(c2), card_getAA2(c2), card_getRE1(c2), card_getRE2(c2), card_getRA1(c2), card_getRA2(c2), card_getADD(c2), card_getRDD(c2), card_getDR(c2), card_getE(c2));
+  printf("carte: %i, type: %i, cout: %i, AE1: %i, AE2: %i, AA1: %i, AA2: %i, RE1: %i, RE2: %i, RA1: %i, RA2: %i, ADD: %i, RDD: %i, DR: %i, E: %i \n", c2, card_getType(c2), card_getCost(c2), card_getAE1(c2), card_getAE2(c2), card_getAA1(c2), card_getAA2(c2), card_getRE1(c2), card_getRE2(c2), card_getRA1(c2), card_getRA2(c2), card_getADD(c2), card_getRDD(c2), card_getDR(c2), card_getE(c2));
 
   return 0;
 }

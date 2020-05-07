@@ -27,7 +27,12 @@ int* structure_getCardListContent(cardList l);
 @ensures return an 42-sized empty cardList 
 */
 cardList structure_emptyCardList();
-
+/*
+@requires a correctly formated cardList
+@assigns nothing
+@ensures return 0 if the cardList is empty else 1
+*/
+int structure_isEmptyCardList(cardlist cl);
 /* 
 @requires correctly formatted cardList cl and card number c
 @assigns cardList 

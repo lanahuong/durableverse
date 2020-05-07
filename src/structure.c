@@ -31,6 +31,14 @@ queue* structure_emptyQueue(unsigned capacity) {
 }
 
 /*
+@requires a correctly formated cardList
+@assigns nothing
+@ensures return 0 if the cardList is empty else 1
+*/
+int structure_isEmptyCardList(cardlist cl){
+	return (cl.length == 0);
+}
+/*
 @requires a correctly formated queue
 @assigns nothing
 @ensures return 1 if the queue is empty else 0 */
@@ -107,3 +115,38 @@ int structure_getQueueSize(queue q) {
 int* structure_getQueueContent(queue q) {
     return q.content;
 }
+
+/*
+@requires nothing
+@assigns nothing
+@ensures return an 42-sized empty cardList 
+*/
+cardList structure_emptyCardList(){
+	cardList res;
+	res.length = 42;
+	return res;
+}
+
+/* 
+@requires correctly formatted cardList cl and card number c
+@assigns cardList 
+@ensures add the card which number is c to the cardList cl
+*/
+void structure_addCardCardLIst(cardlist cl, int c){
+	cl.length = cl.length + 1;
+	cl.content[length - 1] = c;
+}
+
+/* 
+@requires correctly formatted cardList cl and an int c smaller than cardList.length
+@assigns cardList 
+@ensures remove the card which index is c from the cardList cl and return the card's number
+*/
+void structure_removeCardCardList(cardlist cl, int c){
+	tmp = &cl.content[c - 1];
+	&cl.content[c - 1] = &cl.content[length - 1];
+	&cl.content[length - 1] = tmp;
+	cl.length = cl.length - 1;
+
+}
+

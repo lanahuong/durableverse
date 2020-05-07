@@ -23,11 +23,11 @@ int* structure_getCardListContent(cardList l) {
 @assigns memory space for a capacity-sized queue of int 
 @ensures create a queue */
 queue* structure_emptyQueue(int capacity) {
-    queue q;
-    q.capacity = capacity;
-    q.size = 0; 
-    q.content = (int*) malloc(capacity * sizeof(int));
-    return &q;
+    queue* q = (queue *) malloc(sizeof(queue));
+    q->capacity = capacity;
+    q->size = 0; 
+    q->content = (int*) malloc(capacity * sizeof(int));
+    return q;
 }
 
 /*
@@ -81,23 +81,23 @@ void structure_enqueue(queue* q, int n) {
 @assigns content & size
 @ensures remove the first item of the queue & move the others*/
 int structure_dequeue(queue* q) {
-    	if (!structure_isEmptyQueue(*q)){
-    		if(q->size == 1){
-			q->content[2] = NULL;
-		}
-		else if (q->size == 2){
-			q->content[2] = q->content[1];
-			q->content[1] = NULL;
-		}
-		else if (q->size ==3){
-			q->content[2] = q->content[1];
-			q->content[1] = q->content[0];
-			q->content[0] = NULL;
-		}
+    	
+    		int tmp = q->content[2];
+    		
+			if (q->size == 2){
+				q->content[2] = q->content[1];
+				
+			}
+			else if (q->size ==3){
+				q->content[2] = q->content[1];
+				q->content[1] = q->content[0];
+			}
 
 		q->size = q->size - 1;
+		return tmp;
 	}
-}
+
+
 
 
 /* 

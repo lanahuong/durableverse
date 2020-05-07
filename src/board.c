@@ -295,12 +295,6 @@ int board_getDD(board b) {
 }
 
 /*
-@requires a correctly formated deck 
-@assigns nothing
-@ensures return the number of cards included in the deck */ 
- // TODO int card_deckCardAmount(cardList deck);
-
-/*
 @requires a correctly formated card c, two correctly formated boards
 @assigns different according to the played card's effect
 @ensures apply the effect of the card */

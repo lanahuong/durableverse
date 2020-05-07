@@ -122,12 +122,6 @@ void board_earnDD(board b, int newDD);
 int board_getDD(board b);
 
 /*
-@requires a correctly formated deck 
-@assigns nothing
-@ensures return the number of cards included in the deck */ 
-int card_deckCardAmount(cardList deck);
-
-/*
 @requires a correctly formated card c, two correctly formated boards
 @assigns different according to the played card's effect
 @ensures apply the effect of the card */

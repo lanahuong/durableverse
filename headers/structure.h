@@ -33,7 +33,7 @@ cardList structure_emptyCardList();
 @assigns cardList 
 @ensures add the card which number is c to the cardList cl
 */
-void structure_addCardCarList(cardList cl, int c);
+void structure_addCardCardList(cardList cl, int c);
 
 /* 
 @requires correctly formatted cardList cl and an int c smaller than cardList.length

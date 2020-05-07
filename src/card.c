@@ -130,16 +130,6 @@ type card_getType(int c) {
 }
 
 /**
-* \brief get the \a number of the card
-* \param c the correctly formated card we want to get the number
-* \return \a number, the number of the card \a c
-*/
-int card_getNumber(int c) {
-  int n = DECKCARDS[c]->num;
-  return n;
-}
-
-/**
 * \brief get the \a AE1 value of the card
 * \param c the correctly formated card we want to get the AE1 value
 * \return \a AE1 value of the card \a c

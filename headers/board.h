@@ -131,7 +131,7 @@ int card_deckCardAmount(cardList deck);
 @requires a correctly formated card c, two correctly formated boards
 @assigns different according to the played card's effect
 @ensures apply the effect of the card */
-void card_applyCardEffect(card c, board* player, board* opponent);
+void card_applyCardEffect(int c, board player, board opponent);
 
 /*
 @requires a correctly formated board)

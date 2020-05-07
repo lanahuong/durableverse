@@ -99,8 +99,10 @@ int board_drawCount(board p) {
  */
 
 void board_draw(board p) {
-    int c = structure_removeCardCardList(card_getHand(p), structure_getCardListLength(p->hand)-1);
-    structure_addCardCardList(card_getHand(p), c);
+    if (structure_getCardListLength(p->deck)>0) {
+        int c = structure_removeCardCardList(card_getHand(p), structure_getCardListLength(p->hand)-1);
+        structure_addCardCardList(card_getHand(p), c);
+    }
 }
 
 /*
@@ -302,7 +304,65 @@ int board_getDD(board b) {
 @requires a correctly formated card c, two correctly formated boards
 @assigns different according to the played card's effect
 @ensures apply the effect of the card */
- // TODO void card_applyCardEffect(card c, board* player, board* opponent);
+void card_applyCardEffect(int c, board player, board opponent) {
+    switch (c){
+    case 21:
+        // Gagne un point DD
+        board_earnDD(player,1);
+        break;
+    case 22:
+        // Pioche une carte
+        board_draw(player);
+        break;
+    case 23:
+        // Ajoute une carte FISE
+        board_playStudentCard(player,0);
+        break;
+    case 24:
+        // Ajoute une carte FISA
+        board_playStudentCard(player,1);
+        break;
+    case 25:
+        // Donne 6 PE au joueur
+        board_setPE(player, board_getPE(player)+6);
+        break;
+    case 26:
+        // Retire une carte FISE et une FISA du plateau adverrse
+        opponent->FiseCount--;
+        opponent->FisaCount--;
+        break;
+    case 27:
+        // retire la plus ancienne carte personnelle du plateau de l'adversaire
+        int d = structure_dequeue(&(opponent->personnel));
+        structure_addCardCardList(opponent->discard, d);
+        break;
+    case 28:
+        // melange cette carte et les cartes de la défausse avec votre deck
+        structure_addCardCardList(player->deck, 28);
+        while (!structure_isEmptyCardList(player->discard)) {
+            int d = structure_removeCardCardList(player->discard,structure_getCardListLength(player->discard)-1);
+            structure_addCardCardList(player->deck,d);
+        }
+        break;
+    case 29:
+        // Les cartes élèves gagnent un point de dev (sur le plateau et à venir)
+        player->devBonus++;
+        break;
+    case 30:
+        // Les cartes élèves gagnent un point de dura (sur le plateau et à venir)
+        player->duraBonus++;
+        break;
+    case 31:
+        // Toute les cartes élèves sont retirées du plateau
+        player->FiseCount=0;
+        player->FisaCount=0;
+        opponent->FiseCount=0;
+        opponent->FisaCount=0;
+        break;
+    default:
+        break;
+    }
+}
 
 
 /*

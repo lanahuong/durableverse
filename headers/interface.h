@@ -2,6 +2,11 @@
 #define INTERFACE_H
 #include "board.h"
 
+/* 
+requires n int
+assigns
+ensures return the associate personnel card */
+int* interface_getName(int n);
 
 /*
 requires the current turn currturn

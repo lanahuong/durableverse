@@ -38,14 +38,14 @@ int structure_isEmptyCardList(cardList cl);
 @assigns cardList 
 @ensures add the card which number is c to the cardList cl
 */
-void structure_addCardCardList(cardList cl, int c);
+void structure_addCardCardList(cardList* cl, int c);
 
 /* 
 @requires correctly formatted cardList cl and an int c smaller than cardList.length
 @assigns cardList 
 @ensures remove the card which index is c from the cardList cl and return the card's number
 */
-int structure_removeCardCardList(cardList cl, int c);
+int structure_removeCardCardList(cardList* cl, int c);
 
 /*
 @requires a correctly formatted cardList cl

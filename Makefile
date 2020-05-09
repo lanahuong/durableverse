@@ -1,4 +1,4 @@
-CC = gcc -Wall -Wextra -std=c99
+CC = gcc -Wall -Wextra -std=c99 -g
 BIN = bin/
 OBJ = obj/
 SRC = src/
@@ -8,11 +8,8 @@ EXEC = $(BIN)durableverse
 
 all : $(EXEC)
 
-$(EXEC) : $(OBJ)structure.o $(OBJ)card.o $(OBJ)board.o $(OBJ)interface.o $(OBJ)main.o
+$(EXEC) : $(OBJ)structure.o $(OBJ)card.o $(OBJ)board.o $(OBJ)interface.o $(SRC)main.c
 	$(CC) -o $@ $^
-
-$(OBJ)main.o : $(SRC)main.c
-	$(CC) -c -o $@ $<
 
 $(OBJ)%.o : $(SRC)%.c $(INC)%.h
 	$(CC) -c -o $@ $<
@@ -24,4 +21,4 @@ clean : cleandoc
 	rm -f $(OBJ)*.o $(BIN)*
 
 cleandoc :
-	rm -r html latex
+	rm -fr html latex

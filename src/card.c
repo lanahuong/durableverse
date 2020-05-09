@@ -249,7 +249,7 @@ int card_getE(int c) {
   return n;
 }
 
-
+/*
 int main() {
   card deckCards[31];
   int deckCardsCount[31];
@@ -266,3 +266,4 @@ int main() {
 
   return 0;
 }
+*/

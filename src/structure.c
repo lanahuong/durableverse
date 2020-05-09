@@ -123,7 +123,8 @@ int* structure_getQueueContent(queue q) {
 */
 cardList structure_emptyCardList(){
 	cardList res;
-	res.length = 42;
+	res.content = (int*) malloc(42*sizeof(int));
+	res.length = 0;
 	return res;
 }
 
@@ -132,9 +133,9 @@ cardList structure_emptyCardList(){
 @assigns cardList 
 @ensures add the card which number is c to the cardList cl
 */
-void structure_addCardCardLIst(cardList cl, int c){
-	cl.length = cl.length + 1;
-	cl.content[cl.length - 1] = c;
+void structure_addCardCardList(cardList* cl, int c){
+	cl->content[cl->length] = c;
+	cl->length++;
 }
 
 /* 
@@ -142,11 +143,11 @@ void structure_addCardCardLIst(cardList cl, int c){
 @assigns cardList 
 @ensures remove the card which index is c from the cardList cl and return the card's number
 */
-int structure_removeCardCardList(cardList cl, int c){
-	int tmp = cl.content[c];
-	cl.content[c] = cl.content[cl.length - 1];
-	cl.content[cl.length - 1] = tmp;
-	cl.length = cl.length - 1;
+int structure_removeCardCardList(cardList* cl, int c){
+	int tmp = cl->content[c];
+	cl->content[c] = cl->content[cl->length - 1];
+	cl->content[cl->length - 1] = tmp;
+	cl->length = cl->length - 1;
 	return tmp;
 }
 
@@ -156,7 +157,7 @@ int structure_removeCardCardList(cardList cl, int c){
 @ensures free the cardList cl
 */
 void structure_freeCardList(cardList cl){
-	free(cl);
+	free(cl.content);
 }
 
 /*
@@ -166,7 +167,7 @@ void structure_freeCardList(cardList cl){
 */
 
 void structure_freeQueue(queue q){
-	free(q);
+	free(q.content);
 }
 
 /*
@@ -177,8 +178,9 @@ void structure_freeQueue(queue q){
 */
 int structure_searchCardList(cardList cl, int c){
 	int tmp=-1;
+	int *content = structure_getCardListContent(cl);
 	for (int i = 0; i < structure_getCardListLength(cl); i++){
-		if (structure_getQueueContent[i] == c){
+		if (content[i] == c){
 			tmp = i;
 		}
 	}

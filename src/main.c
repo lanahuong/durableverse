@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "../headers/interface.h"
 #include "../headers/card.h"
 #include "../headers/board.h"
@@ -24,6 +25,7 @@ void phase(board player, board adv, int turn){
 
   // Count the cards to draw
   int cardNbr = board_drawCount(player);
+  printf("Pioche %d cartes\n", cardNbr);
 
   // Draw the cards
   for (int i = 0; i<cardNbr; i++) {
@@ -38,11 +40,10 @@ void phase(board player, board adv, int turn){
 
   // Play cards
   int choice = 0;
-  while (choice !=-1) {
+  choice = interface_choice(player, board_getPE(player));
+  while (choice >=0) {
+    board_playCard(player, adv, choice);
     choice = interface_choice(player, board_getPE(player));
-    if (choice != 0) {
-      board_playCard(player, adv, choice);
-    }
   }
 }
 
@@ -79,25 +80,33 @@ void gameLoop(int *turn, board players[2]){
  * @ensures nothing
  */
 void gameSetUp(board players[2], int* turn, int* winner){
+  printf("Pas de gagnant et tour à 0\n");
   *winner = -1;
   *turn = 0;
   
+  printf("Création des plateaux vides\n");
   for (int i=0; i<2 ; i++){
     players[i] = board_newBoard();
+    printf("Tire 2 carte en début de partie\n");
+    board_draw(players[i]);
+    board_draw(players[i]);
   }
 }
 
 int main() {
   // Initialization of game variables
+  printf("Initialistation de la partie\n");
+  printf("Création des cartes\n");
   card_setTables(DECKCARDS, DECKCARDSCOUNT);
   board players[2];
   int turn;
   int winner;
+  printf("Initialisation des plateaux\n");
   gameSetUp(players, &turn, &winner);
 
   // While the game isn't over an other turn plays out
+  printf("Le jeu commence !\n");
   while (winner==-1) {
-    turn++;
     gameLoop(&turn, players);
     winner = board_gameIsOver(board_getDD(players[0]),board_getDD(players[1]), turn);
   }

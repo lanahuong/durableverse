@@ -1,6 +1,7 @@
 #ifndef BOARD_H
 #define BOARD_H
 
+#include <stdlib.h>
 #include "structure.h"
 #include "card.h"
 

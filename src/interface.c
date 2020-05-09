@@ -8,8 +8,8 @@ requires n int
 assigns
 ensures return the associate personnel card */
 char* interface_getName(int n){
-    char* res;
-    switch(n){
+    char* res = (char*) calloc(22, sizeof(char));
+    switch(n+1){
 
         case 1:
             res= "Thomas Lim";
@@ -71,6 +71,39 @@ char* interface_getName(int n){
         case 20:
             res= "Laurent Prevel";
             break;
+        case 21:
+            res="Cours Développement durable";
+            break;
+        case 22:
+            res="Recrutement";
+            break;
+        case 23:
+            res="Rentrée FISE";
+            break;
+        case 24:
+            res="Rentrée FISA";
+            break;
+        case 25:
+            res="Energie verte";
+            break;
+        case 26:
+            res="Diplomation";
+            break;
+        case 27:
+            res="Décharge";
+            break;
+        case 28:
+            res="Recyclage";
+            break;
+        case 29:
+            res="Zéro papier";
+            break;
+        case 30:
+            res="Repas végétarien";
+            break;
+        case 31:
+            res="Fermeture annuelle";
+            break;
         }
     return res;
 }
@@ -127,15 +160,23 @@ void interface_board(board p1, board p2){
     /*on affiche en colonne les cartes du board*/
     printf("TERRAIN ADVERSE\n");
     printf("Nombre de carte FISE | Nombre de carte FISA | Personnels\n");
-    printf("%20d%23d%13s",card_getFiseCount(p2), card_getFisaCount(p2), interface_getName(structure_getQueueContent(card_getPersonnel(p2))[0]));
-    for(i=1;i<structure_getQueueSize(q_perso_p2);i++){
-        printf("                                                   %s\n", interface_getName(structure_getQueueContent(card_getPersonnel(p2))[i]));
-    }
+    if (structure_getQueueSize(q_perso_p2)>0) {
+        printf("%20d%23d%13s\n",card_getFiseCount(p2), card_getFisaCount(p2), interface_getName(structure_getQueueContent(q_perso_p2)[0]));
+        for(i=1;i<structure_getQueueSize(q_perso_p2);i++){
+            printf("                                                   %s\n", interface_getName(structure_getQueueContent(q_perso_p2)[i]));
+        }
+    } else {
+        printf("%20d%23d\n",card_getFiseCount(p2),card_getFisaCount(p2));
+    } 
     printf("\nMON TERRAIN\n");
     printf("Nombre de carte FISE | Nombre de carte FISA | Personnels\n");
-    printf("%20d%23d%13s",card_getFiseCount(p1), card_getFisaCount(p1), interface_getName(structure_getQueueContent(card_getPersonnel(p1))[0]));
-    for(i=1;i<structure_getQueueSize(q_perso_p1);i++){
-        printf("                                                   %s\n", interface_getName(structure_getQueueContent(card_getPersonnel(p1))[i]));
+    if (structure_isEmptyQueue(q_perso_p1)){
+        printf("%20d%23d\n",card_getFiseCount(p1), card_getFisaCount(p1));
+    } else {
+        printf("%20d%23d%13s",card_getFiseCount(p1), card_getFisaCount(p1), interface_getName(structure_getQueueContent(q_perso_p1)[0]));
+        for(i=1;i<structure_getQueueSize(q_perso_p1);i++){
+            printf("                                                   %s\n", interface_getName(structure_getQueueContent(q_perso_p1)[i]));
+        }
     }
 }
 
@@ -147,10 +188,10 @@ void interface_board(board p1, board p2){
 int interface_fiseOrFisa(){
     int tmp = -1;
     /*la boucle se termine lorque le joueur choisi 1 ou 0 */
-    while(tmp != 0 || tmp != 1){
+    while(tmp != 0 && tmp != 1){
         printf("Quelle carte veux-tu ?\nTape 0 pour un carte FISE\nTape 1 pour une carte FISA\n");
         scanf("%d",&tmp);
-        if (tmp != 0 || tmp != 1){printf("Erreur : Seulement 0 ou 1 accepté\n");}
+        if (tmp != 0 && tmp != 1){printf("Erreur : Seulement 0 ou 1 accepté\n");}
     }
     return tmp;
 }
@@ -166,19 +207,30 @@ int interface_fiseOrFisa(){
  */
 int interface_choice(board p, int PE){
     int tmp = -1;
+    cardList hand = card_getHand(p);
+    printf("PE : %d\n", PE);
     printf("Cartes dans la main\n");
-    for (int i = 0; i < structure_getCardListLength(card_getHand(p)) -1; i++){
-        printf("%d %s\n", structure_getCardListContent(card_getHand(p))[i], interface_getName(structure_getCardListContent(card_getHand(p))[i]));
-    }
-    printf("Cartes jouables\n");
-    for (int j = 0; j< structure_getCardListLength(card_getHand(p)) -1; j++){
-        if ( PE <= card_getCost(structure_getCardListContent(card_getHand(p))[j]) ){
-            printf("%d %s\n", structure_getCardListContent(card_getHand(p))[j], interface_getName(structure_getCardListContent(card_getHand(p))[j]) );
+    if (structure_isEmptyCardList(hand)) {
+        printf("Vous n'avez plus de cartes en main\n");
+    } else {
+        for (int i = 0; i < structure_getCardListLength(hand) -1; i++){
+            char* name = interface_getName(hand.content[i]);
+            printf("%d %s\n", hand.content[i]+1, name);
+            //free(name);
         }
-    }
+        printf("Cartes jouables\n");
+        for (int j = 0; j< structure_getCardListLength(hand) -1; j++){
+            if (card_getCost(hand.content[j])<=PE ){
+            char* name = interface_getName(hand.content[j]);
+            printf("%d %s\n", hand.content[j]+1, name);
+            //free(name);
+            }
+        }
 
-    scanf("Rentrer le n° de la carte que tu veux jouer (ou -1 si tu n'en jouer aucune) :%d",&tmp);
-    return tmp;
+    printf("Rentrer le n° de la carte que tu veux jouer (ou -1 si tu n'en joue aucune) : ");
+    scanf("%d",&tmp);
+    }
+    return tmp-1;
 
 }
 

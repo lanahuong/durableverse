@@ -6,7 +6,7 @@
 requires n int
 assigns
 ensures return the associate personnel card */
-int* interface_getName(int n);
+char* interface_getName(int n);
 
 /*
 requires the current turn currturn

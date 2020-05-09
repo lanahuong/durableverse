@@ -150,3 +150,37 @@ int structure_removeCardCardList(cardList cl, int c){
 	return tmp;
 }
 
+/*
+@requires a correctly formatted cardList cl
+@assigns queue
+@ensures free the cardList cl
+*/
+void structure_freeCardList(cardList cl){
+	free(cl);
+}
+
+/*
+@requires a correctly formatted queue q
+@assigns queue
+@ensures free the queue q
+*/
+
+void structure_freeQueue(queue q){
+	free(q);
+}
+
+/*
+@requires correctly formatted cardList cl and card number c
+@assigns nothing
+@ensures return the index of the card which number is c in cl or 
+                    -1 if that card does not exist in cl
+*/
+int structure_searchCardList(cardList cl, int c){
+	int tmp=-1;
+	for (int i = 0; i < structure_getCardListLength(cl); i++){
+		if (structure_getQueueContent[i] == c){
+			tmp = i;
+		}
+	}
+	return tmp;
+}

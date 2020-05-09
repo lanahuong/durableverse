@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include "../headers/interface.h"
 #include "../headers/card.h"
 #include "../headers/board.h"
@@ -83,6 +85,7 @@ void gameSetUp(board players[2], int* turn, int* winner){
   printf("Pas de gagnant et tour à 0\n");
   *winner = -1;
   *turn = 0;
+  srand(time(NULL));
   
   printf("Création des plateaux vides\n");
   for (int i=0; i<2 ; i++){

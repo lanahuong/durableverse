@@ -112,7 +112,7 @@ int board_drawCount(board p) {
 
 void board_draw(board p) {
     if (structure_getCardListLength(p->deck)>0) {
-        int i = structure_getCardListLength(p->deck)*rand()/(1.0+RAND_MAX);
+        int i = structure_getCardListLength(p->deck)*(rand()/(1.0+RAND_MAX));
         int c = structure_removeCardCardList(&(p->deck), i);
         structure_addCardCardList(&(p->hand), c);
     }

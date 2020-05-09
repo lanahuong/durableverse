@@ -168,6 +168,7 @@ void board_playCard(board p, board o, int c) {
     int i = structure_searchCardList(p->hand, c);
     if (i>=0) {
         structure_removeCardCardList(&(p->hand), i);
+        board_setPE(p, board_getPE(p)-card_getCost(c));
         if (card_getType(c) == ACTION) {
             card_applyCardEffect(c, p, o);
             structure_addCardCardList(&(p->discard),c);
@@ -177,7 +178,6 @@ void board_playCard(board p, board o, int c) {
                 structure_addCardCardList(&(p->discard),l);
             }
             structure_enqueue(&(p->personnel),c);
-            board_setPE(p, board_getPE(p)-card_getCost(c));
         }
     }
 }
@@ -312,7 +312,7 @@ int board_getDD(board b) {
 @assigns different according to the played card's effect
 @ensures apply the effect of the card */
 void card_applyCardEffect(int c, board player, board opponent) {
-    switch (c){
+    switch (c+1){
     case 21:
         // Gagne un point DD
         board_earnDD(player,1);

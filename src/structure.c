@@ -26,7 +26,7 @@ queue* structure_emptyQueue(int capacity) {
     queue* q = (queue *) malloc(sizeof(queue));
     q->capacity = capacity;
     q->size = 0; 
-    q->content = (int*) malloc(capacity * sizeof(int));
+    q->content = (int*) malloc(3 * sizeof(int));
     return q;
 }
 
@@ -59,21 +59,12 @@ int structure_isFullQueue(queue q) {
 @assigns content & size
 @ensures add n to the queue */
 void structure_enqueue(queue* q, int n) {
-    if (q->size == 0){
-	    q->content[2] = n;
-	    q->size +=1;
-    }
-    else if (q->size == 1){
-	    q->content[1] = n;
-	    q->size +=1;
-    }
-    else if (q->size == 2){
-	   structure_dequeue(q);
-	    q->content[0] = n;
-	    
-    }
   
-    
+    q->size +=1;
+	q->content[2] = q->content[1];
+	q->content[1] = q->content[0];
+	q->content[0] = n;
+
 }
 
 /*
@@ -81,20 +72,9 @@ void structure_enqueue(queue* q, int n) {
 @assigns content & size
 @ensures remove the first item of the queue & move the others*/
 int structure_dequeue(queue* q) {
-    	
-    		int tmp = q->content[2];
-    		
-			if (q->size == 2){
-				q->content[2] = q->content[1];
-				
-			}
-			else if (q->size ==3){
-				q->content[2] = q->content[1];
-				q->content[1] = q->content[0];
-			}
+	q->size =q->size -1;
+    	return q->content[q->capacity -1];
 
-		q->size = q->size - 1;
-		return tmp;
 	}
 
 

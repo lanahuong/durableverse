@@ -18,7 +18,7 @@ doc :
 	doxygen Doxyfile
 
 clean : cleandoc
-	rm -f $(OBJ)*.o $(BIN)*
+	rm -fr $(OBJ)*.o $(BIN)*
 
 cleandoc :
 	rm -fr html latex

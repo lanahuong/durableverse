@@ -77,7 +77,7 @@ typedef struct queue {
 @requires an unsigned int
 @assigns memory space for a capacity-sized queue of int 
 @ensures create a queue */
-queue* structure_emptyQueue(int capacity);
+queue* structure_emptyQueue();
 
 /*
 @requires a correctly formated queue

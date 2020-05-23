@@ -116,6 +116,7 @@ ensures display new turn and it's number and additionnal informations
 */
 
 void interface_newTurn(int currturn){
+    printf("\n\n=================================================\n");
     printf("\nPrépare toi !\nUn nouveau tour commence...\n");
 
     printf("infomration sur le tour :\n\nTour n°%d\n",currturn);
@@ -144,6 +145,7 @@ assigns
 ensures display "Nouvelle Phase" and the player associated to the new phase
 */
 void interface_newPhase(int player){
+    printf("--------------------------------------------------------\n");
     printf("Nouvelle phase\nC'est à l'ENSIIE %d de jouer !\n\n",player);
 }
 
@@ -162,9 +164,9 @@ void interface_board(board p1, board p2){
     printf("PE : %d\tDD : %d\n", board_getPE(p2),board_getDD(p2));
     printf("Nombre de carte FISE | Nombre de carte FISA | Personnels\n");
     if (structure_getQueueSize(q_perso_p2)>0) {
-        printf("%20d%23d%13s\n",card_getFiseCount(p2), card_getFisaCount(p2), interface_getName(structure_getQueueContent(q_perso_p2)[0]));
+        printf("%20d%23d%24s\n",card_getFiseCount(p2), card_getFisaCount(p2), interface_getName(structure_getQueueContent(q_perso_p2)[0]));
         for(i=1;i<structure_getQueueSize(q_perso_p2);i++){
-            printf("                                                   %s\n", interface_getName(structure_getQueueContent(q_perso_p2)[i]));
+            printf("%67s\n", interface_getName(structure_getQueueContent(q_perso_p2)[i]));
         }
     } else {
         printf("%20d%23d\n",card_getFiseCount(p2),card_getFisaCount(p2));
@@ -175,9 +177,9 @@ void interface_board(board p1, board p2){
     if (structure_isEmptyQueue(q_perso_p1)){
         printf("%20d%23d\n",card_getFiseCount(p1), card_getFisaCount(p1));
     } else {
-        printf("%20d%23d%13s",card_getFiseCount(p1), card_getFisaCount(p1), interface_getName(structure_getQueueContent(q_perso_p1)[0]));
+        printf("%20d%23d%24s\n",card_getFiseCount(p1), card_getFisaCount(p1), interface_getName(structure_getQueueContent(q_perso_p1)[0]));
         for(i=1;i<structure_getQueueSize(q_perso_p1);i++){
-            printf("                                                   %s\n", interface_getName(structure_getQueueContent(q_perso_p1)[i]));
+            printf("%67s\n", interface_getName(structure_getQueueContent(q_perso_p1)[i]));
         }
     }
 }

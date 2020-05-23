@@ -22,35 +22,35 @@ struct board {
  */
 
 board board_newBoard() {
-    printf("Allocation du plateau\n");
+    //printf("Allocation du plateau\n");
     board b = (board) malloc(sizeof(struct board));
-    printf("Assignation des attributs\n");
+    //printf("Assignation des attributs\n");
     b->DD = 0;
     b->PE = 0;
     b->FiseCount = 0;
     b->FisaCount = 0;
     b->duraBonus = 0;
     b->devBonus = 0;
-    printf("Création de la file de personnel\n");
-    queue *personnelq = structure_emptyQueue(3);
+    //printf("Création de la file de personnel\n");
+    queue *personnelq = structure_emptyQueue();
     b->personnel = *personnelq;
-    printf("Création du deck\n");
+    //printf("Création du deck\n");
     b->deck = structure_emptyCardList();
     // Create a complete deck
-    printf("Remplissage du deck\n");
+    //printf("Remplissage du deck\n");
     int i=0;
     int k=0;
     while (i<31) {
         k+=1;
         if (k<=DECKCARDSCOUNT[i]) {
-            printf("Ajoute une carte au deck\n");
+            //printf("Ajoute une carte au deck\n");
             structure_addCardCardList(&(b->deck), i);
         } else {
             i++;
             k=0;
         }
     }
-    printf("Création de la main et de la défausse\n");
+    //printf("Création de la main et de la défausse\n");
     b->hand = structure_emptyCardList();
     b->discard = structure_emptyCardList();
 

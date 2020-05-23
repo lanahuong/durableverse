@@ -147,27 +147,27 @@ int card_getFisaCount(board player);
 @assigns
 @ensures return the queue personnel
 */
-queue card_getPersonnel(board player);
+queue* card_getPersonnel(board player);
 
 /*
 @requires a correctly formated board)
 @assigns
 @ensures return the deck
 */
-cardList card_getDeck(board player);
+cardList* card_getDeck(board player);
 
 /*
 @requires a correctly formated board)
 @assigns
 @ensures return the hand
 */
-cardList card_getHand(board player);
+cardList* card_getHand(board player);
 
 /*
 @requires a correctly formated board)
 @assigns
 @ensures return the discard
 */
-cardList card_getDiscard(board player);
+cardList* card_getDiscard(board player);
 
 #endif

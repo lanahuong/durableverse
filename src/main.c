@@ -122,5 +122,8 @@ int main() {
   board_freeBoard(players[0]);
   board_freeBoard(players[1]);
 
+  //Free the cards list
+  for (int i=0; i<31; i++)
+    free(DECKCARDS[i]);
   return 0;
 }

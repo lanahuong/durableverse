@@ -6,16 +6,16 @@
 @requires a correctly formated cardList
 @assigns nothing
 @ensures return the length */
-int structure_getCardListLength(cardList l) {
-    return l.length;
+int structure_getCardListLength(cardList* l) {
+    return l->length;
 }
 
 /* 
 @requires a correctly formated cardList
 @assigns nothing
 @ensures return the content */
-int* structure_getCardListContent(cardList l) {
-    return l.content;
+int* structure_getCardListContent(cardList* l) {
+    return l->content;
 }
 
 /*
@@ -35,23 +35,23 @@ queue* structure_emptyQueue() {
 @assigns nothing
 @ensures return 0 if the cardList is empty else 1
 */
-int structure_isEmptyCardList(cardList cl){
-	return (cl.length == 0);
+int structure_isEmptyCardList(cardList* cl){
+	return (cl->length == 0);
 }
 /*
 @requires a correctly formated queue
 @assigns nothing
 @ensures return 1 if the queue is empty else 0 */
-int structure_isEmptyQueue(queue q) {
-    return (q.size == 0);
+int structure_isEmptyQueue(queue* q) {
+    return (q->size == 0);
 }
 
 /*
 @requires a correctly formated queue
 @assigns nothing
 @ensures return 1 if the queue is full else 0 */
-int structure_isFullQueue(queue q) {
-    return (q.size == q.capacity);;
+int structure_isFullQueue(queue* q) {
+    return (q->size == q->capacity);;
 }
 
 /*
@@ -84,16 +84,16 @@ int structure_dequeue(queue* q) {
 @requires a correctly formated queue
 @assigns nothing
 @ensures return the size */
-int structure_getQueueSize(queue q) {
-    return q.size;
+int structure_getQueueSize(queue* q) {
+    return q->size;
 }
 
 /* 
 @requires a correctly formated queue
 @assigns nothing
 @ensures return the content */
-int* structure_getQueueContent(queue q) {
-    return q.content;
+int* structure_getQueueContent(queue* q) {
+    return q->content;
 }
 
 /*
@@ -101,10 +101,10 @@ int* structure_getQueueContent(queue q) {
 @assigns nothing
 @ensures return an 42-sized empty cardList 
 */
-cardList structure_emptyCardList(){
-	cardList res;
-	res.content = (int*) malloc(42*sizeof(int));
-	res.length = 0;
+cardList* structure_emptyCardList(){
+	cardList *res = (cardList *) malloc(sizeof(cardList));
+	res->content = (int*) malloc(42*sizeof(int));
+	res->length = 0;
 	return res;
 }
 
@@ -136,8 +136,9 @@ int structure_removeCardCardList(cardList* cl, int c){
 @assigns queue
 @ensures free the cardList cl
 */
-void structure_freeCardList(cardList cl){
-	free(cl.content);
+void structure_freeCardList(cardList* cl){
+	free(cl->content);
+	free(cl);
 }
 
 /*
@@ -146,8 +147,9 @@ void structure_freeCardList(cardList cl){
 @ensures free the queue q
 */
 
-void structure_freeQueue(queue q){
-	free(q.content);
+void structure_freeQueue(queue* q){
+	free(q->content);
+	free(q);
 }
 
 /*
@@ -156,7 +158,7 @@ void structure_freeQueue(queue q){
 @ensures return the index of the card which number is c in cl or 
                     -1 if that card does not exist in cl
 */
-int structure_searchCardList(cardList cl, int c){
+int structure_searchCardList(cardList *cl, int c){
 	int tmp=-1;
 	int *content = structure_getCardListContent(cl);
 	for (int i = 0; i < structure_getCardListLength(cl); i++){

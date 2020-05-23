@@ -13,26 +13,26 @@ typedef struct cardList {
 @requires a correctly formated cardList
 @assigns nothing
 @ensures return the length */
-int structure_getCardListLength(cardList l);
+int structure_getCardListLength(cardList* l);
 
 /* 
 @requires a correctly formated cardList
 @assigns nothing
 @ensures return the content */
-int* structure_getCardListContent(cardList l);
+int* structure_getCardListContent(cardList* l);
 
 /*
 @requires nothing
 @assigns nothing
 @ensures return an 42-sized empty cardList 
 */
-cardList structure_emptyCardList();
+cardList* structure_emptyCardList();
 /*
 @requires a correctly formated cardList
 @assigns nothing
 @ensures return 0 if the cardList is empty else 1
 */
-int structure_isEmptyCardList(cardList cl);
+int structure_isEmptyCardList(cardList* cl);
 /* 
 @requires correctly formatted cardList cl and card number c
 @assigns cardList 
@@ -52,7 +52,7 @@ int structure_removeCardCardList(cardList* cl, int c);
 @assigns queue
 @ensures free the cardList cl
 */
-void structure_freeCardList(cardList cl);
+void structure_freeCardList(cardList* cl);
 
 /*
 @requires correctly formatted cardList cl and card number c
@@ -60,7 +60,7 @@ void structure_freeCardList(cardList cl);
 @ensures return the index of the card which number is c in cl or 
                     -1 if that card does not exist in cl
 */
-int structure_searchCardList(cardList cl, int c);
+int structure_searchCardList(cardList* cl, int c);
 
 
 
@@ -83,13 +83,13 @@ queue* structure_emptyQueue();
 @requires a correctly formated queue
 @assigns nothing
 @ensures return 1 if the queue is empty else 0 */
-int structure_isEmptyQueue(queue q);
+int structure_isEmptyQueue(queue* q);
 
 /*
 @requires a correctly formated queue
 @assigns nothing
 @ensures return 1 if the queue is full else 0 */
-int structure_isFullQueue(queue q);
+int structure_isFullQueue(queue* q);
 
 /*
 @requires a correctly formated non full queue and an integer n
@@ -107,20 +107,20 @@ int structure_dequeue(queue* q);
 @requires a correctly formated queue
 @assigns nothing
 @ensures return the size */
-int structure_getQueueSize(queue l);
+int structure_getQueueSize(queue* l);
 
 /* 
 @requires a correctly formated queue
 @assigns nothing
 @ensures return the content */
-int* structure_getQueueContent(queue l);
+int* structure_getQueueContent(queue* l);
 
 /*
 @requires a correctly formatted queue q
 @assigns queue
 @ensures free the queue q
 */
-void structure_freeQueue(queue q);
+void structure_freeQueue(queue* q);
 
 
 #endif

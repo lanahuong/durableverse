@@ -8,10 +8,10 @@ struct board {
     int FisaCount; 
     int duraBonus;
     int devBonus;
-    queue personnel;
-    cardList deck;
-    cardList hand;
-    cardList discard;
+    queue* personnel;
+    cardList* deck;
+    cardList* hand;
+    cardList* discard;
 };
 
 
@@ -32,8 +32,7 @@ board board_newBoard() {
     b->duraBonus = 0;
     b->devBonus = 0;
     //printf("Création de la file de personnel\n");
-    queue *personnelq = structure_emptyQueue();
-    b->personnel = *personnelq;
+    b->personnel = structure_emptyQueue();
     //printf("Création du deck\n");
     b->deck = structure_emptyCardList();
     // Create a complete deck
@@ -44,7 +43,7 @@ board board_newBoard() {
         k+=1;
         if (k<=DECKCARDSCOUNT[i]) {
             //printf("Ajoute une carte au deck\n");
-            structure_addCardCardList(&(b->deck), i);
+            structure_addCardCardList(b->deck, i);
         } else {
             i++;
             k=0;
@@ -69,6 +68,7 @@ void board_freeBoard(board p) {
     structure_freeCardList(p->hand);
     structure_freeCardList(p->discard);
     structure_freeQueue(p->personnel);
+    free(p);
 }
 
 /*
@@ -81,8 +81,8 @@ void board_freeBoard(board p) {
 void board_newTurn(board b1, board b2, int *turn) {
     *turn = *turn+1;
     if (*turn==6 || *turn==11) {
-        b1->personnel.capacity++;
-        b2->personnel.capacity++;
+        b1->personnel->capacity++;
+        b2->personnel->capacity++;
     }
 }
 
@@ -94,7 +94,7 @@ void board_newTurn(board b1, board b2, int *turn) {
 
 int board_drawCount(board p) {
     int c = 1;
-    queue personnel = card_getPersonnel(p);
+    queue* personnel = card_getPersonnel(p);
     if (!structure_isEmptyQueue(personnel)) {
         int* content = structure_getQueueContent(personnel);
         for (int i=0; i<structure_getQueueSize(personnel); i++){
@@ -113,8 +113,8 @@ int board_drawCount(board p) {
 void board_draw(board p) {
     if (structure_getCardListLength(p->deck)>0) {
         int i = structure_getCardListLength(p->deck)*(rand()/(1.0+RAND_MAX));
-        int c = structure_removeCardCardList(&(p->deck), i);
-        structure_addCardCardList(&(p->hand), c);
+        int c = structure_removeCardCardList(p->deck, i);
+        structure_addCardCardList(p->hand, c);
     }
 }
 
@@ -125,7 +125,7 @@ void board_draw(board p) {
 */
 int board_studentCardCount(board p) {
     int c = 1;
-   queue personnel = card_getPersonnel(p);
+   queue* personnel = card_getPersonnel(p);
     if (!structure_isEmptyQueue(personnel)) {
         int* content = structure_getQueueContent(personnel);
         for (int i=0; i<structure_getQueueSize(personnel); i++){
@@ -167,17 +167,17 @@ int board_initialPECount(board p, int curturn) {
 void board_playCard(board p, board o, int c) {
     int i = structure_searchCardList(p->hand, c);
     if (i>=0) {
-        structure_removeCardCardList(&(p->hand), i);
+        structure_removeCardCardList(p->hand, i);
         board_setPE(p, board_getPE(p)-card_getCost(c));
         if (card_getType(c) == ACTION) {
             card_applyCardEffect(c, p, o);
-            structure_addCardCardList(&(p->discard),c);
+            structure_addCardCardList(p->discard,c);
         } else {
             if (structure_isFullQueue(p->personnel)) {
-                int l = structure_dequeue(&(p->personnel));
-                structure_addCardCardList(&(p->discard),l);
+                int l = structure_dequeue(p->personnel);
+                structure_addCardCardList(p->discard,l);
             }
-            structure_enqueue(&(p->personnel),c);
+            structure_enqueue(p->personnel,c);
         }
     }
 }
@@ -198,7 +198,7 @@ void board_DDEarned(board p1, board p2, int DD[2], int turn) {
     int durMultFISA2 = 1 + p2->duraBonus;
     int DDbonus1 = 0;
     int DDbonus2 = 0;
-    queue personnel = card_getPersonnel(p1);
+    queue* personnel = card_getPersonnel(p1);
     if (!structure_isEmptyQueue(personnel)) {
         int* content = structure_getQueueContent(personnel);
         for (int i=0; i<structure_getQueueSize(personnel); i++){
@@ -340,14 +340,14 @@ void card_applyCardEffect(int c, board player, board opponent) {
         break;
     case 27:
         // retire la plus ancienne carte personnelle du plateau de l'adversaire
-        structure_addCardCardList(&(opponent->discard), structure_dequeue(&(opponent->personnel)));
+        structure_addCardCardList(opponent->discard, structure_dequeue(opponent->personnel));
         break;
     case 28:
         // melange cette carte et les cartes de la défausse avec votre deck
-        structure_addCardCardList(&(player->deck), 28);
+        structure_addCardCardList(player->deck, 28);
         while (!structure_isEmptyCardList(player->discard)) {
-            int d = structure_removeCardCardList(&(player->discard),structure_getCardListLength(player->discard)-1);
-            structure_addCardCardList(&(player->deck),d);
+            int d = structure_removeCardCardList(player->discard,structure_getCardListLength(player->discard)-1);
+            structure_addCardCardList(player->deck,d);
         }
         break;
     case 29:
@@ -394,7 +394,7 @@ int card_getFisaCount(board player) {
 @assigns
 @ensures return the queue personnel
 */
-queue card_getPersonnel(board player) {
+queue* card_getPersonnel(board player) {
     return player->personnel;
 }
 
@@ -403,7 +403,7 @@ queue card_getPersonnel(board player) {
 @assigns
 @ensures return the deck
 */
-cardList card_getDeck(board player) {
+cardList* card_getDeck(board player) {
     return player->deck;
 }
 
@@ -412,7 +412,7 @@ cardList card_getDeck(board player) {
 @assigns
 @ensures return the hand
 */
-cardList card_getHand(board player) {
+cardList* card_getHand(board player) {
     return player->hand;
 }
 
@@ -421,6 +421,6 @@ cardList card_getHand(board player) {
 @assigns
 @ensures return the discard
 */
-cardList card_getDiscard(board player) {
+cardList* card_getDiscard(board player) {
     return player->discard;
 }

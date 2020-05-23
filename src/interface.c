@@ -8,104 +8,103 @@ requires n int
 assigns
 ensures return the associate personnel card */
 char* interface_getName(int n){
-    char* res = (char*) calloc(22, sizeof(char));
     switch(n+1){
 
         case 1:
-            res= "Thomas Lim";
+            return "Thomas Lim";
             break;
         case 2:
-            res= "Marie Szafranski";
+            return "Marie Szafranski";
             break;
         case 3:
-            res= "Alain Faye";
+            return "Alain Faye";
             break;
         case 4:
-            res= "Christophe Mouilleron";
+            return "Christophe Mouilleron";
             break;
         case 5:
-            res= "Stefania Dumbrava";
+            return "Stefania Dumbrava";
             break;
         case 6:
-            res= "Julien Forest";
+            return "Julien Forest";
             break;
         case 7:
-            res= "Nicolas Brunel";
+            return "Nicolas Brunel";
             break;
         case 8:
-            res= "Laurence Bourard";
+            return "Laurence Bourard";
             break;
         case 9:
-            res= "Dimitri Watel";
+            return "Dimitri Watel";
             break;
         case 10:
-            res= "Vitera Y";
+            return "Vitera Y";
             break;
         case 11:
-            res= "Kevin Goilard";
+            return "Kevin Goilard";
             break;
         case 12:
-            res= "Vincent Jeannas";
+            return "Vincent Jeannas";
             break;
         case 13:
-            res= "Massinissa Merabet";
+            return "Massinissa Merabet";
             break;
         case 14:
-            res= "Anne_Laure Ligozat";
+            return "Anne_Laure Ligozat";
             break;
         case 15:
-            res= "Catherine Dubois";
+            return "Catherine Dubois";
             break;
         case 16:
-            res= "Eric Lejeune";
+            return "Eric Lejeune";
             break;
         case 17:
-            res= "Christine Mathias";
+            return "Christine Mathias";
             break;
         case 18:
-            res= "Katrin Salhab";
+            return "Katrin Salhab";
             break;
         case 19:
-            res= "Abass Sagna";
+            return "Abass Sagna";
             break;
         case 20:
-            res= "Laurent Prevel";
+            return "Laurent Prevel";
             break;
         case 21:
-            res="Cours Développement durable";
+            return "Cours Développement durable";
             break;
         case 22:
-            res="Recrutement";
+            return "Recrutement";
             break;
         case 23:
-            res="Rentrée FISE";
+            return "Rentrée FISE";
             break;
         case 24:
-            res="Rentrée FISA";
+            return "Rentrée FISA";
             break;
         case 25:
-            res="Energie verte";
+            return "Energie verte";
             break;
         case 26:
-            res="Diplomation";
+            return "Diplomation";
             break;
         case 27:
-            res="Décharge";
+            return "Décharge";
             break;
         case 28:
-            res="Recyclage";
+            return "Recyclage";
             break;
         case 29:
-            res="Zéro papier";
+            return "Zéro papier";
             break;
         case 30:
-            res="Repas végétarien";
+            return "Repas végétarien";
             break;
         case 31:
-            res="Fermeture annuelle";
+            return "Fermeture annuelle";
             break;
         }
-    return res;
+    return "";
 }
 
 
@@ -156,8 +155,8 @@ ensures display the board of each player
 void interface_board(board p1, board p2){
     /*le joeur actuel est p1 et le joueur adverse est p2*/
     int i =0;
-    queue q_perso_p1 = card_getPersonnel(p1);
-    queue q_perso_p2 = card_getPersonnel(p2);
+    queue* q_perso_p1 = card_getPersonnel(p1);
+    queue* q_perso_p2 = card_getPersonnel(p2);
     
     /*on affiche en colonne les cartes du board*/
     printf("TERRAIN ADVERSE\n");
@@ -211,22 +210,22 @@ int interface_fiseOrFisa(){
  */
 int interface_choice(board p, int PE){
     int tmp = -1;
-    cardList hand = card_getHand(p);
+    cardList* hand = card_getHand(p);
     printf("PE : %d\tDD : %d\n", PE,board_getDD(p));
     printf("Cartes dans la main\n");
     if (structure_isEmptyCardList(hand)) {
         printf("Vous n'avez plus de cartes en main\n");
     } else {
         for (int i = 0; i < structure_getCardListLength(hand); i++){
-            char* name = interface_getName(hand.content[i]);
-            printf("%d %s\n", hand.content[i]+1, name);
+            char* name = interface_getName(hand->content[i]);
+            printf("%d %s\n", hand->content[i]+1, name);
             //free(name);
         }
         printf("Cartes jouables\n");
         for (int j = 0; j< structure_getCardListLength(hand); j++){
-            if (card_getCost(hand.content[j])<=PE ){
-            char* name = interface_getName(hand.content[j]);
-            printf("%d %s\n", hand.content[j]+1, name);
+            if (card_getCost(hand->content[j])<=PE ){
+            char* name = interface_getName(hand->content[j]);
+            printf("%d %s\n", hand->content[j]+1, name);
             //free(name);
             }
         }

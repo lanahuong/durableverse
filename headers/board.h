@@ -5,169 +5,190 @@
 #include "structure.h"
 #include "card.h"
 
+/**
+ * \file board.h
+ * This file describes all the functions to manipulate and modify the board
+ * according the rules of the game.
+ */
+
 typedef struct board* board;
 
-
-/*
- @requires nothing
- @assigns  nothing
- @ensures  return a new correctly initialized board
+/**
+ * \brief Create a new board and return it
+ * \internal Initialize all attributes
  */
-
 board board_newBoard();
 
-
-/*
- @requires a correctly fomatted board
- @assigns  nothing
- @ensures  free the memory espace 
+/**
+ * \brief Free memory space used by a board
+ * \param p the board to destroy and free it's memory space
+ * \internal free all cardLists (hand, deck and discard), the queue (personnel)
+ *           and finally free itself
+ * \attention not testable
  */
-
 void board_freeBoard(board p);
 
-/*
- @requires 2 correctly formatted boards
- @assigns  *turn 
- @ensures  add 1 to the number of the turn
-           if turn is 6 or 11 , add 1 to the number of personnel cards boards can hold
+/**
+ * \brief Make all updates related to the begining of a new turn
+ * \param b1 the board of player 1
+ * \param b2 the board of player 2
+ * \param turn a pointer to the turn number
+ * \internal increment the turn number through \a turn and update the number of
+ *           personnel cards allowed on board when necessary
  */
-
 void board_newTurn(board b1, board b2, int *turn);
 
-/*
- @requires a correctly formatted board
- @assigns  nothing
- @ensures  calcule how many card should ensiie draw at the beginning the phase
+/**
+ * \brief Count the number of cards the player should draw at the begining of
+ *        its phase
+ * \param p the board of the current player
+ * \internal 1 + bonus from cards on the board
+ * \return the number of cards to draw
  */
-
 int board_drawCount(board p);
 
-/*
- @requires a correctly formatted board
- @assigns  the hand and deck of the board
- @ensures  remove a card from the deck and put's it in the hand
+/**
+ * \brief Draw a card for a player
+ * \param p the board of the current player
+ * \internal remove a random card from the deck and add it to the hand
  */
-
 void board_draw(board p);
 
-/*
-@requires a correctly formatted board
-@assigns nothing
-@ensures return the number of student cards the player will receive
-*/
+/**
+ * \brief Count the number of student card a player receives at the begining of
+ *        their phase
+ * \param p the board of the current player
+ * \internal 1 + bonus from cards on the board
+ */
 int board_studentCardCount(board p);
 
-/*
-@requires a correctly formatted board and c is 0 for fise and 1 for fisa
-@assigns the play area of the board
-@ensures add the student card to the board's play area
-*/
+/**
+ * \brief Make a player play a card a student card
+ * \param b the board of the current player
+ * \param c the number of the card to play
+ * \internal if c is 0 it a FISE card is added to the board, if it's 1, a FISA
+ *           card id added
+ */
 void board_playStudentCard(board p, int c);
 
-/*
-@requires a correctly formatted card board
-@assigns nothing
-@ensures return the number of PE available to the player in the current turn 
-*/
+/**
+ * \brief Count the number of PE a player has at the begining of their turn
+ * \param p the board of the current player
+ * \param curturn the number of the current turn
+ * \internal number of FISE + 2 * number of FISA (on odd turns) + bonus from the
+ *           cards on the board
+ * \return the number of PE the player has when starting their turn
+ */
 int board_initialPECount(board p, int curturn);
 
-/*
-@requires a correctly formatted board, c is a number from 1 to 30
-@assigns the hand and the play area of the board, *PE
-@ensures put the card c on the cardboard's play area 
-*/
+/**
+ * \brief Make a player play a card
+ * \param p the board of the current player
+ * \param o the borad of the opponent
+ * \param c the number of the card to play
+ * \internal if it's personnel card add it to the board and apply the necessary
+ *           border effects, if it's an action card apply it's effect and put it
+ *           in the discard, in all cases the card is removed from the hand
+ */
 void board_playCard(board p, board o, int c);
 
-/*
-@requires 2 correctly formatted boards
-@assigns DD
-@ensures DD comtains the number of DD earned by the 2 players (can be negative)
-*/
+/**
+ * \brief Counts the DD earned by each player
+ * \param p1 the board of player 1
+ * \param p2 the corad of player 2
+ * \param DD the array of DD to modify with correct values
+ * \param turn the number of the current turn
+ * \internal for each player : number of FISE + 2* number of FISA + bonus/malus
+ * from cards of the boards + eventuallay bonus from action card
+ */
 void board_DDEarned(board p1, board p2, int DD[2], int turn);
 
-/*
-@requires 
-@assigns nothing
-@ensures return -1 if the game is not over, 0 (resp. 1) if player 0 (resp.1) wins
-         2 if it is a tie
-
-*/
+/**
+ * \brief Determines if the game is over and who is the winner
+ * \param DDp1 DD of player 1
+ * \param DDp2 DD of player 2
+ * \param curturn the number of the current turn
+ * \return -1 if the game is not over, 0 if player 1 wins, 1 if player 2 wins
+ */
 int board_gameIsOver(int DDp1,int DDp2, int curturn);
 
-/*
-@requires newPE>=0, b a correctly formatted board
-@assigns b->PE
-@ensures b->PE holds the value newPE
-*/
+/**
+ * \brief PE setter
+ * \param b a board
+ * \param newPE the new PE value to set in the board
+ */
 void board_setPE(board b, int newPE);
 
-/*
-@requires b a correctly formatted board
-@assigns nothing
-@ensures return b->PE
-*/
+/**
+ * \brief PE getter
+ * \param b a board
+ * \return the PE value of the board
+ */
 int board_getPE(board b);
 
-/*
-@requires newDD>=0, b a correctly formatted board
-@assigns b->DD
-@ensures b->DD holds the value newPE+b->DD
-*/
+/**
+ * \brief DD adder
+ * \param b a board
+ * \param newDD newly earned DD
+ * \internal add \a newDD to the current DD value of \a b
+ */
 void board_earnDD(board b, int newDD);
 
-/*
-@requires b a correctly formatted board
-@assigns nothing
-@ensures return b->DD
-*/
+/**
+ * \brief DD getter
+ * \param b a board
+ * \return the DD value of the board
+ */
 int board_getDD(board b);
 
-/*
-@requires a correctly formated card c, two correctly formated boards
-@assigns different according to the played card's effect
-@ensures apply the effect of the card */
+/**
+ * \brief Apply the effect of an action card
+ * \param c the number of the card played
+ * \param player the board of the current player
+ * \param opponenent the board of the other player
+ */
 void card_applyCardEffect(int c, board player, board opponent);
 
-/*
-@requires a correctly formated board)
-@assigns
-@ensures return the FiseCount
-*/
+/**
+ * \brief FISEcount getter
+ * \param player a board
+ * \return the number of FISE cards on the board
+ */
 int card_getFiseCount(board player);
 
-/*
-@requires a correctly formated board)
-@assigns
-@ensures return the FisaCount
-*/
+/**
+ * \brief FISAcount getter
+ * \param player a board
+ * \return the number of FISA cards on the board
+ */
 int card_getFisaCount(board player);
 
-/*
-@requires a correctly formated board)
-@assigns
-@ensures return the queue personnel
-*/
+/**
+ * \brief Personnel getter
+ * \param player a board
+ * \return the personnel queue of \a player
+ */
 queue* card_getPersonnel(board player);
 
-/*
-@requires a correctly formated board)
-@assigns
-@ensures return the deck
-*/
+/**
+ * \brief Deck getter
+ * \param player a board
+ * \return the deck cardList of \a player
+ */
 cardList* card_getDeck(board player);
 
-/*
-@requires a correctly formated board)
-@assigns
-@ensures return the hand
-*/
+/**
+ * \brief Hand getter
+ * \param player a board
+ * \return the hand cardList of \a player
+ */
 cardList* card_getHand(board player);
 
-/*
-@requires a correctly formated board)
-@assigns
-@ensures return the discard
-*/
+/**
+ * \brief Discard getter
+ * \param player a board
+ * \return the discard cardList of \a player
+ */
 cardList* card_getDiscard(board player);
 
 #endif

@@ -4,13 +4,12 @@ OBJ = obj/
 SRC = src/
 INC = headers/
 TEST = test/
-TESTLIST = $(TEST)structureTest.c $(TEST)testRun.c
 
 EXEC = $(BIN)durableverse
 
 all : $(EXEC)
 
-test : $(TEST)testRun.c $(OBJ)structure.o
+test : $(TEST)testRun.c $(OBJ)structure.o $(OBJ)card.o
 	$(CC) -o $(BIN)tests $^ -lcunit
 
 $(EXEC) : $(OBJ)structure.o $(OBJ)card.o $(OBJ)board.o $(OBJ)interface.o $(SRC)main.c

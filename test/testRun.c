@@ -1,6 +1,7 @@
 #include "CUnit/CUnit.h"
 #include "CUnit/Basic.h"
 #include "structureTest.c"
+#include "cardTest.c"
 
 int main() {
   // Create registery
@@ -33,6 +34,33 @@ int main() {
       (NULL == CU_add_test(psuite, "isEmptyQueueNotEmpty", test_isEmptyQueue_notEmpty)) ||
       (NULL == CU_add_test(psuite, "isFullQueueFull", test_isFullQueue_full)) ||
       (NULL == CU_add_test(psuite, "isFullQueueNotFull", test_isFullQueue_notFull)) )
+  {
+    CU_cleanup_registry();
+    return CU_get_error();
+  }
+  
+  psuite = NULL;
+  // Create the test suit for card module
+  psuite = CU_add_suite("card_tests", cardtest_setup, cardtest_teardown);
+  if (NULL == psuite) {
+    CU_cleanup_registry();
+    return CU_get_error();
+  }
+  // Add tests to the structure_tests suite
+  if ((NULL == CU_add_test(psuite, "getCost", test_getCost)) ||
+      (NULL == CU_add_test(psuite, "getType", test_getType)) ||
+      (NULL == CU_add_test(psuite, "getAA1", test_getAA1)) ||
+      (NULL == CU_add_test(psuite, "getAA2", test_getAA2)) ||
+      (NULL == CU_add_test(psuite, "getAE1", test_getAE1)) ||
+      (NULL == CU_add_test(psuite, "getAE2", test_getAE2)) ||
+      (NULL == CU_add_test(psuite, "getRA1", test_getRA1)) ||
+      (NULL == CU_add_test(psuite, "getRA2", test_getRA2)) ||
+      (NULL == CU_add_test(psuite, "getRE1", test_getRE1)) ||
+      (NULL == CU_add_test(psuite, "getRE2", test_getRE2)) ||
+      (NULL == CU_add_test(psuite, "getADD", test_getADD)) ||
+      (NULL == CU_add_test(psuite, "getRDD", test_getRDD)) ||
+      (NULL == CU_add_test(psuite, "getDR)", test_getDR)) ||
+      (NULL == CU_add_test(psuite, "getE", test_getE)) )
   {
     CU_cleanup_registry();
     return CU_get_error();

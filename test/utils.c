@@ -1,3 +1,5 @@
+#ifndef _UTILS
+#define _UTILS
 #include <stdlib.h>
 
 /*
@@ -39,3 +41,5 @@ int* deepCopy(int* a, int l) {
   
   return aCopy;
 }
+
+#endif
